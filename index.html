@@ -11,7 +11,7 @@
 
 <style>
   :root {
-    --bg-main: #F4F7F6; /* خلفية هادئة جداً ومريحة للعين مائلة للرمادي والأخضر البارد */
+    --bg-main: #F4F7F6; /* خلفية هادئة جداً ومريحة للعين */
     --text-dark: #2C3E50; 
     --muted: #7F8C8D;
     --radius: 14px;
@@ -24,7 +24,7 @@
     --color-alerts: #BF360C;    
     --color-calc: #2E7D32;      
     --color-numbers: #F9A825;
-    --color-github: #24292E; /* لون جيتهاب الرسمي لتعديل الأكواد */
+    --color-github: #24292E; 
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,93 +36,148 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    direction: rtl;
+    direction: rlt;
+    position: relative;
   }
 
-  /* الهيدر العلوي المدمج والمريح */
+  /* --- الشرائط الجانبية المضافة --- */
+  .side-bar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    border: 1px solid #E5E9E8;
+    padding: 10px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 200;
+  }
+  
+  /* شريط اليمين (جوجل وأدوات العمل) */
+  .side-bar.right-bar {
+    right: 0;
+    border-radius: var(--radius) 0 0 var(--radius);
+  }
+
+  /* شريط اليسار (المنصات الحكومية) */
+  .side-bar.left-bar {
+    left: 0;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  /* تصميم أيقونات الروابط السريعة */
+  .side-item {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 20px;
+    position: relative;
+    transition: transform 0.2s ease, background 0.2s;
+  }
+  .side-item:hover {
+    transform: scale(1.08);
+  }
+
+  /* بالونات التلميح عند مرور الفأرة فوق الأيقونة الصغيرة */
+  .side-item .tooltip {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #2C3E50;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .right-bar .side-item .tooltip { right: 55px; }
+  .left-bar .side-item .tooltip { left: 55px; }
+  .side-item:hover .tooltip { opacity: 1; }
+
+  /* تخصيص خلفيات الشرائط بما يناسب الأيقونات */
+  .bg-google { background: #f1f3f4; }
+  .bg-qiwa { background: #E0F2F1; color: #00796B; }
+  .bg-mudad { background: #E8EAF6; color: #3F51B5; }
+  .bg-absher { background: #E8F5E9; color: #2E7D32; }
+  .bg-gosi { background: #FFF3E0; color: #E65100; }
+
+  /* --- تصميم وسط البوابة --- */
+  .main-content {
+    flex: 1;
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 70px; /* تفادي تداخل المحتوى مع الأشرطة الجانبية */
+  }
+
   .hero-section {
     background: #FFFFFF;
     text-align: center;
-    padding: 25px 20px 75px;
+    padding: 20px 20px 70px;
     border-bottom: 1px solid #E5E9E8;
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
   }
 
   .brand-title {
     color: var(--color-brand);
-    font-size: 46px;
+    font-size: 44px;
     font-weight: 900;
     margin-bottom: 2px;
     letter-spacing: 1px;
   }
 
   .hero-section h1 {
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: #34495E; 
   }
 
-  /* نظام لوحة الوقت والتاريخ الحي المطور */
   .live-clock-panel {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
     background: #EAF2F1;
-    padding: 10px 24px;
+    padding: 8px 22px;
     border-radius: 30px;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
     margin-bottom: 5px;
     flex-wrap: wrap;
   }
 
-  .live-time {
-    font-size: 20px;
-    font-weight: 900;
-    color: #111;
-    font-family: monospace, sans-serif;
-    letter-spacing: 0.5px;
-  }
+  .live-time { font-size: 19px; font-weight: 900; color: #111; font-family: monospace, sans-serif; }
+  .live-date { font-size: 13px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 15px; }
+  .live-hijri { font-size: 13px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 15px; }
 
-  .live-date {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #2E7D32;
-    border-right: 2px solid #BDC3C7;
-    padding-right: 15px;
-  }
-
-  .live-hijri {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #C0392B;
-    border-right: 2px solid #BDC3C7;
-    padding-right: 15px;
-  }
-
-  /* الحاوية الهيكلية (صفين أسفل بعض متساويين بدقة) */
+  /* حاوية الأنظمة الستة (صفين أسفل بعض بدقة) */
   .cards-container {
-    max-width: 1150px;
-    width: 100%;
-    margin: -45px auto 40px;
-    padding: 0 20px;
+    margin: -40px auto 40px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 أعمدة ثابتة لتشكيل صفين متساويين */
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 16px;
   }
 
-  /* في الشاشات المتوسطة والصغيرة يتحول تلقائياً ليتناسب مع الجوال */
-  @media (max-width: 900px) {
-    .cards-container {
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
+  @media (max-width: 950px) {
+    .cards-container { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .main-content { padding: 0 20px; margin-top: 60px; margin-bottom: 60px; }
+    .side-bar { position: relative; top: 0; transform: none; flex-direction: row; justify-content: center; width: 100%; border-radius: var(--radius) !important; margin-bottom: 15px; }
   }
 
-  /* تصميم بطاقة الأيقونة المدمج */
   .portal-card {
     background: #ffffff;
     border-radius: var(--radius);
-    padding: 24px 20px;
+    padding: 22px 18px;
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid #E5E9E8; 
@@ -131,176 +186,154 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
   }
 
-  .portal-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-  }
+  .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; }
 
-  /* ربط الألوان بالبطاقات الستة */
   .card-stock::before { background: var(--color-stock); } 
   .card-stock .icon-wrapper { background: #FDEBD0; color: var(--color-stock); }
-  .card-stock .action-btn { background: var(--color-stock); }
-
   .card-accounts::before { background: var(--color-accounts); } 
   .card-accounts .icon-wrapper { background: #EAEDED; color: var(--color-accounts); }
-  .card-accounts .action-btn { background: var(--color-accounts); }
-
   .card-alerts::before { background: #E64A19; } 
   .card-alerts .icon-wrapper { background: #FFCCBC; color: #BF360C; }
-  .card-alerts .action-btn { background: #E64A19; }
-
   .card-calc::before { background: var(--color-calc); } 
   .card-calc .icon-wrapper { background: #D5F5E3; color: var(--color-calc); }
-  .card-calc .action-btn { background: var(--color-calc); }
-
   .card-numbers::before { background: var(--color-numbers); } 
   .card-numbers .icon-wrapper { background: #FEF9E7; color: #F57F17; }
-  .card-numbers .action-btn { background: var(--color-numbers); }
-
   .card-github::before { background: var(--color-github); } 
   .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
-  .card-github .action-btn { background: var(--color-github); }
 
-  /* ضبط حجم دائرة الأيقونات */
   .icon-wrapper {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
-    margin-bottom: 12px;
-    transition: transform 0.2s ease;
+    font-size: 24px;
+    margin-bottom: 10px;
   }
 
-  .portal-card h2 {
-    font-size: 16px;
-    font-weight: 900;
-    margin-bottom: 8px;
-    color: #2C3E50;
-  }
+  .portal-card h2 { font-size: 15.5px; font-weight: 900; margin-bottom: 6px; }
+  .portal-card p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; flex: 1; }
 
-  .portal-card p {
-    font-size: 12.5px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-bottom: 16px;
-    flex: 1;
-  }
-
-  /* أزرار الإجراء والدخول المدمجة */
   .action-btn {
     color: #fff;
-    padding: 7px 22px;
+    padding: 6px 20px;
     border-radius: 20px;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 6px;
     border: none;
-    transition: background 0.2s;
   }
+  .portal-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); border-color: #BDC3C7; }
 
-  .portal-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    border-color: #BDC3C7;
-  }
-  .portal-card:hover .icon-wrapper { transform: scale(1.05); }
-  .portal-card:hover .action-btn { opacity: 0.95; }
-
-  /* الفوتر الأسفل */
   .footer {
-    margin-top: auto;
     text-align: center;
-    padding: 18px;
+    padding: 16px;
     font-size: 12px;
     color: #95A5A6;
     border-top: 1px solid #E5E9E8;
     background: #FFFFFF;
+    margin-top: auto;
   }
 </style>
 </head>
 <body>
 
-  <div class="hero-section">
-    <div class="brand-title">كبابجي</div>
-    <h1>البوابة الرقمية الموحدة</h1>
-    
-    <div class="live-clock-panel">
-      <div class="live-time" id="liveTime">00:00:00 ص</div>
-      <div class="live-date" id="liveDate">جاري تحميل تاريخ اليوم...</div>
-      <div class="live-hijri" id="liveHijri">جاري حساب الهجري...</div>
-    </div>
+  <div class="side-bar right-bar">
+    <a href="https://www.google.com" class="side-item bg-google">
+      <span>🔍</span><span class="tooltip">بحث جوجل</span>
+    </a>
+    <a href="https://drive.google.com" class="side-item bg-google">
+      <span>💾</span><span class="tooltip">جوجل درايف</span>
+    </a>
+    <a href="https://mail.google.com" class="side-item bg-google">
+      <span>✉️</span><span class="tooltip">جيميل البريد</span>
+    </a>
+    <a href="https://maps.google.com" class="side-item bg-google">
+      <span>📍</span><span class="tooltip">خرائط جوجل</span>
+    </a>
   </div>
 
-  <div class="cards-container">
+  <div class="side-bar left-bar">
+    <a href="https://qiwa.sa" class="side-item bg-qiwa">
+      <span>💼</span><span class="tooltip">منصة قوى (الموظفين)</span>
+    </a>
+    <a href="https://www.mudad.com.sa" class="side-item bg-mudad">
+      <span>💵</span><span class="tooltip">منصة مدد (الأجور)</span>
+    </a>
+    <a href="https://www.absher.sa" class="side-item bg-absher">
+      <span>👤</span><span class="tooltip">أبشر (الجوازات)</span>
+    </a>
+    <a href="https://www.gosi.gov.sa" class="side-item bg-gosi">
+      <span>🛡️</span><span class="tooltip">التأمينات الاجتماعية</span>
+    </a>
+  </div>
+
+  <div class="main-content">
     
-    <a href="http://kababjk.opos.me/" class="portal-card card-stock">
-      <div class="icon-wrapper">📦</div>
-      <h2>المخزون - أرقامي</h2>
-      <p>متابعة وتدقيق جرد المخازن، التوريدات، والمواد الخام للفروع بشكل دوري وحي.</p>
-      <div class="action-btn">
-        <span>دخول</span> ⬅️
+    <div class="hero-section">
+      <div class="brand-title">كبابجي</div>
+      <h1>البوابة الرقمية الموحدة</h1>
+      
+      <div class="live-clock-panel">
+        <div class="live-time" id="liveTime">00:00:00 ص</div>
+        <div class="live-date" id="liveDate">جاري المزامنة...</div>
+        <div class="live-hijri" id="liveHijri">جاري حساب الهجري...</div>
       </div>
-    </a>
+    </div>
 
-    <a href="http://kababjk-accounts.opos.me/Account/LogOn?LanguageID=2&mat=0.6675783853251626" class="portal-card card-accounts">
-      <div class="icon-wrapper">💼</div>
-      <h2>الحسابات - أرقامي</h2>
-      <p>تسجيل القيود المحاسبية، الرواتب، الأرباح والخسائر والميزانية التشغيلية.</p>
-      <div class="action-btn">
-        <span>دخول</span> ⬅️
-      </div>
-    </a>
+    <div class="cards-container" style="margin-top: -35px;">
+      
+      <a href="http://kababjk.opos.me/" class="portal-card card-stock">
+        <div class="icon-wrapper">📦</div>
+        <h2>المخزون - أرقامي</h2>
+        <p>متابعة وتدقيق جرد المخازن، التوريدات، والمواد الخام للفروع بشكل دوري وحي.</p>
+        <div class="action-btn" style="background: var(--color-stock);"><span>دخول</span> ⬅️</div>
+      </a>
 
-    <a href="https://abo-shefaa.vercel.app/" class="portal-card card-alerts">
-      <div class="icon-wrapper">🔔</div>
-      <h2>تنبيهات الوثائق</h2>
-      <p>مراقبة صلاحيات الإقامات، التراخيص البلديّة، والتأمين الطبي تفادياً للمخالفات.</p>
-      <div class="action-btn">
-        <span>دخول</span> ⬅️
-      </div>
-    </a>
+      <a href="http://kababjk-accounts.opos.me/Account/LogOn?LanguageID=2&mat=0.6675783853251626" class="portal-card card-accounts">
+        <div class="icon-wrapper">💼</div>
+        <h2>الحسابات - أرقامي</h2>
+        <p>تسجيل القيود المحاسبية، الرواتب، الأرباح والخسائر والميزانية التشغيلية.</p>
+        <div class="action-btn" style="background: var(--color-accounts);"><span>دخول</span> ⬅️</div>
+      </a>
 
-    <a href="https://kababji-seven.vercel.app/" class="portal-card card-calc">
-      <div class="icon-wrapper">📊</div>
-      <h2>حاسبة التطبيقات</h2>
-      <p>احتساب مبيعات المنصات بدقة، وحساب العمولات والتحليلات المالية اليومية.</p>
-      <div class="action-btn">
-        <span>دخول</span> ⬅️
-      </div>
-    </a>
+      <a href="https://abo-shefaa.vercel.app/" class="portal-card card-alerts">
+        <div class="icon-wrapper">🔔</div>
+        <h2>تنبيهات الوثائق</h2>
+        <p>مراقبة صلاحيات الإقامات، التراخيص البلديّة، والتأمين الطبي تفادياً للمخالفات.</p>
+        <div class="action-btn" style="background: var(--color-alerts);"><span>دخول</span> ⬅️</div>
+      </a>
 
-    <a href="https://kababji-xl.vercel.app/" class="portal-card card-numbers">
-      <div class="icon-wrapper">🧩</div>
-      <h2>تنظيم أرقامي</h2>
-      <p>تنظيم ملفات الإكسل لمكونات الأصناف المصدرة من برنامج أرقامي مع إمكانية التعديل والتصدير والطباعة.</p>
-      <div class="action-btn">
-        <span>دخول</span> ⬅️
-      </div>
-    </a>
+      <a href="https://kababji-seven.vercel.app/" class="portal-card card-calc">
+        <div class="icon-wrapper">📊</div>
+        <h2>حاسبة التطبيقات</h2>
+        <p>احتساب مبيعات المنصات بدقة، وحساب العمولات والتحليلات المالية اليومية.</p>
+        <div class="action-btn" style="background: var(--color-calc);"><span>دخول</span> ⬅️</div>
+      </a>
 
-    <a href="https://github.com/kababji2016-hub" class="portal-card card-github">
-      <div class="icon-wrapper">⚙️</div>
-      <h2>تعديل الأكواد</h2>
-      <p>الدخول المباشر إلى مستودع البرمجيات لتحديث السكريبتات وتعديل البنية البرمجية للبوابة واللوحات.</p>
-      <div class="action-btn">
-        <span>فتح الـ Hub</span> ⬅️
-      </div>
-    </a>
+      <a href="https://kababji-xl.vercel.app/" class="portal-card card-numbers">
+        <div class="icon-wrapper">🧩</div>
+        <h2>تنظيم أرقامي</h2>
+        <p>تنظيم ملفات الإكسل لمكونات الأصناف المصدرة من برنامج أرقامي مع إمكانية التعديل والتصدير والطباعة.</p>
+        <div class="action-btn" style="background: var(--color-numbers);"><span>دخول</span> ⬅️</div>
+      </a>
 
+      <a href="https://github.com/kababji2016-hub" class="portal-card card-github">
+        <div class="icon-wrapper">⚙️</div>
+        <h2>تعديل الأكواد</h2>
+        <p>الدخول المباشر إلى مستودع البرمجيات لتحديث السكريبتات وتعديل البنية البرمجية للبوابة واللوحات.</p>
+        <div class="action-btn" style="background: var(--color-github);"><span>فتح الـ Hub</span> ⬅️</div>
+      </a>
+
+    </div>
   </div>
 
   <div class="footer">
@@ -308,38 +341,33 @@
   </div>
 
 <script>
-// =========================================
-// سكريبت تشغيل الميقات الذكي (ساعة + ميلادي + هجري تفاعلي)
-// =========================================
+// سكريبت تشغيل الميقات الذكي المستمر
 function updateClockAndCalendar() {
   const now = new Date();
 
-  // 1. تحديث الساعة بنظام 12 ساعة مع الثواني
+  // الساعة 12
   let hours = now.getHours();
   let minutes = now.getMinutes();
   let seconds = now.getSeconds();
   const ampm = hours >= 12 ? 'م' : 'ص';
   
   hours = hours % 12;
-  hours = hours ? hours : 12; // الساعة 0 تصبح 12
+  hours = hours ? hours : 12;
   
-  // إضافة الصفر الافتراضي للأرقام الأقل من 10
   minutes = minutes < 10 ? '0' + minutes : minutes;
   seconds = seconds < 10 ? '0' + seconds : seconds;
   hours = hours < 10 ? '0' + hours : hours;
 
   document.getElementById('liveTime').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
 
-  // 2. تحديث التاريخ الميلادي بالعربية بشكل مستمر
+  // التاريخ الميلادي والهجري
   const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   document.getElementById('liveDate').textContent = now.toLocaleDateString('ar-SA', optionsDate);
 
-  // 3. حساب وتحديث التاريخ الهجري بدقة حية تفاعلية
   const optionsHijri = { year: 'numeric', month: 'long', day: 'numeric' };
   document.getElementById('liveHijri').textContent = now.toLocaleDateString('ar-SA-u-ca-islamic', optionsHijri);
 }
 
-// تشغيل العداد وتحديثه فوراً وبشكل متواصل كل 1000 مللي ثانية (ثانية واحدة)
 setInterval(updateClockAndCalendar, 1000);
 window.addEventListener('DOMContentLoaded', updateClockAndCalendar);
 </script>
