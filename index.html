@@ -41,9 +41,9 @@
     --txt-absher: #1B5E20; --bg-absher: #E8F5E9;
     --txt-gosi: #E65100; --bg-gosi: #FFF3E0;
     --txt-chi: #0288D1; --bg-chi: #E1F5FE;
+    --txt-custom: #607D8B; --bg-custom: #ECEFF1;
   }
 
-  /* --- تحسينات الوضع الليلي لتظلم الجوانب وتضيء الكتابة بالوانها المختلفة --- */
   [data-theme="dark"] {
     --bg-main: #121212;
     --bg-card: #1E1E1E;
@@ -51,7 +51,6 @@
     --muted: #A0A0A0;
     --border-color: #2C2C2C;
 
-    /* تظليم خلفيات العناصر الجانبية بالكامل وإضاءة النصوص فوسفورياً */
     --bg-google: #1A1A1A; --txt-google: #6BA4FF;
     --bg-drive: #1A1A1A; --txt-drive: #4285F4;
     --bg-gmail: #1A1A1A; --txt-gmail: #FF6B6B;
@@ -65,6 +64,7 @@
     --bg-absher: #1A1A1A; --txt-absher: #4CAF50;
     --bg-gosi: #1A1A1A; --txt-gosi: #FF9800;
     --bg-chi: #1A1A1A; --txt-chi: #29B6F6;
+    --bg-custom: #1A1A1A; --txt-custom: #B0BEC5;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -123,7 +123,6 @@
   .side-link-item { display: block; text-align: center; padding: 9px 6px; border-radius: 8px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.2s ease; }
   .side-link-item:hover { transform: scale(1.03); opacity: 0.9; }
 
-  /* تطبيق الألوان المتغيرة بين الليل والنهار */
   .lnk-google { background: var(--bg-google); color: var(--txt-google); }
   .lnk-drive { background: var(--bg-drive); color: var(--txt-drive); }
   .lnk-gmail { background: var(--bg-gmail); color: var(--txt-gmail); }
@@ -138,13 +137,19 @@
   .lnk-absher { background: var(--bg-absher); color: var(--txt-absher); }
   .lnk-gosi { background: var(--bg-gosi); color: var(--txt-gosi); }
   .lnk-chi { background: var(--bg-chi); color: var(--txt-chi); } 
+  .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); }
+
+  /* حاوية الروابط المضافة السريعة */
+  .custom-links-area { display: flex; flex-direction: column; gap: 9px; max-height: 110px; overflow-y: auto; padding-right: 2px; }
+  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 8px; padding: 5px; font-size: 10.5px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 4px; }
+  .add-shortcut-btn:hover { background: rgba(0,0,0,0.02); }
 
   .main-content { flex: 1; width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 160px; }
 
   .hero-section {
     background: var(--bg-card);
     text-align: center;
-    padding: 20px 20px 65px;
+    padding: 20px 20px 45px;
     border-bottom: 1px solid var(--border-color);
     border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: 0 2px 8px rgba(0,0,0,0.02);
@@ -161,7 +166,13 @@
   .live-date { font-size: 13px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 15px; }
   .live-hijri { font-size: 13px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 15px; }
 
-  .cards-container { margin: -35px auto 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  /* ميزة أوقات الصلوات في جدة المضافة */
+  .prayer-times-bar { display: flex; justify-content: center; gap: 14px; background: var(--bg-card); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 10px; max-width: 650px; margin: 12px auto 0; box-shadow: var(--shadow); flex-wrap: wrap; }
+  .prayer-title { font-size: 12px; font-weight: 900; color: var(--muted); align-self: center; }
+  .prayer-item { font-size: 12px; font-weight: 700; display: flex; gap: 4px; padding: 2px 8px; background: var(--bg-main); border-radius: 6px; }
+  .prayer-item span { color: var(--color-brand); font-family: monospace; font-size: 12.5px; }
+
+  .cards-container { margin: 25px auto 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
   @media (max-width: 1000px) {
     .cards-container { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
@@ -207,7 +218,6 @@
   .action-btn { color: #fff; padding: 6px 20px; border-radius: 20px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; border: none; }
   .portal-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); border-color: #BDC3C7; }
 
-  /* --- نظام إدارة المهام الجديد التفاعلي --- */
   .tasks-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -218,57 +228,18 @@
   }
   .tasks-section h3 { font-size: 15px; font-weight: 900; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
   
-  .task-input-container {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .task-input {
-    flex: 1;
-    border: 1px solid var(--border-color);
-    background: var(--bg-main);
-    color: var(--text-dark);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 13.5px;
-    outline: none;
-  }
-  .add-task-btn {
-    background: var(--color-calc);
-    color: #fff;
-    border: none;
-    padding: 0 20px;
-    border-radius: 8px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  .add-task-btn:hover { opacity: 0.9; }
+  .task-input-container { display: flex; gap: 10px; margin-bottom: 16px; }
+  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 8px; padding: 10px 14px; font-family: 'Tajawal', sans-serif; font-size: 13.5px; outline: none; }
+  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 20px; border-radius: 8px; font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; }
 
   .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .task-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--bg-main);
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-  }
+  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color); }
   .task-item-right { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 500; }
   .task-checkbox { width: 16px; height: 16px; cursor: pointer; }
   .task-text.completed { text-decoration: line-through; color: var(--muted); }
   
-  .delete-task-btn {
-    background: transparent;
-    border: none;
-    color: var(--color-brand);
-    cursor: pointer;
-    font-size: 14px;
-    padding: 2px;
-  }
+  /* تبديل الخطأ بسلة المهملات للحذف النظيف والمريح */
+  .delete-task-btn { background: transparent; border: none; color: var(--color-brand); cursor: pointer; font-size: 14px; padding: 2px; }
   .delete-task-btn:hover { transform: scale(1.1); }
 
   .footer { text-align: center; padding: 16px; font-size: 12px; color: #95A5A6; border-top: 1px solid var(--border-color); background: var(--bg-card); margin-top: auto; }
@@ -289,6 +260,10 @@
     <a href="https://chatgpt.com/" class="side-link-item lnk-gpt">ChatGPT</a>
     <a href="https://gemini.google.com/" class="side-link-item lnk-gemini">Gemini</a>
     <a href="https://claude.ai/" class="side-link-item lnk-claude">Claude</a>
+
+    <div class="side-bar-title sub-section-title">روابط سريعة</div>
+    <div class="custom-links-area" id="customLinksArea"></div>
+    <button class="add-shortcut-btn" onclick="addCustomLink()">➕ أضف رابط</button>
   </div>
 
   <div class="side-bar left-bar">
@@ -299,7 +274,7 @@
     <a href="https://www.absher.sa" class="side-link-item lnk-absher">منصة أبشر</a>
     <a href="https://www.gosi.gov.sa" class="side-link-item lnk-gosi">التأمينات</a>
     
-    <a href="https://www.chi.gov.sa/Pages/Home.aspx" class="side-link-item lnk-chi" style="margin-top: 10px;">التأمين الصحي</a>
+    <a href="https://www.chi.gov.sa/Pages/Home.aspx" class="side-link-item lnk-chi">التأمين الصحي</a>
   </div>
 
   <div class="main-content">
@@ -313,9 +288,18 @@
         <div class="live-date" id="liveDate">جاري المزامنة...</div>
         <div class="live-hijri" id="liveHijri">جاري حساب الهجري...</div>
       </div>
+
+      <div class="prayer-times-bar">
+        <div class="prayer-title">🕌 مواقيت الصلاة بجدة:</div>
+        <div class="prayer-item">الفجر: <span id="p-fajr">04:12</span></div>
+        <div class="prayer-item">الظهر: <span id="p-dhuhr">12:22</span></div>
+        <div class="prayer-item">العصر: <span id="p-asr">15:42</span></div>
+        <div class="prayer-item">المغرب: <span id="p-maghrib">19:03</span></div>
+        <div class="prayer-item">العشاء: <span id="p-isha">20:33</span></div>
+      </div>
     </div>
 
-    <div class="cards-container" style="margin-top: -35px;">
+    <div class="cards-container">
       <a href="http://kababjk.opos.me/" class="portal-card card-stock">
         <div class="icon-wrapper">📦</div>
         <h2>المخزون - أرقامي</h2>
@@ -360,9 +344,9 @@
     </div>
 
     <div class="tasks-section">
-      <h3>📋 قائمة مهام كبابجي الإدارية (تُحفظ وتُحدث حياً)</h3>
+      <h3>📋 قائمة المهام</h3>
       <div class="task-input-container">
-        <input type="text" id="newTaskInput" class="task-input" placeholder="اكتب المهمة الجديدة هنا (مثال: مراجعة تجديد شهادات عمالة فرع السامر)...">
+        <input type="text" id="newTaskInput" class="task-input" placeholder="اكتب المهمة الجديدة المطلوبة هنا لتسجيلها...">
         <button class="add-task-btn" onclick="addNewTask()">➕ إضافة مهمة</button>
       </div>
       <ul class="tasks-list" id="tasksList"></ul>
@@ -375,6 +359,7 @@
 
 <script>
 let tasks = [];
+let customLinks = [];
 
 function updateClockAndCalendar() {
   const now = new Date();
@@ -399,17 +384,53 @@ function updateClockAndCalendar() {
   document.getElementById('liveHijri').textContent = now.toLocaleDateString('ar-SA-u-ca-islamic', optionsHijri);
 }
 
-// وظائف نظام المهام المطور
-function saveTasksToStorage() {
-  localStorage.setItem('kababji_tasks_list', JSON.stringify(tasks));
+// وظائف تشغيل وحفظ وإضافة الروابط السريعة الاختيارية الخاصة بك
+function addCustomLink() {
+  const title = prompt("اكتب اسم الموقع الجديد المفضل:");
+  if (!title) return;
+  const url = prompt("الصق رابط الموقع الكامل (يجب أن يبدأ بـ http:// أو https://):");
+  if (!url) return;
+
+  const newLink = { id: Date.now(), title: title, url: url };
+  customLinks.push(newLink);
+  localStorage.setItem('kababji_custom_shortcuts', JSON.stringify(customLinks));
+  renderCustomLinks();
 }
 
+function deleteCustomLink(id, e) {
+  e.preventDefault();
+  e.stopPropagation();
+  if(confirm("هل تود مسح هذا الرابط المفضل من قائمة الوصول السريع؟")) {
+    customLinks = customLinks.filter(l => l.id !== id);
+    localStorage.setItem('kababji_custom_shortcuts', JSON.stringify(customLinks));
+    renderCustomLinks();
+  }
+}
+
+function renderCustomLinks() {
+  const area = document.getElementById('customLinksArea');
+  if(!area) return;
+  const saved = localStorage.getItem('kababji_custom_shortcuts');
+  if(saved) customLinks = JSON.parse(saved);
+
+  if(customLinks.length === 0) {
+    area.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center; padding:4px;">لا توجد روابط مضافة</div>';
+    return;
+  }
+
+  area.innerHTML = customLinks.map(l => `
+    <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;" title="اضغط مطولاً أو باليمين للمسح">
+      ${l.title}
+      <span onclick="deleteCustomLink(${l.id}, event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:10px; cursor:pointer;">🗑️</span>
+    </a>
+  `).join('');
+}
+
+// وظائف تشغيل قائمة المهام مع استبدال الأيقونة بسلة مهملات واحترافية الحفظ
+function saveTasksToStorage() { localStorage.setItem('kababji_tasks_list', JSON.stringify(tasks)); }
 function loadTasksFromStorage() {
   const saved = localStorage.getItem('kababji_tasks_list');
-  if (saved) {
-    tasks = JSON.parse(saved);
-    renderTasks();
-  }
+  if (saved) { tasks = JSON.parse(saved); renderTasks(); }
 }
 
 function addNewTask() {
@@ -417,23 +438,14 @@ function addNewTask() {
   const text = input.value.trim();
   if (text === "") return;
 
-  const task = {
-    id: Date.now(),
-    text: text,
-    completed: false
-  };
-
-  tasks.push(task);
+  tasks.push({ id: Date.now(), text: text, completed: false });
   input.value = "";
   saveTasksToStorage();
   renderTasks();
 }
 
 function toggleTaskStatus(id) {
-  tasks = tasks.map(t => {
-    if (t.id === id) t.completed = !t.completed;
-    return t;
-  });
+  tasks = tasks.map(t => { if (t.id === id) t.completed = !t.completed; return t; });
   saveTasksToStorage();
   renderTasks();
 }
@@ -447,24 +459,21 @@ function deleteTask(id) {
 function renderTasks() {
   const listEl = document.getElementById('tasksList');
   if(!listEl) return;
-  
   if (tasks.length === 0) {
-    listEl.innerHTML = '<li style="text-align:center; padding:15px; color:var(--muted); font-size:13px;">👍 لا توجد مهام حالية، جدول العمل اليومي نظيف!</li>';
+    listEl.innerHTML = '<li style="text-align:center; padding:12px; color:var(--muted); font-size:13px;">👍 جدول أعمال اليوم منجز بالكامل ومستقر!</li>';
     return;
   }
-
   listEl.innerHTML = tasks.map(t => `
     <li class="task-item">
       <div class="task-item-right">
         <input type="checkbox" class="task-checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTaskStatus(${t.id})">
         <span class="task-text ${t.completed ? 'completed' : ''}">${t.text}</span>
       </div>
-      <button class="delete-task-btn" onclick="deleteTask(${t.id})">❌</button>
+      <button class="delete-task-btn" onclick="deleteTask(${t.id})" title="حذف المهمة">🗑️</button>
     </li>
   `).join('');
 }
 
-// التحكم بالوضع الليلي المطور
 function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const btn = document.getElementById('themeBtn');
@@ -487,15 +496,11 @@ function loadTheme() {
   }
 }
 
-// الاستماع لزر الإنتر داخل مربع الإدخال لإضافة المهمة تلقائياً
-document.getElementById('newTaskInput')?.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') addNewTask();
-});
-
 setInterval(updateClockAndCalendar, 1000);
 window.addEventListener('DOMContentLoaded', () => {
   updateClockAndCalendar();
   loadTasksFromStorage();
+  renderCustomLinks();
   loadTheme();
 });
 </script>
