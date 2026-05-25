@@ -15,8 +15,8 @@
     --bg-card: #ffffff;
     --text-dark: #2C3E50; 
     --muted: #7F8C8D;
-    --radius: 14px;
-    --shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    --radius: 12px;
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
     --border-color: #E5E9E8;
     
     --color-brand: #E64A19;     
@@ -27,10 +27,10 @@
     --color-numbers: #F9A825;
     --color-github: #24292E; 
 
-    /* ألوان خفيفة وناعمة للصلوات لا تؤذي العين */
-    --prayer-text: #5A6B6C;
-    --prayer-bg: #EBF1F0;
-    --prayer-highlight: #D35400;
+    /* ألوان خفيفة جداً ومريحة للعين للصلوات */
+    --prayer-text: #627273;
+    --prayer-bg: #EEF3F2;
+    --prayer-bar-color: #2E7D32; /* لون أخضر واحد مريح للمؤشر الطويل */
 
     --txt-google: #4285F4; --bg-google: #F1F3F4;
     --txt-drive: #1967D2; --bg-drive: #E8F0FE;
@@ -55,9 +55,9 @@
     --muted: #A0A0A0;
     --border-color: #2C2C2C;
 
-    --prayer-text: #A5B4B5;
-    --prayer-bg: #262626;
-    --prayer-highlight: #FF8A65;
+    --prayer-text: #9EAEAF;
+    --prayer-bg: #282828;
+    --prayer-bar-color: #4CAF50;
 
     --bg-google: #1A1A1A; --txt-google: #6BA4FF;
     --bg-drive: #1A1A1A; --txt-drive: #4285F4;
@@ -84,52 +84,53 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    direction: rtl;
+    direction: rlt;
     position: relative;
     transition: background 0.3s, color 0.3s;
+    overflow-x: hidden;
   }
 
   .theme-toggle-btn {
     position: absolute;
-    top: 20px;
+    top: 15px;
     left: 20px;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    padding: 6px 12px;
+    padding: 5px 10px;
     border-radius: 20px;
     cursor: pointer;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 12px;
+    font-family: 'Tajawal';
+    font-size: 11px;
     font-weight: 700;
     color: var(--text-dark);
-    box-shadow: var(--shadow);
     z-index: 210;
   }
 
+  /* --- الشرائط الجانبية --- */
   .side-bar {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
     background: var(--bg-card);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     border: 1px solid var(--border-color);
-    padding: 14px 8px;
+    padding: 10px 6px;
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 7px;
     z-index: 200;
-    width: 140px; 
+    width: 135px; 
     transition: background 0.3s, border-color 0.3s;
   }
   
   .side-bar.right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
   .side-bar.left-bar { left: 0; border-radius: 0 var(--radius) var(--radius) 0; }
 
-  .side-bar-title { font-size: 11px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 6px; border-bottom: 1px dashed var(--border-color); margin-bottom: 2px; }
-  .side-bar-title.sub-section-title { margin-top: 10px; color: #5D6D7E; }
+  .side-bar-title { font-size: 10.5px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 4px; border-bottom: 1px dashed var(--border-color); margin-bottom: 1px; }
+  .side-bar-title.sub-section-title { margin-top: 6px; color: #5D6D7E; }
 
-  .side-link-item { display: block; text-align: center; padding: 9px 6px; border-radius: 8px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.2s ease; }
-  .side-link-item:hover { transform: scale(1.03); opacity: 0.9; }
+  .side-link-item { display: block; text-align: center; padding: 7px 4px; border-radius: 6px; text-decoration: none; font-size: 11.5px; font-weight: 700; transition: all 0.2s ease; }
+  .side-link-item:hover { transform: scale(1.02); opacity: 0.9; }
 
   .lnk-google { background: var(--bg-google); color: var(--txt-google); }
   .lnk-drive { background: var(--bg-drive); color: var(--txt-drive); }
@@ -147,111 +148,90 @@
   .lnk-chi { background: var(--bg-chi); color: var(--txt-chi); } 
   .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); }
 
-  .custom-links-area { display: flex; flex-direction: column; gap: 9px; max-height: 110px; overflow-y: auto; padding-right: 2px; }
-  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 8px; padding: 5px; font-size: 10.5px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 4px; }
+  .custom-links-area { display: flex; flex-direction: column; gap: 6px; max-height: 90px; overflow-y: auto; }
+  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 4px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 2px; }
 
-  .main-content { flex: 1; width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 160px; }
+  /* --- التصميم الأوسط المدمج لمنع النزول بالصفحة --- */
+  .main-content { flex: 1; width: 100%; max-width: 1260px; margin: 0 auto; padding: 0 150px; display: flex; flex-direction: column; }
 
   .hero-section {
     background: var(--bg-card);
     text-align: center;
-    padding: 20px 20px 35px;
+    padding: 12px 20px 24px;
     border-bottom: 1px solid var(--border-color);
     border-radius: 0 0 var(--radius) var(--radius);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    transition: background 0.3s, border-color 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
   }
 
-  .brand-title { color: var(--color-brand); font-size: 44px; font-weight: 900; margin-bottom: 2px; letter-spacing: 1px; }
-  .hero-section h1 { font-size: 19px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); }
+  .brand-title { color: var(--color-brand); font-size: 36px; font-weight: 900; margin-bottom: 0px; letter-spacing: 0.5px; line-height: 1.1; }
+  .hero-section h1 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
 
-  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 15px; background: #EAF2F1; padding: 8px 22px; border-radius: 30px; margin-bottom: 5px; flex-wrap: wrap; }
+  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #EAF2F1; padding: 5px 16px; border-radius: 30px; margin-bottom: 4px; }
   [data-theme="dark"] .live-clock-panel { background: #2A3A39; }
-  .live-time { font-size: 19px; font-weight: 900; color: #111; font-family: monospace, sans-serif; }
+  .live-time { font-size: 16px; font-weight: 900; color: #111; font-family: monospace, sans-serif; }
   [data-theme="dark"] .live-time { color: #fff; }
-  .live-date { font-size: 13px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 15px; }
-  .live-hijri { font-size: 13px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 15px; }
+  .live-date { font-size: 12px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 12px; }
+  .live-hijri { font-size: 12px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 12px; }
 
-  /* --- تطوير نظام أوقات الصلوات ليكون مدمجاً بالكامل وعلى سطر واحد مريح للعين --- */
+  /* --- تحسين وتصغير شريط الصلوات ومحاذاة الأرقام بالكامل على سطر واحد --- */
   .prayer-times-bar { 
     background: var(--bg-card); 
     border: 1px solid var(--border-color); 
-    padding: 12px 16px; 
-    border-radius: 12px; 
-    max-width: 780px; 
-    margin: 14px auto 0; 
-    box-shadow: var(--shadow); 
+    padding: 8px 12px; 
+    border-radius: 10px; 
+    max-width: 720px; 
+    margin: 8px auto 0; 
   }
-  .prayers-row {
-    display: flex; 
-    justify-content: center; 
-    gap: 12px; 
-    flex-wrap: wrap;
-  }
-  .prayer-title { font-size: 12px; font-weight: 900; color: var(--muted); align-self: center; }
+  .prayers-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .prayer-title { font-size: 11.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 4px; }
+  
+  /* مساواة وتنسيق اسم الصلاة مع الوقت بالمنتصف تماماً */
   .prayer-item { 
-    font-size: 12px; 
+    font-size: 11.5px; 
     font-weight: 700; 
-    display: flex; 
-    gap: 5px; 
-    padding: 3px 10px; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; 
+    padding: 3px 8px; 
     background: var(--prayer-bg); 
     color: var(--prayer-text);
     border-radius: 6px; 
-    transition: all 0.3s;
+    border: none !important; /* إزالة أي إطارات حول صلاة العشاء أو غيرها */
   }
-  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 12.5px; font-weight: bold; }
+  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 11.5px; font-weight: bold; }
   
-  /* سطر العداد التنازلي ومؤشر الاقتراب المضاف */
+  /* سطر العداد التنازلي والمؤشر الأطول بلون واحد هادئ */
   .prayer-countdown-container {
-    margin-top: 10px;
-    padding-top: 8px;
+    margin-top: 6px;
+    padding-top: 5px;
     border-top: 1px dashed var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    flex-wrap: wrap;
   }
-  .countdown-text {
-    font-size: 12.5px;
-    font-weight: 800;
-    color: var(--text-dark);
-  }
-  .countdown-text span {
-    color: var(--color-brand);
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: 900;
-  }
-  .proximity-bar-bg {
-    width: 140px;
-    height: 8px;
-    background: var(--border-color);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .proximity-bar-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--color-calc), var(--color-brand));
-    border-radius: 10px;
-    transition: width 1s linear;
-  }
+  .countdown-text { font-size: 11.5px; font-weight: 700; color: var(--muted); } /* خط متبقي على الصلاة هادئ */
+  .countdown-text span { color: var(--text-dark); font-weight: 800; font-family: monospace; }
+  
+  /* جعل مؤشر الاقتراب أطول وبلون واحد ثابت مريح للعين */
+  .proximity-bar-bg { width: 220px; height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
+  .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 1s linear; }
 
-  .cards-container { margin: 25px auto 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  /* --- تصغير وموازنة شبكة الأنظمة الستة --- */
+  .cards-container { margin: 16px auto 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 
   @media (max-width: 1000px) {
-    .cards-container { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .cards-container { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
     .main-content { padding: 0 20px; }
-    .side-bar { position: relative; top: 0; transform: none; flex-direction: row; justify-content: center; width: 100%; border-radius: var(--radius) !important; margin: 15px 0; flex-wrap: wrap; }
+    .side-bar { position: relative; top: 0; transform: none; flex-direction: row; justify-content: center; width: 100%; border-radius: var(--radius) !important; margin: 10px 0; flex-wrap: wrap; }
     .side-bar-title { width: 100%; border-bottom: none; margin-bottom: 0; }
   }
 
   .portal-card {
     background: var(--bg-card);
     border-radius: var(--radius);
-    padding: 22px 18px;
+    padding: 14px 12px;
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color); 
@@ -260,11 +240,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s, background 0.3s, border-color 0.3s;
+    transition: transform 0.2s ease, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
   }
-  .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; }
+  .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
 
   .card-stock::before { background: var(--color-stock); } 
   .card-stock .icon-wrapper { background: #FDEBD0; color: var(--color-stock); }
@@ -279,34 +259,35 @@
   .card-github::before { background: var(--color-github); } 
   .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
 
-  .icon-wrapper { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 10px; }
-  .portal-card h2 { font-size: 15.5px; font-weight: 900; margin-bottom: 6px; }
-  .portal-card p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; flex: 1; }
-  .action-btn { color: #fff; padding: 6px 20px; border-radius: 20px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; border: none; }
-  .portal-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); border-color: #BDC3C7; }
+  .icon-wrapper { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 6px; }
+  .portal-card h2 { font-size: 14px; font-weight: 900; margin-bottom: 4px; }
+  .portal-card p { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-bottom: 8px; flex: 1; }
+  .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; border: none; }
+  .portal-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); }
 
+  /* --- تصغير مساحة صندوق قائمة المهام للتوافق الشامل الشاشة --- */
   .tasks-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 40px;
+    padding: 12px 16px;
+    margin-bottom: 15px;
     box-shadow: var(--shadow);
   }
-  .tasks-section h3 { font-size: 15px; font-weight: 900; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+  .tasks-section h3 { font-size: 13.5px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
   
-  .task-input-container { display: flex; gap: 10px; margin-bottom: 16px; }
-  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 8px; padding: 10px 14px; font-family: 'Tajawal', sans-serif; font-size: 13.5px; outline: none; }
-  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 20px; border-radius: 8px; font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .task-input-container { display: flex; gap: 8px; margin-bottom: 10px; }
+  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 6px; padding: 7px 12px; font-family: 'Tajawal'; font-size: 12.5px; outline: none; }
+  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 14px; border-radius: 6px; font-family: 'Tajawal'; font-size: 12px; font-weight: 700; cursor: pointer; }
 
-  .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color); }
-  .task-item-right { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 500; }
-  .task-checkbox { width: 16px; height: 16px; cursor: pointer; }
+  .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 5px; max-height: 100px; overflow-y: auto; }
+  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border-color); }
+  .task-item-right { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+  .task-checkbox { width: 14px; height: 14px; cursor: pointer; }
   .task-text.completed { text-decoration: line-through; color: var(--muted); }
-  .delete-task-btn { background: transparent; border: none; color: var(--color-brand); cursor: pointer; font-size: 14px; padding: 2px; }
+  .delete-task-btn { background: transparent; border: none; color: var(--color-brand); cursor: pointer; font-size: 12px; }
 
-  .footer { text-align: center; padding: 16px; font-size: 12px; color: #95A5A6; border-top: 1px solid var(--border-color); background: var(--bg-card); margin-top: auto; }
+  .footer { text-align: center; padding: 10px; font-size: 11.5px; color: #95A5A6; border-top: 1px solid var(--border-color); background: var(--bg-card); margin-top: auto; }
 </style>
 </head>
 <body>
@@ -355,15 +336,15 @@
       <div class="prayer-times-bar">
         <div class="prayers-row">
           <div class="prayer-title">🕌 مواقيت صلاة جدة:</div>
-          <div class="prayer-item" id="pCard-fajr">الفجر: <span id="p-fajr">04:12 ص</span></div>
-          <div class="prayer-item" id="pCard-dhuhr">الظهر: <span id="p-dhuhr">12:22 م</span></div>
-          <div class="prayer-item" id="pCard-asr">العصر: <span id="p-asr">03:42 م</span></div>
-          <div class="prayer-item" id="pCard-maghrib">المغرب: <span id="p-maghrib">07:03 م</span></div>
-          <div class="prayer-item" id="pCard-isha">العشاء: <span id="p-isha">08:33 م</span></div>
+          <div class="prayer-item" id="pCard-fajr">الفجر <span>04:12 ص</span></div>
+          <div class="prayer-item" id="pCard-dhuhr">الظهر <span>12:22 م</span></div>
+          <div class="prayer-item" id="pCard-asr">العصر <span>03:42 م</span></div>
+          <div class="prayer-item" id="pCard-maghrib">المغرب <span>07:03 م</span></div>
+          <div class="prayer-item" id="pCard-isha">العشاء <span>08:33 م</span></div>
         </div>
         
         <div class="prayer-countdown-container">
-          <div class="countdown-text" id="prayerCountdownText">جاري فحص الصلاة القادمة...</div>
+          <div class="countdown-text" id="prayerCountdownText">متبقي على صلاة...</div>
           <div class="proximity-bar-bg">
             <div class="proximity-bar-fill" id="proximityFill"></div>
           </div>
@@ -371,47 +352,47 @@
       </div>
     </div>
 
-    <div class="cards-container">
+    <div class="cards-container" style="margin-top: -20px;">
       <a href="http://kababjk.opos.me/" class="portal-card card-stock">
         <div class="icon-wrapper">📦</div>
         <h2>المخزون - أرقامي</h2>
-        <p>متابعة وتدقيق جرد المخازن، التوريدات، والمواد الخام للفروع بشكل دوري وحي.</p>
-        <div class="action-btn" style="background: var(--color-stock);"><span>دخول</span> ⬅️</div>
+        <p>متابعة وتدقيق جرد المخازن، التوريدات، والمواد الخام حياً للفروع.</p>
+        <div class="action-btn" style="background: var(--color-stock);"><span>دخول</span></div>
       </a>
 
       <a href="http://kababjk-accounts.opos.me/Account/LogOn?LanguageID=2&mat=0.6675783853251626" class="portal-card card-accounts">
         <div class="icon-wrapper">💼</div>
         <h2>الحسابات - أرقامي</h2>
-        <p>تسجيل القيود المحاسبية، الرواتب، الأرباح والخسائر والميزانية التشغيلية.</p>
-        <div class="action-btn" style="background: var(--color-accounts);"><span>دخول</span> ⬅️</div>
+        <p>تسجيل القيود المحاسبية، الرواتب، الأرباح والميزانية التشغيلية.</p>
+        <div class="action-btn" style="background: var(--color-accounts);"><span>دخول</span></div>
       </a>
 
       <a href="https://abo-shefaa.vercel.app/" class="portal-card card-alerts">
         <div class="icon-wrapper">🔔</div>
         <h2>تنبيهات الوثائق</h2>
         <p>مراقبة صلاحيات الإقامات، التراخيص البلديّة، والتأمين الطبي تفادياً للمخالفات.</p>
-        <div class="action-btn" style="background: var(--color-alerts);"><span>دخول</span> ⬅️</div>
+        <div class="action-btn" style="background: var(--color-alerts);"><span>دخول</span></div>
       </a>
 
       <a href="https://kababji-seven.vercel.app/" class="portal-card card-calc">
         <div class="icon-wrapper">📊</div>
         <h2>حاسبة التطبيقات</h2>
-        <p>احتساب مبيعات المنصات بدقة، وحساب العمولات والتحليلات المالية اليومية.</p>
-        <div class="action-btn" style="background: var(--color-calc);"><span>دخول</span> ⬅️</div>
+        <p>احتساب مبيعات المنصات وعمولات التحليلات المالية اليومية بدقة.</p>
+        <div class="action-btn" style="background: var(--color-calc);"><span>دخول</span></div>
       </a>
 
       <a href="https://kababji-xl.vercel.app/" class="portal-card card-numbers">
         <div class="icon-wrapper">🧩</div>
         <h2>تنظيم أرقامي</h2>
-        <p>تنظيم ملفات الإكسل لمكونات الأصناف المصدرة من برنامج أرقامي مع إمكانية التعديل والتصدير والطباعة.</p>
-        <div class="action-btn" style="background: var(--color-numbers);"><span>دخول</span> ⬅️</div>
+        <p>تنظيم ملفات الإكسل لمكونات الأصناف المصدرة مع إمكانية التعديل والطباعة.</p>
+        <div class="action-btn" style="background: var(--color-numbers);"><span>دخول</span></div>
       </a>
 
       <a href="https://github.com/kababji2016-hub" class="portal-card card-github">
         <div class="icon-wrapper">⚙️</div>
         <h2>تعديل الأكواد</h2>
-        <p>الدخول المباشر إلى مستودع البرمجيات لتحديث السكريبتات وتعديل البنية البرمجية للبوابة واللوحات.</p>
-        <div class="action-btn" style="background: var(--color-github);"><span>فتح الـ Hub</span> ⬅️</div>
+        <p>الدخول المباشر لمستودع البرمجيات لتحديث السكريبتات وتعديل البنية البرمجية.</p>
+        <div class="action-btn" style="background: var(--color-github);"><span>فتح الـ Hub</span></div>
       </a>
     </div>
 
@@ -419,7 +400,7 @@
       <h3>📋 قائمة المهام</h3>
       <div class="task-input-container">
         <input type="text" id="newTaskInput" class="task-input" placeholder="اكتب المهمة الجديدة المطلوبة هنا لتسجيلها...">
-        <button class="add-task-btn" onclick="addNewTask()">➕ إضافة مهمة</button>
+        <button class="add-task-btn" onclick="addNewTask()">➕ إضافة</button>
       </div>
       <ul class="tasks-list" id="tasksList"></ul>
     </div>
@@ -433,10 +414,9 @@
 let tasks = [];
 let customLinks = [];
 
-// تعريف بيانات مواقيت الصلاة الفعلية لمدينة جدة لربطها بالعداد الحسابي الحقيقي
 const PRAYER_DATA = [
   { name: "الفجر", key: "fajr", timeStr: "04:12" },
-  { name: "الظهر", key: "dhuhr", timeStr: "12:22" },
+  { name: "الظهر", key: "12:22", timeStr: "12:22" },
   { name: "العصر", key: "asr", timeStr: "15:42" },
   { name: "المغرب", key: "maghrib", timeStr: "19:03" },
   { name: "العشاء", key: "isha", timeStr: "20:33" }
@@ -464,24 +444,20 @@ function updateClockAndCalendar() {
   const optionsHijri = { year: 'numeric', month: 'long', day: 'numeric' };
   document.getElementById('liveHijri').textContent = now.toLocaleDateString('ar-SA-u-ca-islamic', optionsHijri);
 
-  // حساب المتبقي ومؤشر الاقتراب للصلوات تلقائياً
   calculatePrayerCountdown(now);
 }
 
 function calculatePrayerCountdown(now) {
   let currentTarget = null;
   let minDiff = Infinity;
-  let nextIndex = 0;
 
-  // تحويل المواقيت إلى كائنات تاريخ للمقارنة اللحظية
-  const prayerTimesWithDates = PRAYER_DATA.map((p, index) => {
+  const prayerTimesWithDates = PRAYER_DATA.map((p) => {
     const [h, m] = p.timeStr.split(':');
     const pDate = new Date(now);
     pDate.setHours(parseInt(h), parseInt(m), 0, 0);
-    return { ...p, date: pDate, index: index };
+    return { ...p, date: pDate };
   });
 
-  // العثور على الصلاة القادمة اليوم
   for (let p of prayerTimesWithDates) {
     let diff = p.date - now;
     if (diff > 0 && diff < minDiff) {
@@ -490,22 +466,12 @@ function calculatePrayerCountdown(now) {
     }
   }
 
-  // إذا انقضت كل صلوات اليوم، تكون الصلاة القادمة هي فجر الغد
   if (!currentTarget) {
     currentTarget = { ...prayerTimesWithDates[0] };
     currentTarget.date.setDate(currentTarget.date.getDate() + 1);
     minDiff = currentTarget.date - now;
   }
 
-  // تصفية وتمييز الصلاة الحالية عبر حلقة الحواف بصرياً بلون خفيف
-  PRAYER_DATA.forEach(p => {
-    const el = document.getElementById(`pCard-${p.key}`);
-    if(el) el.style.border = "none";
-  });
-  const currentActiveCard = document.getElementById(`pCard-${currentTarget.key}`);
-  if(currentActiveCard) currentActiveCard.style.border = "1px solid var(--prayer-highlight)";
-
-  // حساب تفاصيل الوقت التنازلي بالساعات والدقائق والثواني
   let totalSeconds = Math.floor(minDiff / 1000);
   let secs = totalSeconds % 60;
   let totalMinutes = Math.floor(totalSeconds / 60);
@@ -516,9 +482,9 @@ function calculatePrayerCountdown(now) {
   secs = secs < 10 ? '0' + secs : secs;
   hrs = hrs < 10 ? '0' + hrs : hrs;
 
-  document.getElementById('prayerCountdownText').innerHTML = `متبقي على صلاة <span>${currentTarget.name}</span> : <span>${hrs}:${mins}:${secs}</span>`;
+  // إبقاء خط صياغة المتبقي هادئاً وخفيفاً بدون تعقيد
+  document.getElementById('prayerCountdownText').innerHTML = `متبقي على صلاة ${currentTarget.name}: <span>${hrs}:${mins}:${secs}</span>`;
 
-  // حساب مؤشر شريط الاقتراب بصرياً (بافتراض متوسط 3 ساعات بين الصلوات كـ 100%)
   const totalWindow = 3 * 60 * 60 * 1000; 
   let progress = ((totalWindow - minDiff) / totalWindow) * 100;
   if (progress < 0) progress = 0;
@@ -528,13 +494,11 @@ function calculatePrayerCountdown(now) {
   if(fillBar) fillBar.style.width = `${progress}%`;
 }
 
-// وظائف تشغيل الروابط السريعة الثابتة والمخصصة
 function addCustomLink() {
-  const title = prompt("اكتب اسم الموقع الجديد المفضل:");
+  const title = prompt("اكتب اسم الموقع:");
   if (!title) return;
-  const url = prompt("الصق رابط الموقع الكامل (يجب أن يبدأ بـ http:// أو https://):");
+  const url = prompt("الصق رابط الموقع الكامل:");
   if (!url) return;
-
   customLinks.push({ id: Date.now(), title: title, url: url });
   localStorage.setItem('kababji_custom_shortcuts', JSON.stringify(customLinks));
   renderCustomLinks();
@@ -542,7 +506,7 @@ function addCustomLink() {
 
 function deleteCustomLink(id, e) {
   e.preventDefault(); e.stopPropagation();
-  if(confirm("هل تود مسح هذا الرابط المفضل؟")) {
+  if(confirm("هل تود مسح هذا الرابط؟")) {
     customLinks = customLinks.filter(l => l.id !== id);
     localStorage.setItem('kababji_custom_shortcuts', JSON.stringify(customLinks));
     renderCustomLinks();
@@ -555,18 +519,17 @@ function renderCustomLinks() {
   const saved = localStorage.getItem('kababji_custom_shortcuts');
   if(saved) customLinks = JSON.parse(saved);
   if(customLinks.length === 0) {
-    area.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center; padding:4px;">لا توجد روابط مضافة</div>';
+    area.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center;">لا توجد روابط</div>';
     return;
   }
   area.innerHTML = customLinks.map(l => `
     <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
       ${l.title}
-      <span onclick="deleteCustomLink(${l.id}, event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:10px; cursor:pointer;">🗑️</span>
+      <span onclick="deleteCustomLink(${l.id}, event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">🗑️</span>
     </a>
   `).join('');
 }
 
-// وظائف تشغيل وحفظ قائمة المهام
 function saveTasksToStorage() { localStorage.setItem('kababji_tasks_list', JSON.stringify(tasks)); }
 function loadTasksFromStorage() {
   const saved = localStorage.getItem('kababji_tasks_list');
@@ -599,7 +562,7 @@ function renderTasks() {
   const listEl = document.getElementById('tasksList');
   if(!listEl) return;
   if (tasks.length === 0) {
-    listEl.innerHTML = '<li style="text-align:center; padding:12px; color:var(--muted); font-size:13px;">👍 جدول أعمال اليوم منجز بالكامل ومستقر!</li>';
+    listEl.innerHTML = '<li style="text-align:center; padding:8px; color:var(--muted); font-size:12px;">👍 لا توجد مهام حالية.</li>';
     return;
   }
   listEl.innerHTML = tasks.map(t => `
@@ -608,7 +571,7 @@ function renderTasks() {
         <input type="checkbox" class="task-checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTaskStatus(${t.id})">
         <span class="task-text ${t.completed ? 'completed' : ''}">${t.text}</span>
       </div>
-      <button class="delete-task-btn" onclick="deleteTask(${t.id})" title="حذف المهمة">🗑️</button>
+      <button class="delete-task-btn" onclick="deleteTask(${t.id})">🗑️</button>
     </li>
   `).join('');
 }
