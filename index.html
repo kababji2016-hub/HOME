@@ -26,19 +26,45 @@
     --color-calc: #2E7D32;      
     --color-numbers: #F9A825;
     --color-github: #24292E; 
-    
-    --color-gpt: #10a37f;
-    --color-gemini: #1a73e8;
-    --color-claude: #d97706;
+
+    /* ألوان النصوص المضيئة الافتراضية */
+    --txt-google: #4285F4; --bg-google: #F1F3F4;
+    --txt-drive: #1967D2; --bg-drive: #E8F0FE;
+    --txt-gmail: #C5221F; --bg-gmail: #FCE8E6;
+    --txt-whatsapp: #128C7E; --bg-whatsapp: #E6F4EA;
+    --txt-gpt: #10a37f; --bg-gpt: #E6F6F2;
+    --txt-gemini: #1a73e8; --bg-gemini: #E8F0FE;
+    --txt-claude: #d97706; --bg-claude: #FEF3C7;
+    --txt-qiwa: #004D40; --bg-qiwa: #E0F2F1;
+    --txt-balady: #006064; --bg-balady: #E0F7FA;
+    --txt-mudad: #1A237E; --bg-mudad: #E8EAF6;
+    --txt-absher: #1B5E20; --bg-absher: #E8F5E9;
+    --txt-gosi: #E65100; --bg-gosi: #FFF3E0;
+    --txt-chi: #0288D1; --bg-chi: #E1F5FE;
   }
 
-  /* ألوان الوضع الليلي الذكي */
+  /* --- تحسينات الوضع الليلي لتظلم الجوانب وتضيء الكتابة بالوانها المختلفة --- */
   [data-theme="dark"] {
-    --bg-main: #1A1A1A;
-    --bg-card: #262626;
+    --bg-main: #121212;
+    --bg-card: #1E1E1E;
     --text-dark: #F5F5F5;
-    --muted: #9AA0A6;
-    --border-color: #333333;
+    --muted: #A0A0A0;
+    --border-color: #2C2C2C;
+
+    /* تظليم خلفيات العناصر الجانبية بالكامل وإضاءة النصوص فوسفورياً */
+    --bg-google: #1A1A1A; --txt-google: #6BA4FF;
+    --bg-drive: #1A1A1A; --txt-drive: #4285F4;
+    --bg-gmail: #1A1A1A; --txt-gmail: #FF6B6B;
+    --bg-whatsapp: #1A1A1A; --txt-whatsapp: #25D366;
+    --bg-gpt: #1A1A1A; --txt-gpt: #10a37f;
+    --bg-gemini: #1A1A1A; --txt-gemini: #5395FF;
+    --bg-claude: #1A1A1A; --txt-claude: #FFB040;
+    --bg-qiwa: #1A1A1A; --txt-qiwa: #33AB9F;
+    --bg-balady: #1A1A1A; --txt-balady: #00E5FF;
+    --bg-mudad: #1A1A1A; --txt-mudad: #7986CB;
+    --bg-absher: #1A1A1A; --txt-absher: #4CAF50;
+    --bg-gosi: #1A1A1A; --txt-gosi: #FF9800;
+    --bg-chi: #1A1A1A; --txt-chi: #29B6F6;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,7 +81,6 @@
     transition: background 0.3s, color 0.3s;
   }
 
-  /* زر تحويل الوضع الليلي علوياً */
   .theme-toggle-btn {
     position: absolute;
     top: 20px;
@@ -98,22 +123,21 @@
   .side-link-item { display: block; text-align: center; padding: 9px 6px; border-radius: 8px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.2s ease; }
   .side-link-item:hover { transform: scale(1.03); opacity: 0.9; }
 
-  /* الهوية اللونية لليمين (جوجل + ذكاء اصطناعي) */
-  .lnk-google { background: #F1F3F4; color: #4285F4; }
-  .lnk-drive { background: #E8F0FE; color: #1967D2; }
-  .lnk-gmail { background: #FCE8E6; color: #C5221F; }
-  .lnk-whatsapp { background: #E6F4EA; color: #128C7E; } 
-  .lnk-gpt { background: #E6F6F2; color: #10a37f; }
-  .lnk-gemini { background: #E8F0FE; color: #1a73e8; }
-  .lnk-claude { background: #FEF3C7; color: #d97706; }
+  /* تطبيق الألوان المتغيرة بين الليل والنهار */
+  .lnk-google { background: var(--bg-google); color: var(--txt-google); }
+  .lnk-drive { background: var(--bg-drive); color: var(--txt-drive); }
+  .lnk-gmail { background: var(--bg-gmail); color: var(--txt-gmail); }
+  .lnk-whatsapp { background: var(--bg-whatsapp); color: var(--txt-whatsapp); } 
+  .lnk-gpt { background: var(--bg-gpt); color: var(--txt-gpt); }
+  .lnk-gemini { background: var(--bg-gemini); color: var(--txt-gemini); }
+  .lnk-claude { background: var(--bg-claude); color: var(--txt-claude); }
 
-  /* الهوية اللونية لليسار (منصات عمل + تأمين صحي) */
-  .lnk-qiwa { background: #E0F2F1; color: #004D40; }
-  .lnk-balady { background: #E0F7FA; color: #006064; } 
-  .lnk-mudad { background: #E8EAF6; color: #1A237E; }
-  .lnk-absher { background: #E8F5E9; color: #1B5E20; }
-  .lnk-gosi { background: #FFF3E0; color: #E65100; }
-  .lnk-chi { background: #E1F5FE; color: #0288D1; } /* لون التأمين الصحي المميز */
+  .lnk-qiwa { background: var(--bg-qiwa); color: var(--txt-qiwa); }
+  .lnk-balady { background: var(--bg-balady); color: var(--txt-balady); } 
+  .lnk-mudad { background: var(--bg-mudad); color: var(--txt-mudad); }
+  .lnk-absher { background: var(--bg-absher); color: var(--txt-absher); }
+  .lnk-gosi { background: var(--bg-gosi); color: var(--txt-gosi); }
+  .lnk-chi { background: var(--bg-chi); color: var(--txt-chi); } 
 
   .main-content { flex: 1; width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 160px; }
 
@@ -183,28 +207,69 @@
   .action-btn { color: #fff; padding: 6px 20px; border-radius: 20px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; border: none; }
   .portal-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); border-color: #BDC3C7; }
 
-  .notepad-section {
+  /* --- نظام إدارة المهام الجديد التفاعلي --- */
+  .tasks-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    padding: 16px;
+    padding: 20px;
     margin-bottom: 40px;
     box-shadow: var(--shadow);
   }
-  .notepad-section h3 { font-size: 14px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-  .notepad-textarea {
-    width: 100%;
-    height: 80px;
+  .tasks-section h3 { font-size: 15px; font-weight: 900; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+  
+  .task-input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .task-input {
+    flex: 1;
     border: 1px solid var(--border-color);
     background: var(--bg-main);
     color: var(--text-dark);
     border-radius: 8px;
-    padding: 10px;
+    padding: 10px 14px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 13.5px;
+    outline: none;
+  }
+  .add-task-btn {
+    background: var(--color-calc);
+    color: #fff;
+    border: none;
+    padding: 0 20px;
+    border-radius: 8px;
     font-family: 'Tajawal', sans-serif;
     font-size: 13px;
-    outline: none;
-    resize: none;
+    font-weight: 700;
+    cursor: pointer;
   }
+  .add-task-btn:hover { opacity: 0.9; }
+
+  .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-main);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+  .task-item-right { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 500; }
+  .task-checkbox { width: 16px; height: 16px; cursor: pointer; }
+  .task-text.completed { text-decoration: line-through; color: var(--muted); }
+  
+  .delete-task-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-brand);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px;
+  }
+  .delete-task-btn:hover { transform: scale(1.1); }
 
   .footer { text-align: center; padding: 16px; font-size: 12px; color: #95A5A6; border-top: 1px solid var(--border-color); background: var(--bg-card); margin-top: auto; }
 </style>
@@ -234,8 +299,7 @@
     <a href="https://www.absher.sa" class="side-link-item lnk-absher">منصة أبشر</a>
     <a href="https://www.gosi.gov.sa" class="side-link-item lnk-gosi">التأمينات</a>
     
-    <div class="side-bar-title sub-section-title">الضمان الطبي</div>
-    <a href="https://www.chi.gov.sa/Pages/Home.aspx" class="side-link-item lnk-chi">التأمين الصحي</a>
+    <a href="https://www.chi.gov.sa/Pages/Home.aspx" class="side-link-item lnk-chi" style="margin-top: 10px;">التأمين الصحي</a>
   </div>
 
   <div class="main-content">
@@ -295,9 +359,13 @@
       </a>
     </div>
 
-    <div class="notepad-section">
-      <h3>📝 مفكرة كبابجي الإدارية السريعة (تُحفظ تلقائياً)</h3>
-      <textarea class="notepad-textarea" id="adminNotes" placeholder="اكتب هنا أي ملاحظات، مهام مستعجلة، أو أرقام تحتاج إلى تذكرها أثناء العمل..." oninput="saveNotes(this.value)"></textarea>
+    <div class="tasks-section">
+      <h3>📋 قائمة مهام كبابجي الإدارية (تُحفظ وتُحدث حياً)</h3>
+      <div class="task-input-container">
+        <input type="text" id="newTaskInput" class="task-input" placeholder="اكتب المهمة الجديدة هنا (مثال: مراجعة تجديد شهادات عمالة فرع السامر)...">
+        <button class="add-task-btn" onclick="addNewTask()">➕ إضافة مهمة</button>
+      </div>
+      <ul class="tasks-list" id="tasksList"></ul>
     </div>
   </div>
 
@@ -306,6 +374,8 @@
   </div>
 
 <script>
+let tasks = [];
+
 function updateClockAndCalendar() {
   const now = new Date();
   let hours = now.getHours();
@@ -329,12 +399,72 @@ function updateClockAndCalendar() {
   document.getElementById('liveHijri').textContent = now.toLocaleDateString('ar-SA-u-ca-islamic', optionsHijri);
 }
 
-function saveNotes(val) { localStorage.setItem('kababji_admin_notes', val); }
-function loadNotes() {
-  const saved = localStorage.getItem('kababji_admin_notes');
-  if(saved) document.getElementById('adminNotes').value = saved;
+// وظائف نظام المهام المطور
+function saveTasksToStorage() {
+  localStorage.setItem('kababji_tasks_list', JSON.stringify(tasks));
 }
 
+function loadTasksFromStorage() {
+  const saved = localStorage.getItem('kababji_tasks_list');
+  if (saved) {
+    tasks = JSON.parse(saved);
+    renderTasks();
+  }
+}
+
+function addNewTask() {
+  const input = document.getElementById('newTaskInput');
+  const text = input.value.trim();
+  if (text === "") return;
+
+  const task = {
+    id: Date.now(),
+    text: text,
+    completed: false
+  };
+
+  tasks.push(task);
+  input.value = "";
+  saveTasksToStorage();
+  renderTasks();
+}
+
+function toggleTaskStatus(id) {
+  tasks = tasks.map(t => {
+    if (t.id === id) t.completed = !t.completed;
+    return t;
+  });
+  saveTasksToStorage();
+  renderTasks();
+}
+
+function deleteTask(id) {
+  tasks = tasks.filter(t => t.id !== id);
+  saveTasksToStorage();
+  renderTasks();
+}
+
+function renderTasks() {
+  const listEl = document.getElementById('tasksList');
+  if(!listEl) return;
+  
+  if (tasks.length === 0) {
+    listEl.innerHTML = '<li style="text-align:center; padding:15px; color:var(--muted); font-size:13px;">👍 لا توجد مهام حالية، جدول العمل اليومي نظيف!</li>';
+    return;
+  }
+
+  listEl.innerHTML = tasks.map(t => `
+    <li class="task-item">
+      <div class="task-item-right">
+        <input type="checkbox" class="task-checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTaskStatus(${t.id})">
+        <span class="task-text ${t.completed ? 'completed' : ''}">${t.text}</span>
+      </div>
+      <button class="delete-task-btn" onclick="deleteTask(${t.id})">❌</button>
+    </li>
+  `).join('');
+}
+
+// التحكم بالوضع الليلي المطور
 function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const btn = document.getElementById('themeBtn');
@@ -357,10 +487,15 @@ function loadTheme() {
   }
 }
 
+// الاستماع لزر الإنتر داخل مربع الإدخال لإضافة المهمة تلقائياً
+document.getElementById('newTaskInput')?.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') addNewTask();
+});
+
 setInterval(updateClockAndCalendar, 1000);
 window.addEventListener('DOMContentLoaded', () => {
   updateClockAndCalendar();
-  loadNotes();
+  loadTasksFromStorage();
   loadTheme();
 });
 </script>
