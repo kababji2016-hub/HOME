@@ -11,12 +11,13 @@
 
 <style>
   :root {
-    --bg-main: #121212; /* تثبيت الثيم الغامق كما في الصورة */
-    --bg-card: #1E1E1E;
-    --text-dark: #F5F5F5;
-    --muted: #A0A0A0;
-    --border-color: #2C2C2C;
-
+    /* الوضع النهاري الافتراضي */
+    --bg-main: #F4F7F6; 
+    --bg-card: #ffffff;
+    --text-dark: #2C3E50; 
+    --muted: #7F8C8D;
+    --border-color: #E5E9E8;
+    
     --color-brand: #E64A19;     
     --color-stock: #D35400;      
     --color-accounts: #2C3E50;  
@@ -24,6 +25,36 @@
     --color-calc: #2E7D32;      
     --color-numbers: #F9A825;
     --color-github: #24292E; 
+
+    --prayer-text: #627273;
+    --prayer-bg: #EEF3F2;
+    --prayer-bar-color: #2E7D32; 
+
+    --bg-google: #F1F3F4; --txt-google: #4285F4;
+    --bg-drive: #E8F0FE; --txt-drive: #1967D2;
+    --bg-gmail: #FCE8E6; --txt-gmail: #C5221F;
+    --bg-whatsapp: #E6F4EA; --txt-whatsapp: #128C7E;
+    --bg-gpt: #E6F6F2; --txt-gpt: #10a37f;
+    --bg-gemini: #E8F0FE; --txt-gemini: #1a73e8;
+    --bg-claude: #FEF3C7; --txt-claude: #d97706;
+    --bg-qiwa: #E0F2F1; --txt-qiwa: #004D40;
+    --bg-balady: #E0F7FA; --txt-balady: #006064;
+    --bg-mudad: #E8EAF6; --txt-mudad: #1A237E;
+    --bg-absher: #E8F5E9; --txt-absher: #1B5E20;
+    --bg-gosi: #FFF3E0; --txt-gosi: #E65100;
+    --bg-chi: #E1F5FE; --txt-chi: #0288D1;
+    --bg-custom: #ECEFF1; --txt-custom: #607D8B;
+    --radius: 12px;
+    --shadow: 0 4px 15px rgba(0,0,0,0.03);
+  }
+
+  [data-theme="dark"] {
+    /* الوضع الليلي المطور */
+    --bg-main: #121212;
+    --bg-card: #1E1E1E;
+    --text-dark: #F5F5F5;
+    --muted: #A0A0A0;
+    --border-color: #2C2C2C;
 
     --prayer-text: #9EAEAF;
     --prayer-bg: #282828;
@@ -43,8 +74,7 @@
     --bg-gosi: #1A1A1A; --txt-gosi: #FF9800;
     --bg-chi: #1A1A1A; --txt-chi: #29B6F6;
     --bg-custom: #1A1A1A; --txt-custom: #B0BEC5;
-    --radius: 12px;
-    --shadow: 0 4px 15px rgba(0,0,0,0.2);
+    --shadow: 0 4px 15px rgba(0,0,0,0.3);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -57,7 +87,8 @@
     display: flex;
     flex-direction: column;
     direction: rtl;
-    overflow: hidden; /* منع التمرير العمودي لتظهر الصفحة كاملة */
+    overflow: hidden;
+    transition: background 0.3s, color 0.3s;
   }
 
   .theme-toggle-btn {
@@ -66,7 +97,7 @@
     left: 20px;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    padding: 4px 10px;
+    padding: 6px 12px;
     border-radius: 20px;
     cursor: pointer;
     font-family: 'Tajawal';
@@ -74,9 +105,10 @@
     font-weight: 700;
     color: var(--text-dark);
     z-index: 210;
+    box-shadow: var(--shadow);
   }
 
-  /* --- الأشرطة الجانبية مدمجة --- */
+  /* --- الأشرطة الجانبية --- */
   .side-bar {
     position: fixed;
     top: 50%;
@@ -90,6 +122,7 @@
     gap: 6px;
     z-index: 200;
     width: 135px; 
+    transition: background 0.3s, border-color 0.3s;
   }
   
   .side-bar.right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
@@ -131,7 +164,7 @@
   .custom-links-area { display: flex; flex-direction: column; gap: 5px; max-height: 100px; overflow-y: auto; margin-top: 2px; }
   .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 4px; font-size: 10px; font-weight: 700; cursor: pointer; text-align: center; margin-top: 4px; font-family: 'Tajawal'; }
 
-  /* --- محتوى الصفحة الرئيسي المتجاوب عمودياً --- */
+  /* --- المحتوى الرئيسي المتناسق --- */
   .main-content { 
     flex: 1; 
     width: 100%; 
@@ -140,31 +173,33 @@
     padding: 0 150px; 
     display: flex; 
     flex-direction: column;
-    justify-content: space-between; /* توزيع مثالي لمنع النزول لأسفل الشاشة */
+    justify-content: space-between; 
     height: 100%;
   }
 
-  /* --- الهيدر المدمج --- */
   .hero-section {
     background: var(--bg-card);
     text-align: center;
-    padding: 14px 20px 14px; 
+    padding: 14px 20px; 
     border-bottom: 1px solid var(--border-color);
     border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: var(--shadow);
+    transition: background 0.3s;
   }
 
   .brand-title { color: var(--color-brand); font-size: 32px; font-weight: 900; margin-bottom: 2px; }
   .hero-section h1 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text-dark); }
 
-  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #2A3A39; padding: 6px 16px; border-radius: 30px; margin-bottom: 10px; }
-  .live-time { font-size: 15px; font-weight: 900; color: #fff; font-family: monospace, sans-serif; }
-  .live-date { font-size: 11.5px; font-weight: 700; color: #4CAF50; border-right: 2px solid #555; padding-right: 10px; }
-  .live-hijri { font-size: 11.5px; font-weight: 700; color: #FF6B6B; border-right: 2px solid #555; padding-right: 10px; }
+  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: var(--bg-main); padding: 6px 16px; border-radius: 30px; margin-bottom: 10px; border: 1px solid var(--border-color); }
+  .live-time { font-size: 15px; font-weight: 900; color: var(--text-dark); font-family: monospace, sans-serif; }
+  .live-date { font-size: 11.5px; font-weight: 700; color: #2E7D32; border-right: 2px solid var(--border-color); padding-right: 10px; }
+  [data-theme="dark"] .live-date { color: #4CAF50; }
+  .live-hijri { font-size: 11.5px; font-weight: 700; color: #C0392B; border-right: 2px solid var(--border-color); padding-right: 10px; }
+  [data-theme="dark"] .live-hijri { color: #FF6B6B; }
 
-  /* --- حل مشكلة شريط الصلوات: تقريب الأوقات ومنع الالتفاف نهائياً --- */
+  /* --- شريط مواقيت الصلاة المتقارب الموزون --- */
   .prayer-times-bar { 
-    background: var(--bg-main); 
+    background: var(--bg-card); 
     border: 1px solid var(--border-color); 
     padding: 10px 16px; 
     border-radius: 10px; 
@@ -173,10 +208,10 @@
   }
   .prayers-row { 
     display: flex; 
-    justify-content: center; /* تجميع المكونات في المنتصف لتقريبها */
+    justify-content: center; 
     align-items: center;
-    gap: 12px; /* مسافة متناسقة وقريبة بين أوقات الصلوات */
-    flex-wrap: nowrap; /* منع النص من الالتفاف أو النزول لسطر جديد */
+    gap: 12px; 
+    flex-wrap: nowrap; 
   }
   .prayer-title { font-size: 12px; font-weight: 900; color: var(--muted); white-space: nowrap; margin-left: 4px; }
   
@@ -190,9 +225,10 @@
     background: var(--prayer-bg); 
     color: var(--prayer-text);
     border-radius: 6px; 
-    white-space: nowrap; /* تأكيد عدم التفاف الكلمات داخل الصندوق */
+    white-space: nowrap;
   }
   .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 11.5px; font-weight: bold; }
+  .prayer-item.active-next { border: 1px solid var(--prayer-bar-color); box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
   
   .prayer-countdown-container {
     margin-top: 8px;
@@ -206,10 +242,10 @@
   .countdown-text { font-size: 11px; font-weight: 700; color: var(--muted); } 
   .countdown-text span { color: var(--text-dark); font-weight: 800; font-family: monospace; }
   
-  .proximity-bar-bg { width: 180px; height: 5px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
-  .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 1s linear; }
+  .proximity-bar-bg { width: 180px; height: 5px; background: var(--border-color); border-radius: 10px; overflow: hidden; position: relative; }
+  .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 0.5s ease; }
 
-  /* --- كروت الـ 6 المدمجة والموزونة لتظهر بالكامل دون التمرير للأسفل --- */
+  /* --- كروت الأنظمة الستة --- */
   .cards-container { 
     margin: 12px 0; 
     display: grid; 
@@ -221,7 +257,7 @@
   .portal-card {
     background: var(--bg-card);
     border-radius: var(--radius);
-    padding: 14px 12px; /* تقليص الحشو الداخلي لكبس الكارت عمودياً */
+    padding: 14px 12px; 
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color); 
@@ -230,33 +266,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px; /* تقريب الأيقونة من العناوين */
-    transition: transform 0.2s, box-shadow 0.2s;
+    gap: 6px; 
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
     position: relative;
     overflow: hidden;
   }
   .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
 
   .card-stock::before { background: var(--color-stock); } 
-  .card-stock .icon-wrapper { background: #3a2a1a; color: var(--color-stock); }
+  .card-stock .icon-wrapper { background: #FDEBD0; color: var(--color-stock); }
   .card-accounts::before { background: var(--color-accounts); } 
-  .card-accounts .icon-wrapper { background: #2a3a4a; color: #5dade2; }
+  .card-accounts .icon-wrapper { background: #EAEDED; color: var(--color-accounts); }
   .card-alerts::before { background: var(--color-alerts); } 
-  .card-alerts .icon-wrapper { background: #4a2a2a; color: #ff6b6b; }
+  .card-alerts .icon-wrapper { background: #FFCCBC; color: #BF360C; }
   .card-calc::before { background: var(--color-calc); } 
-  .card-calc .icon-wrapper { background: #1a3a2a; color: var(--color-calc); }
+  .card-calc .icon-wrapper { background: #D5F5E3; color: var(--color-calc); }
   .card-numbers::before { background: var(--color-numbers); } 
-  .card-numbers .icon-wrapper { background: #3a3a1a; color: var(--color-numbers); }
+  .card-numbers .icon-wrapper { background: #FEF9E7; color: #F57F17; }
   .card-github::before { background: var(--color-github); } 
-  .card-github .icon-wrapper { background: #2a2a2a; color: #fff; }
+  .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
+
+  [data-theme="dark"] .card-stock .icon-wrapper { background: #3a2a1a; }
+  [data-theme="dark"] .card-accounts .icon-wrapper { background: #2a3a4a; color: #5dade2; }
+  [data-theme="dark"] .card-alerts .icon-wrapper { background: #4a2a2a; color: #ff6b6b; }
+  [data-theme="dark"] .card-calc .icon-wrapper { background: #1a3a2a; }
+  [data-theme="dark"] .card-numbers .icon-wrapper { background: #3a3a1a; }
+  [data-theme="dark"] .card-github .icon-wrapper { background: #2a2a2a; color: #fff; }
 
   .icon-wrapper { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
   .portal-card h2 { font-size: 13.5px; font-weight: 900; }
   .portal-card p { font-size: 11px; color: var(--muted); line-height: 1.4; flex: 1; margin-bottom: 4px; }
   .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; border: none; margin-top: auto; }
-  .portal-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
+  .portal-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
 
-  /* --- صندوق المهام المدمج --- */
+  /* --- صندوق قائمة المهام المطور --- */
   .tasks-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -265,6 +308,7 @@
     margin-bottom: 10px;
     box-shadow: var(--shadow);
     width: 100%;
+    transition: background 0.3s;
   }
   .tasks-section h3 { font-size: 12.5px; font-weight: 900; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
   
@@ -274,10 +318,10 @@
 
   .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 4px; max-height: 70px; overflow-y: auto; }
   .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 6px 10px; border-radius: 5px; border: 1px solid var(--border-color); }
-  .task-item-right { display: flex; align-items: center; gap: 6px; font-size: 11.5px; }
-  .task-checkbox { width: 13px; height: 13px; cursor: pointer; }
+  .task-item-right { display: flex; align-items: center; gap: 8px; font-size: 11.5px; }
+  .task-checkbox { width: 14px; height: 14px; cursor: pointer; }
   .task-text.completed { text-decoration: line-through; color: var(--muted); }
-  .delete-task-btn { background: transparent; border: none; color: var(--color-brand); cursor: pointer; font-size: 11px; }
+  .finish-task-btn { background: transparent; border: none; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
 
   .footer { text-align: center; padding: 8px; font-size: 11px; color: #7f8c8d; border-top: 1px solid var(--border-color); background: var(--bg-card); }
 
@@ -292,7 +336,7 @@
 </head>
 <body>
 
-  <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">☀️ الوضع النهاري</button>
+  <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">🌙 الوضع الليلي</button>
 
   <div class="side-bar right-bar">
     <div class="side-bar-title">أدوات جوجل</div>
@@ -418,11 +462,11 @@ let customLinksRight = [];
 let customLinksLeft = [];
 
 const PRAYER_DATA = [
-  { name: "الفجر", key: "fajr", timeStr: "04:12" },
-  { name: "الظهر", key: "dhuhr", timeStr: "12:22" },
-  { name: "العصر", key: "asr", timeStr: "15:42" },
-  { name: "المغرب", key: "maghrib", timeStr: "19:03" },
-  { name: "العشاء", key: "isha", timeStr: "20:33" }
+  { name: "الفجر", key: "fajr", timeStr: "04:12", nextWindow: 8 }, 
+  { name: "الظهر", key: "dhuhr", timeStr: "12:22", nextWindow: 3.3 },
+  { name: "العصر", key: "asr", timeStr: "15:42", nextWindow: 3.3 },
+  { name: "المغرب", key: "maghrib", timeStr: "19:03", nextWindow: 1.5 },
+  { name: "العشاء", key: "isha", timeStr: "20:33", nextWindow: 7.6 }
 ];
 
 function updateClockAndCalendar() {
@@ -461,6 +505,8 @@ function calculatePrayerCountdown(now) {
     return { ...p, date: pDate };
   });
 
+  document.querySelectorAll('.prayer-item').forEach(el => el.classList.remove('active-next'));
+
   for (let p of prayerTimesWithDates) {
     let diff = p.date - now;
     if (diff > 0 && diff < minDiff) {
@@ -475,6 +521,9 @@ function calculatePrayerCountdown(now) {
     minDiff = currentTarget.date - now;
   }
 
+  const nextElement = document.getElementById(`pCard-${currentTarget.key}`);
+  if(nextElement) nextElement.classList.add('active-next');
+
   let totalSeconds = Math.floor(minDiff / 1000);
   let secs = totalSeconds % 60;
   let totalMinutes = Math.floor(totalSeconds / 60);
@@ -487,8 +536,9 @@ function calculatePrayerCountdown(now) {
 
   document.getElementById('prayerCountdownText').innerHTML = `متبقي على صلاة ${currentTarget.name}: <span>${hrs}:${mins}:${secs}</span>`;
 
-  const totalWindow = 3 * 60 * 60 * 1000; 
-  let progress = ((totalWindow - minDiff) / totalWindow) * 100;
+  // حسبة شريط الاقتراب الأخضر الذكي بناءً على الفترة الزمنية الفاصلة بين الصلاتين
+  const totalWindowMs = currentTarget.nextWindow * 60 * 60 * 1000;
+  let progress = ((totalWindowMs - minDiff) / totalWindowMs) * 100;
   if (progress < 0) progress = 0;
   if (progress > 100) progress = 100;
   
@@ -514,7 +564,7 @@ function addCustomLink(type) {
 
 function deleteCustomLink(id, type, e) {
   e.preventDefault(); e.stopPropagation();
-  if(confirm("هل تود مسح هذا الرابط?")) {
+  if(confirm("هل تود مسح هذا الرابط؟")) {
     if (type === 'google') {
       customLinksRight = customLinksRight.filter(l => l.id !== id);
       localStorage.setItem('kababji_custom_shortcuts_right', JSON.stringify(customLinksRight));
@@ -536,7 +586,7 @@ function renderCustomLinks() {
     areaRight.innerHTML = customLinksRight.map(l => `
       <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
         ${l.title}
-        <span onclick="deleteCustomLink(${l.id}, 'google', event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">🗑️</span>
+        <span onclick="deleteCustomLink(${l.id}, 'google', event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">✅</span>
       </a>
     `).join('');
   }
@@ -547,7 +597,7 @@ function renderCustomLinks() {
     areaLeft.innerHTML = customLinksLeft.map(l => `
       <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
         ${l.title}
-        <span onclick="deleteCustomLink(${l.id}, 'work', event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">🗑️</span>
+        <span onclick="deleteCustomLink(${l.id}, 'work', event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">✅</span>
       </a>
     `).join('');
   }
@@ -594,11 +644,12 @@ function renderTasks() {
         <input type="checkbox" class="task-checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTaskStatus(${t.id})">
         <span class="task-text ${t.completed ? 'completed' : ''}">${t.text}</span>
       </div>
-      <button class="delete-task-btn" onclick="deleteTask(${t.id})">🗑️</button>
+      <button class="finish-task-btn" onclick="deleteTask(${t.id})" title="تم الإنجاز">✅</button>
     </li>
   `).join('');
 }
 
+/* إصلاح التبديل الكامل والصحيح بين الوضعين الليلي والنهاري */
 function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const btn = document.getElementById('themeBtn');
@@ -614,18 +665,25 @@ function toggleTheme() {
 }
 
 function loadTheme() {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeBtn').textContent = '☀️ الوضع النهاري';
+  const savedTheme = localStorage.getItem('kababji_theme') || 'dark'; // افتراضي غامق
+  const btn = document.getElementById('themeBtn');
+  if(savedTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if(btn) btn.textContent = '☀️ الوضع النهاري';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    if(btn) btn.textContent = '🌙 الوضع الليلي';
+  }
 }
 
 document.getElementById('newTaskInput')?.addEventListener('keypress', function(e) { if (e.key === 'Enter') addNewTask(); });
 
 setInterval(updateClockAndCalendar, 1000);
 window.addEventListener('DOMContentLoaded', () => {
+  loadTheme();
   updateClockAndCalendar();
   loadTasksFromStorage();
   renderCustomLinks();
-  loadTheme();
 });
 </script>
 </body>
