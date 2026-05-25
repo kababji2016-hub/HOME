@@ -11,20 +11,25 @@
 
 <style>
   :root {
-    --bg-main: #F4F7F6; 
+    --bg-main: #F4F7F6; /* خلفية هادئة ومريحة جداً للعين */
     --text-dark: #2C3E50; 
     --muted: #7F8C8D;
     --radius: 14px;
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
     
-    /* ألوان الماركة والهوية التشكيلية */
-    --color-brand: #E64A19;   
-    --color-stock: #D35400;  
-    --color-accounts: #2C3E50; 
-    --color-alerts: #BF360C; 
-    --color-calc: #2E7D32;  
-    --color-numbers: #F9A825; 
+    /* ألوان الأنظمة وهويات المواقع */
+    --color-brand: #E64A19;     
+    --color-stock: #D35400;     
+    --color-accounts: #2C3E50;  
+    --color-alerts: #BF360C;    
+    --color-calc: #2E7D32;      
+    --color-numbers: #F9A825;
     --color-github: #24292E; 
+    
+    /* ألوان منصات الذكاء الاصطناعي الجديدة */
+    --color-gpt: #10a37f;
+    --color-gemini: #1a73e8;
+    --color-claude: #d97706;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +41,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    direction: rlt;
+    direction: rtl;
     position: relative;
   }
 
@@ -91,11 +96,9 @@
     opacity: 0.9;
   }
 
-  /* ألوان وتنسيقات الأسماء الجانبية */
   .lnk-google { background: #F1F3F4; color: #4285F4; }
   .lnk-drive { background: #E8F0FE; color: #1967D2; }
   .lnk-gmail { background: #FCE8E6; color: #C5221F; }
-  /* تم تحديث لون واتساب */
   .lnk-whatsapp { background: #E6F4EA; color: #128C7E; } 
 
   .lnk-qiwa { background: #E0F2F1; color: #004D40; }
@@ -115,7 +118,7 @@
   .hero-section {
     background: #FFFFFF;
     text-align: center;
-    padding: 20px 20px 70px;
+    padding: 20px 20px 60px;
     border-bottom: 1px solid #E5E9E8;
     border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: 0 2px 8px rgba(0,0,0,0.02);
@@ -152,12 +155,32 @@
   .live-date { font-size: 13px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 15px; }
   .live-hijri { font-size: 13px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 15px; }
 
-  /* حاوية الأنظمة الستة (صفين أسفل بعض بدقة) */
+  /* شبكة الأنظمة (تم تنظيم الأعمدة والصفوف لتظهر بكفاءة وثبات) */
   .cards-container {
-    margin: -40px auto 40px;
+    margin: -30px auto 40px;
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 16px;
+  }
+
+  /* عنوان فاصل لأقسام الذكاء الاصطناعي السفلية */
+  .row-separator {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin: 10px 0 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .row-separator::before, .row-separator::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #E5E9E8;
   }
 
   @media (max-width: 1000px) {
@@ -170,7 +193,7 @@
   .portal-card {
     background: #ffffff;
     border-radius: var(--radius);
-    padding: 22px 18px;
+    padding: 20px 16px;
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid #E5E9E8; 
@@ -186,6 +209,7 @@
 
   .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; }
 
+  /* ربط الألوان بالخطوط العلوية والدوائر الداخليّة للبطاقات */
   .card-stock::before { background: var(--color-stock); } 
   .card-stock .icon-wrapper { background: #FDEBD0; color: var(--color-stock); }
   .card-accounts::before { background: var(--color-accounts); } 
@@ -199,25 +223,33 @@
   .card-github::before { background: var(--color-github); } 
   .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
 
+  /* خلفيات منصات الذكاء الاصطناعي */
+  .card-gpt::before { background: var(--color-gpt); }
+  .card-gpt .icon-wrapper { background: #e6f6f2; color: var(--color-gpt); }
+  .card-gemini::before { background: var(--color-gemini); }
+  .card-gemini .icon-wrapper { background: #e8f0fe; color: var(--color-gemini); }
+  .card-claude::before { background: var(--color-claude); }
+  .card-claude .icon-wrapper { background: #fef3c7; color: var(--color-claude); }
+
   .icon-wrapper {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 10px;
   }
 
-  .portal-card h2 { font-size: 15.5px; font-weight: 900; margin-bottom: 6px; }
-  .portal-card p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; flex: 1; }
+  .portal-card h2 { font-size: 15px; font-weight: 900; margin-bottom: 6px; }
+  .portal-card p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 12px; flex: 1; }
 
   .action-btn {
     color: #fff;
-    padding: 6px 20px;
+    padding: 5px 18px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -268,7 +300,7 @@
       </div>
     </div>
 
-    <div class="cards-container" style="margin-top: -35px;">
+    <div class="cards-container" style="margin-top: -25px;">
       
       <a href="http://kababjk.opos.me/" class="portal-card card-stock">
         <div class="icon-wrapper">📦</div>
@@ -310,6 +342,30 @@
         <h2>تعديل الأكواد</h2>
         <p>الدخول المباشر إلى مستودع البرمجيات لتحديث السكريبتات وتعديل البنية البرمجية للبوابة واللوحات.</p>
         <div class="action-btn" style="background: var(--color-github);"><span>فتح الـ Hub</span> ⬅️</div>
+      </a>
+
+
+      <div class="row-separator">مساعدات الذكاء الاصطناعي والتحليل البرمجي</div>
+
+      <a href="https://chatgpt.com/" class="portal-card card-gpt">
+        <div class="icon-wrapper">🤖</div>
+        <h2>جي بي تي - ChatGPT</h2>
+        <p>المساعد الذكي لتوليد الأفكار، كتابة وتقويم الصياغات الإدارية والخطابات وتطوير الكفاءة التشغيلية.</p>
+        <div class="action-btn" style="background: var(--color-gpt);"><span>فتح Chat</span> ⬅️</div>
+      </a>
+
+      <a href="https://gemini.google.com/" class="portal-card card-gemini">
+        <div class="icon-wrapper">✨</div>
+        <h2>جيميناي - Gemini</h2>
+        <p>الذكاء الاصطناعي من جوجل لتحليل ملفات الجداول والبيانات الضخمة وربط استراتيجيات العمل.</p>
+        <div class="action-btn" style="background: var(--color-gemini);"><span>فتح Gemini</span> ⬅️</div>
+      </a>
+
+      <a href="https://claude.ai/" class="portal-card card-claude">
+        <div class="icon-wrapper">🧠</div>
+        <h2>كلود - Claude</h2>
+        <p>النظام المتقدم والمثالي للهندسة البرمجية وتدقيق وتحسين الأكواد والسكريبتات بدقة متناهية.</p>
+        <div class="action-btn" style="background: var(--color-claude);"><span>فتح Claude</span> ⬅️</div>
       </a>
 
     </div>
