@@ -4,609 +4,125 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>كبابجي - البوابة الرقمية الموحدة</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-main: #F4F7F6; 
-    --bg-card: #ffffff;
-    --text-dark: #2C3E50; 
-    --muted: #7F8C8D;
-    --radius: 12px;
-    --shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
-    --border-color: #E5E9E8;
-    
-    --color-brand: #E64A19;     
-    --color-stock: #D35400;     
-    --color-accounts: #2C3E50;  
-    --color-alerts: #BF360C;    
-    --color-calc: #2E7D32;      
-    --color-numbers: #F9A825;
-    --color-github: #24292E; 
-
-    /* ألوان خفيفة جداً ومريحة للعين للصلوات */
-    --prayer-text: #627273;
-    --prayer-bg: #EEF3F2;
-    --prayer-bar-color: #2E7D32; /* لون أخضر واحد مريح للمؤشر الطويل */
-
-    --txt-google: #4285F4; --bg-google: #F1F3F4;
-    --txt-drive: #1967D2; --bg-drive: #E8F0FE;
-    --txt-gmail: #C5221F; --bg-gmail: #FCE8E6;
-    --txt-whatsapp: #128C7E; --bg-whatsapp: #E6F4EA;
-    --txt-gpt: #10a37f; --bg-gpt: #E6F6F2;
-    --txt-gemini: #1a73e8; --bg-gemini: #E8F0FE;
-    --txt-claude: #d97706; --bg-claude: #FEF3C7;
-    --txt-qiwa: #004D40; --bg-qiwa: #E0F2F1;
-    --txt-balady: #006064; --bg-balady: #E0F7FA;
-    --txt-mudad: #1A237E; --bg-mudad: #E8EAF6;
-    --txt-absher: #1B5E20; --bg-absher: #E8F5E9;
-    --txt-gosi: #E65100; --bg-gosi: #FFF3E0;
-    --txt-chi: #0288D1; --bg-chi: #E1F5FE;
-    --txt-custom: #607D8B; --bg-custom: #ECEFF1;
+    --bg-main: #F4F7F6; --bg-card: #ffffff; --text-dark: #2C3E50; --muted: #7F8C8D;
+    --radius: 12px; --shadow: 0 4px 12px rgba(0,0,0,0.05); --border-color: #E5E9E8;
+    --color-brand: #E64A19; --color-stock: #D35400; --color-accounts: #2C3E50;
+    --color-alerts: #BF360C; --color-calc: #2E7D32; --color-numbers: #F9A825;
   }
-
   [data-theme="dark"] {
-    --bg-main: #121212;
-    --bg-card: #1E1E1E;
-    --text-dark: #F5F5F5;
-    --muted: #A0A0A0;
-    --border-color: #2C2C2C;
-
-    --prayer-text: #9EAEAF;
-    --prayer-bg: #282828;
-    --prayer-bar-color: #4CAF50;
-
-    --bg-google: #1A1A1A; --txt-google: #6BA4FF;
-    --bg-drive: #1A1A1A; --txt-drive: #4285F4;
-    --bg-gmail: #1A1A1A; --txt-gmail: #FF6B6B;
-    --bg-whatsapp: #1A1A1A; --txt-whatsapp: #25D366;
-    --bg-gpt: #1A1A1A; --txt-gpt: #10a37f;
-    --bg-gemini: #1A1A1A; --txt-gemini: #5395FF;
-    --bg-claude: #1A1A1A; --txt-claude: #FFB040;
-    --bg-qiwa: #1A1A1A; --txt-qiwa: #33AB9F;
-    --bg-balady: #1A1A1A; --txt-balady: #00E5FF;
-    --bg-mudad: #1A1A1A; --txt-mudad: #7986CB;
-    --bg-absher: #1A1A1A; --txt-absher: #4CAF50;
-    --bg-gosi: #1A1A1A; --txt-gosi: #FF9800;
-    --bg-chi: #1A1A1A; --txt-chi: #29B6F6;
-    --bg-custom: #1A1A1A; --txt-custom: #B0BEC5;
+    --bg-main: #121212; --bg-card: #1E1E1E; --text-dark: #F5F5F5; --muted: #A0A0A0; --border-color: #333;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Tajawal', sans-serif; background: var(--bg-main); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-  body {
-    font-family: 'Tajawal', sans-serif;
-    background: var(--bg-main);
-    color: var(--text-dark);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    direction: rlt;
-    position: relative;
-    transition: background 0.3s, color 0.3s;
-    overflow-x: hidden;
-  }
+  /* إجبار الصفحة على عدم النزول (No Scroll) */
+  .main-wrapper { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
-  .theme-toggle-btn {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    padding: 5px 10px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: 'Tajawal';
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-dark);
-    z-index: 210;
-  }
-
-  /* --- الشرائط الجانبية --- */
   .side-bar {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--bg-card);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    border: 1px solid var(--border-color);
-    padding: 10px 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    z-index: 200;
-    width: 135px; 
-    transition: background 0.3s, border-color 0.3s;
+    position: fixed; top: 55%; transform: translateY(-50%); background: var(--bg-card);
+    border: 1px solid var(--border-color); padding: 8px; display: flex; flex-direction: column; gap: 5px; z-index: 200; width: 130px;
   }
+  .right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
+  .left-bar { left: 0; border-radius: 0 var(--radius) var(--radius) 0; }
+
+  .side-link-item { display: block; text-align: center; padding: 6px; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.2s; }
   
-  .side-bar.right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
-  .side-bar.left-bar { left: 0; border-radius: 0 var(--radius) var(--radius) 0; }
-
-  .side-bar-title { font-size: 10.5px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 4px; border-bottom: 1px dashed var(--border-color); margin-bottom: 1px; }
-  .side-bar-title.sub-section-title { margin-top: 6px; color: #5D6D7E; }
-
-  .side-link-item { display: block; text-align: center; padding: 7px 4px; border-radius: 6px; text-decoration: none; font-size: 11.5px; font-weight: 700; transition: all 0.2s ease; }
-  .side-link-item:hover { transform: scale(1.02); opacity: 0.9; }
-
-  .lnk-google { background: var(--bg-google); color: var(--txt-google); }
-  .lnk-drive { background: var(--bg-drive); color: var(--txt-drive); }
-  .lnk-gmail { background: var(--bg-gmail); color: var(--txt-gmail); }
-  .lnk-whatsapp { background: var(--bg-whatsapp); color: var(--txt-whatsapp); } 
-  .lnk-gpt { background: var(--bg-gpt); color: var(--txt-gpt); }
-  .lnk-gemini { background: var(--bg-gemini); color: var(--txt-gemini); }
-  .lnk-claude { background: var(--bg-claude); color: var(--txt-claude); }
-
-  .lnk-qiwa { background: var(--bg-qiwa); color: var(--txt-qiwa); }
-  .lnk-balady { background: var(--bg-balady); color: var(--txt-balady); } 
-  .lnk-mudad { background: var(--bg-mudad); color: var(--txt-mudad); }
-  .lnk-absher { background: var(--bg-absher); color: var(--txt-absher); }
-  .lnk-gosi { background: var(--bg-gosi); color: var(--txt-gosi); }
-  .lnk-chi { background: var(--bg-chi); color: var(--txt-chi); } 
-  .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); }
-
-  .custom-links-area { display: flex; flex-direction: column; gap: 6px; max-height: 90px; overflow-y: auto; }
-  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 4px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 2px; }
-
-  /* --- التصميم الأوسط المدمج لمنع النزول بالصفحة --- */
-  .main-content { flex: 1; width: 100%; max-width: 1260px; margin: 0 auto; padding: 0 150px; display: flex; flex-direction: column; }
-
-  .hero-section {
-    background: var(--bg-card);
-    text-align: center;
-    padding: 12px 20px 24px;
-    border-bottom: 1px solid var(--border-color);
-    border-radius: 0 0 var(--radius) var(--radius);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
-  }
-
-  .brand-title { color: var(--color-brand); font-size: 36px; font-weight: 900; margin-bottom: 0px; letter-spacing: 0.5px; line-height: 1.1; }
-  .hero-section h1 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
-
-  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #EAF2F1; padding: 5px 16px; border-radius: 30px; margin-bottom: 4px; }
-  [data-theme="dark"] .live-clock-panel { background: #2A3A39; }
-  .live-time { font-size: 16px; font-weight: 900; color: #111; font-family: monospace, sans-serif; }
-  [data-theme="dark"] .live-time { color: #fff; }
-  .live-date { font-size: 12px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 12px; }
-  .live-hijri { font-size: 12px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 12px; }
-
-  /* --- تحسين وتصغير شريط الصلوات ومحاذاة الأرقام بالكامل على سطر واحد --- */
-  .prayer-times-bar { 
-    background: var(--bg-card); 
-    border: 1px solid var(--border-color); 
-    padding: 8px 12px; 
-    border-radius: 10px; 
-    max-width: 720px; 
-    margin: 8px auto 0; 
-  }
-  .prayers-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-  .prayer-title { font-size: 11.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 4px; }
+  /* إخفاء شريط التمرير في الروابط المضافة */
+  .custom-links-area { display: flex; flex-direction: column; gap: 4px; max-height: 80px; overflow-y: hidden; }
   
-  /* مساواة وتنسيق اسم الصلاة مع الوقت بالمنتصف تماماً */
-  .prayer-item { 
-    font-size: 11.5px; 
-    font-weight: 700; 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px; 
-    padding: 3px 8px; 
-    background: var(--prayer-bg); 
-    color: var(--prayer-text);
-    border-radius: 6px; 
-    border: none !important; /* إزالة أي إطارات حول صلاة العشاء أو غيرها */
-  }
-  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 11.5px; font-weight: bold; }
+  .main-content { flex: 1; padding: 10px 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  .hero-section { text-align: center; padding: 5px; }
+  .brand-title { color: var(--color-brand); font-size: 32px; font-weight: 900; }
   
-  /* سطر العداد التنازلي والمؤشر الأطول بلون واحد هادئ */
-  .prayer-countdown-container {
-    margin-top: 6px;
-    padding-top: 5px;
-    border-top: 1px dashed var(--border-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-  .countdown-text { font-size: 11.5px; font-weight: 700; color: var(--muted); } /* خط متبقي على الصلاة هادئ */
-  .countdown-text span { color: var(--text-dark); font-weight: 800; font-family: monospace; }
-  
-  /* جعل مؤشر الاقتراب أطول وبلون واحد ثابت مريح للعين */
-  .proximity-bar-bg { width: 220px; height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
-  .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 1s linear; }
+  .cards-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 1000px; margin-top: 10px; }
+  .portal-card { background: var(--bg-card); border-radius: var(--radius); padding: 10px; text-align: center; border: 1px solid var(--border-color); text-decoration: none; color: var(--text-dark); display: flex; flex-direction: column; align-items: center; }
+  .icon-wrapper { font-size: 20px; margin-bottom: 2px; }
+  .portal-card h2 { font-size: 13px; font-weight: 900; }
+  .portal-card p { font-size: 10px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .action-btn { font-size: 10px; padding: 2px 10px; border-radius: 10px; color: #fff; margin-top: 4px; }
 
-  /* --- تصغير وموازنة شبكة الأنظمة الستة --- */
-  .cards-container { margin: 16px auto 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-
-  @media (max-width: 1000px) {
-    .cards-container { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .main-content { padding: 0 20px; }
-    .side-bar { position: relative; top: 0; transform: none; flex-direction: row; justify-content: center; width: 100%; border-radius: var(--radius) !important; margin: 10px 0; flex-wrap: wrap; }
-    .side-bar-title { width: 100%; border-bottom: none; margin-bottom: 0; }
-  }
-
-  .portal-card {
-    background: var(--bg-card);
-    border-radius: var(--radius);
-    padding: 14px 12px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color); 
-    text-decoration: none;
-    color: var(--text-dark);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
-
-  .card-stock::before { background: var(--color-stock); } 
-  .card-stock .icon-wrapper { background: #FDEBD0; color: var(--color-stock); }
-  .card-accounts::before { background: var(--color-accounts); } 
-  .card-accounts .icon-wrapper { background: #EAEDED; color: var(--color-accounts); }
-  .card-alerts::before { background: var(--color-alerts); } 
-  .card-alerts .icon-wrapper { background: #FFCCBC; color: #BF360C; }
-  .card-calc::before { background: var(--color-calc); } 
-  .card-calc .icon-wrapper { background: #D5F5E3; color: var(--color-calc); }
-  .card-numbers::before { background: var(--color-numbers); } 
-  .card-numbers .icon-wrapper { background: #FEF9E7; color: #F57F17; }
-  .card-github::before { background: var(--color-github); } 
-  .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
-
-  .icon-wrapper { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 6px; }
-  .portal-card h2 { font-size: 14px; font-weight: 900; margin-bottom: 4px; }
-  .portal-card p { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-bottom: 8px; flex: 1; }
-  .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; border: none; }
-  .portal-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); }
-
-  /* --- تصغير مساحة صندوق قائمة المهام للتوافق الشامل الشاشة --- */
-  .tasks-section {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 12px 16px;
-    margin-bottom: 15px;
-    box-shadow: var(--shadow);
-  }
-  .tasks-section h3 { font-size: 13.5px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-  
-  .task-input-container { display: flex; gap: 8px; margin-bottom: 10px; }
-  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 6px; padding: 7px 12px; font-family: 'Tajawal'; font-size: 12.5px; outline: none; }
-  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 14px; border-radius: 6px; font-family: 'Tajawal'; font-size: 12px; font-weight: 700; cursor: pointer; }
-
-  .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 5px; max-height: 100px; overflow-y: auto; }
-  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border-color); }
-  .task-item-right { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
-  .task-checkbox { width: 14px; height: 14px; cursor: pointer; }
-  .task-text.completed { text-decoration: line-through; color: var(--muted); }
-  .delete-task-btn { background: transparent; border: none; color: var(--color-brand); cursor: pointer; font-size: 12px; }
-
-  .footer { text-align: center; padding: 10px; font-size: 11.5px; color: #95A5A6; border-top: 1px solid var(--border-color); background: var(--bg-card); margin-top: auto; }
+  .tasks-section { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 10px; width: 100%; max-width: 1000px; margin-top: 10px; }
+  .tasks-list { list-style: none; max-height: 80px; overflow-y: hidden; }
 </style>
 </head>
 <body>
 
-  <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">🌙 الوضع الليلي</button>
-
+<div class="main-wrapper">
   <div class="side-bar right-bar">
     <div class="side-bar-title">أدوات جوجل</div>
     <a href="https://www.google.com" class="side-link-item lnk-google">بحث جوجل</a>
-    <a href="https://drive.google.com" class="side-link-item lnk-drive">جوجل درايف</a>
-    <a href="https://mail.google.com" class="side-link-item lnk-gmail">بريد جيميل</a>
     <a href="https://web.whatsapp.com/" class="side-link-item lnk-whatsapp">واتساب ويب</a>
-    
-    <div class="side-bar-title sub-section-title">الذكاء الاصطناعي</div>
-    <a href="https://chatgpt.com/" class="side-link-item lnk-gpt">ChatGPT</a>
-    <a href="https://gemini.google.com/" class="side-link-item lnk-gemini">Gemini</a>
-    <a href="https://claude.ai/" class="side-link-item lnk-claude">Claude</a>
-
-    <div class="side-bar-title sub-section-title">روابط سريعة</div>
-    <div class="custom-links-area" id="customLinksArea"></div>
-    <button class="add-shortcut-btn" onclick="addCustomLink()">➕ أضف رابط</button>
+    <div class="side-bar-title sub-section-title">إضافات يمين</div>
+    <div class="custom-links-area" id="rightLinksArea"></div>
+    <button class="add-shortcut-btn" onclick="addLink('rightLinksArea', 'rightLinks')">➕ إضافة</button>
   </div>
 
   <div class="side-bar left-bar">
-    <div class="side-bar-title">منصات العمل</div>
+    <div class="side-bar-title">المنصات</div>
     <a href="https://qiwa.sa" class="side-link-item lnk-qiwa">منصة قوى</a>
-    <a href="https://balady.gov.sa" class="side-link-item lnk-balady">منصة بلدي</a>
-    <a href="https://www.mudad.com.sa" class="side-link-item lnk-mudad">منصة مدد</a>
-    <a href="https://www.absher.sa" class="side-link-item lnk-absher">منصة أبشر</a>
-    <a href="https://www.gosi.gov.sa" class="side-link-item lnk-gosi">التأمينات</a>
-    <a href="https://www.chi.gov.sa/Pages/Home.aspx" class="side-link-item lnk-chi">التأمين الصحي</a>
+    <a href="https://www.chi.gov.sa" class="side-link-item lnk-chi">التأمين الصحي</a>
+    <div class="side-bar-title sub-section-title">إضافات يسار</div>
+    <div class="custom-links-area" id="leftLinksArea"></div>
+    <button class="add-shortcut-btn" onclick="addLink('leftLinksArea', 'leftLinks')">➕ إضافة</button>
   </div>
 
   <div class="main-content">
-    
     <div class="hero-section">
       <div class="brand-title">كبابجي</div>
-      <h1>البوابة الرقمية الموحدة</h1>
-      
-      <div class="live-clock-panel">
-        <div class="live-time" id="liveTime">00:00:00 ص</div>
-        <div class="live-date" id="liveDate">جاري المزامنة...</div>
-        <div class="live-hijri" id="liveHijri">جاري حساب الهجري...</div>
-      </div>
-
-      <div class="prayer-times-bar">
-        <div class="prayers-row">
-          <div class="prayer-title">🕌 مواقيت صلاة جدة:</div>
-          <div class="prayer-item" id="pCard-fajr">الفجر <span>04:12 ص</span></div>
-          <div class="prayer-item" id="pCard-dhuhr">الظهر <span>12:22 م</span></div>
-          <div class="prayer-item" id="pCard-asr">العصر <span>03:42 م</span></div>
-          <div class="prayer-item" id="pCard-maghrib">المغرب <span>07:03 م</span></div>
-          <div class="prayer-item" id="pCard-isha">العشاء <span>08:33 م</span></div>
-        </div>
-        
-        <div class="prayer-countdown-container">
-          <div class="countdown-text" id="prayerCountdownText">متبقي على صلاة...</div>
-          <div class="proximity-bar-bg">
-            <div class="proximity-bar-fill" id="proximityFill"></div>
-          </div>
-        </div>
-      </div>
+      <div id="liveTime" style="font-size: 14px; font-weight: bold;">00:00:00</div>
+      <div class="prayer-times-bar" style="font-size: 11px;">مواقيت الصلاة: جدة</div>
     </div>
 
-    <div class="cards-container" style="margin-top: -20px;">
+    <div class="cards-container">
       <a href="http://kababjk.opos.me/" class="portal-card card-stock">
-        <div class="icon-wrapper">📦</div>
-        <h2>المخزون - أرقامي</h2>
-        <p>متابعة وتدقيق جرد المخازن، التوريدات، والمواد الخام حياً للفروع.</p>
-        <div class="action-btn" style="background: var(--color-stock);"><span>دخول</span></div>
+        <div class="icon-wrapper">📦</div> <h2>المخزون</h2> <p>جرد المخازن والمواد الخام.</p> <div class="action-btn" style="background:var(--color-stock)">دخول</div>
       </a>
-
-      <a href="http://kababjk-accounts.opos.me/Account/LogOn?LanguageID=2&mat=0.6675783853251626" class="portal-card card-accounts">
-        <div class="icon-wrapper">💼</div>
-        <h2>الحسابات - أرقامي</h2>
-        <p>تسجيل القيود المحاسبية، الرواتب، الأرباح والميزانية التشغيلية.</p>
-        <div class="action-btn" style="background: var(--color-accounts);"><span>دخول</span></div>
+      <a href="http://kababjk-accounts.opos.me/Account/LogOn?LanguageID=2&mat=0.6675783853251626" class="portal-card">
+        <div class="icon-wrapper">💼</div> <h2>الحسابات</h2> <p>القيود، الرواتب، الأرباح.</p> <div class="action-btn" style="background:var(--color-accounts)">دخول</div>
       </a>
-
-      <a href="https://abo-shefaa.vercel.app/" class="portal-card card-alerts">
-        <div class="icon-wrapper">🔔</div>
-        <h2>تنبيهات الوثائق</h2>
-        <p>مراقبة صلاحيات الإقامات، التراخيص البلديّة، والتأمين الطبي تفادياً للمخالفات.</p>
-        <div class="action-btn" style="background: var(--color-alerts);"><span>دخول</span></div>
+      <a href="https://abo-shefaa.vercel.app/" class="portal-card">
+        <div class="icon-wrapper">🔔</div> <h2>التنبيهات</h2> <p>متابعة الوثائق والإقامات.</p> <div class="action-btn" style="background:var(--color-alerts)">دخول</div>
       </a>
-
-      <a href="https://kababji-seven.vercel.app/" class="portal-card card-calc">
-        <div class="icon-wrapper">📊</div>
-        <h2>حاسبة التطبيقات</h2>
-        <p>احتساب مبيعات المنصات وعمولات التحليلات المالية اليومية بدقة.</p>
-        <div class="action-btn" style="background: var(--color-calc);"><span>دخول</span></div>
+      <a href="https://kababji-seven.vercel.app/" class="portal-card">
+        <div class="icon-wrapper">📊</div> <h2>الحاسبة</h2> <p>احتساب مبيعات المنصات.</p> <div class="action-btn" style="background:var(--color-calc)">دخول</div>
       </a>
-
-      <a href="https://kababji-xl.vercel.app/" class="portal-card card-numbers">
-        <div class="icon-wrapper">🧩</div>
-        <h2>تنظيم أرقامي</h2>
-        <p>تنظيم ملفات الإكسل لمكونات الأصناف المصدرة مع إمكانية التعديل والطباعة.</p>
-        <div class="action-btn" style="background: var(--color-numbers);"><span>دخول</span></div>
+      <a href="https://kababji-xl.vercel.app/" class="portal-card">
+        <div class="icon-wrapper">🧩</div> <h2>التنظيم</h2> <p>ملفات الإكسل والبيانات.</p> <div class="action-btn" style="background:var(--color-numbers)">دخول</div>
       </a>
-
-      <a href="https://github.com/kababji2016-hub" class="portal-card card-github">
-        <div class="icon-wrapper">⚙️</div>
-        <h2>تعديل الأكواد</h2>
-        <p>الدخول المباشر لمستودع البرمجيات لتحديث السكريبتات وتعديل البنية البرمجية.</p>
-        <div class="action-btn" style="background: var(--color-github);"><span>فتح الـ Hub</span></div>
+      <a href="https://github.com/kababji2016-hub" class="portal-card">
+        <div class="icon-wrapper">⚙️</div> <h2>الأكواد</h2> <p>تعديل السكريبتات.</p> <div class="action-btn" style="background:var(--color-github)">دخول</div>
       </a>
     </div>
 
     <div class="tasks-section">
       <h3>📋 قائمة المهام</h3>
-      <div class="task-input-container">
-        <input type="text" id="newTaskInput" class="task-input" placeholder="اكتب المهمة الجديدة المطلوبة هنا لتسجيلها...">
-        <button class="add-task-btn" onclick="addNewTask()">➕ إضافة</button>
-      </div>
       <ul class="tasks-list" id="tasksList"></ul>
     </div>
   </div>
-
-  <div class="footer">
-    جميع الحقوق محفوظة © مطاعم كبابجي — الإشراف الإداري: أبو شفاء
-  </div>
+</div>
 
 <script>
-let tasks = [];
-let customLinks = [];
-
-const PRAYER_DATA = [
-  { name: "الفجر", key: "fajr", timeStr: "04:12" },
-  { name: "الظهر", key: "12:22", timeStr: "12:22" },
-  { name: "العصر", key: "asr", timeStr: "15:42" },
-  { name: "المغرب", key: "maghrib", timeStr: "19:03" },
-  { name: "العشاء", key: "isha", timeStr: "20:33" }
-];
-
-function updateClockAndCalendar() {
-  const now = new Date();
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  const ampm = hours >= 12 ? 'م' : 'ص';
-  
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-  
-  minutes = minutes < 10 ? '0' + minutes : minutes;
-  seconds = seconds < 10 ? '0' + seconds : seconds;
-  hours = hours < 10 ? '0' + hours : hours;
-
-  document.getElementById('liveTime').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-
-  const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('liveDate').textContent = now.toLocaleDateString('ar-SA', optionsDate);
-
-  const optionsHijri = { year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('liveHijri').textContent = now.toLocaleDateString('ar-SA-u-ca-islamic', optionsHijri);
-
-  calculatePrayerCountdown(now);
-}
-
-function calculatePrayerCountdown(now) {
-  let currentTarget = null;
-  let minDiff = Infinity;
-
-  const prayerTimesWithDates = PRAYER_DATA.map((p) => {
-    const [h, m] = p.timeStr.split(':');
-    const pDate = new Date(now);
-    pDate.setHours(parseInt(h), parseInt(m), 0, 0);
-    return { ...p, date: pDate };
-  });
-
-  for (let p of prayerTimesWithDates) {
-    let diff = p.date - now;
-    if (diff > 0 && diff < minDiff) {
-      minDiff = diff;
-      currentTarget = p;
-    }
-  }
-
-  if (!currentTarget) {
-    currentTarget = { ...prayerTimesWithDates[0] };
-    currentTarget.date.setDate(currentTarget.date.getDate() + 1);
-    minDiff = currentTarget.date - now;
-  }
-
-  let totalSeconds = Math.floor(minDiff / 1000);
-  let secs = totalSeconds % 60;
-  let totalMinutes = Math.floor(totalSeconds / 60);
-  let mins = totalMinutes % 60;
-  let hrs = Math.floor(totalMinutes / 60);
-
-  mins = mins < 10 ? '0' + mins : mins;
-  secs = secs < 10 ? '0' + secs : secs;
-  hrs = hrs < 10 ? '0' + hrs : hrs;
-
-  // إبقاء خط صياغة المتبقي هادئاً وخفيفاً بدون تعقيد
-  document.getElementById('prayerCountdownText').innerHTML = `متبقي على صلاة ${currentTarget.name}: <span>${hrs}:${mins}:${secs}</span>`;
-
-  const totalWindow = 3 * 60 * 60 * 1000; 
-  let progress = ((totalWindow - minDiff) / totalWindow) * 100;
-  if (progress < 0) progress = 0;
-  if (progress > 100) progress = 100;
-  
-  const fillBar = document.getElementById('proximityFill');
-  if(fillBar) fillBar.style.width = `${progress}%`;
-}
-
-function addCustomLink() {
-  const title = prompt("اكتب اسم الموقع:");
-  if (!title) return;
-  const url = prompt("الصق رابط الموقع الكامل:");
-  if (!url) return;
-  customLinks.push({ id: Date.now(), title: title, url: url });
-  localStorage.setItem('kababji_custom_shortcuts', JSON.stringify(customLinks));
-  renderCustomLinks();
-}
-
-function deleteCustomLink(id, e) {
-  e.preventDefault(); e.stopPropagation();
-  if(confirm("هل تود مسح هذا الرابط؟")) {
-    customLinks = customLinks.filter(l => l.id !== id);
-    localStorage.setItem('kababji_custom_shortcuts', JSON.stringify(customLinks));
-    renderCustomLinks();
+function addLink(areaId, storageKey) {
+  const title = prompt("اسم الرابط:");
+  const url = prompt("الرابط:");
+  if (title && url) {
+    let links = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    links.push({ title, url });
+    localStorage.setItem(storageKey, JSON.stringify(links));
+    renderLinks(areaId, storageKey);
   }
 }
-
-function renderCustomLinks() {
-  const area = document.getElementById('customLinksArea');
-  if(!area) return;
-  const saved = localStorage.getItem('kababji_custom_shortcuts');
-  if(saved) customLinks = JSON.parse(saved);
-  if(customLinks.length === 0) {
-    area.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center;">لا توجد روابط</div>';
-    return;
-  }
-  area.innerHTML = customLinks.map(l => `
-    <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
-      ${l.title}
-      <span onclick="deleteCustomLink(${l.id}, event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">🗑️</span>
-    </a>
-  `).join('');
+function renderLinks(areaId, storageKey) {
+  const area = document.getElementById(areaId);
+  const links = JSON.parse(localStorage.getItem(storageKey) || "[]");
+  area.innerHTML = links.map((l, i) => `<a href="${l.url}" class="side-link-item lnk-custom">${l.title}</a>`).join('');
 }
-
-function saveTasksToStorage() { localStorage.setItem('kababji_tasks_list', JSON.stringify(tasks)); }
-function loadTasksFromStorage() {
-  const saved = localStorage.getItem('kababji_tasks_list');
-  if (saved) { tasks = JSON.parse(saved); renderTasks(); }
-}
-
-function addNewTask() {
-  const input = document.getElementById('newTaskInput');
-  const text = input.value.trim();
-  if (text === "") return;
-  tasks.push({ id: Date.now(), text: text, completed: false });
-  input.value = "";
-  saveTasksToStorage();
-  renderTasks();
-}
-
-function toggleTaskStatus(id) {
-  tasks = tasks.map(t => { if (t.id === id) t.completed = !t.completed; return t; });
-  saveTasksToStorage();
-  renderTasks();
-}
-
-function deleteTask(id) {
-  tasks = tasks.filter(t => t.id !== id);
-  saveTasksToStorage();
-  renderTasks();
-}
-
-function renderTasks() {
-  const listEl = document.getElementById('tasksList');
-  if(!listEl) return;
-  if (tasks.length === 0) {
-    listEl.innerHTML = '<li style="text-align:center; padding:8px; color:var(--muted); font-size:12px;">👍 لا توجد مهام حالية.</li>';
-    return;
-  }
-  listEl.innerHTML = tasks.map(t => `
-    <li class="task-item">
-      <div class="task-item-right">
-        <input type="checkbox" class="task-checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTaskStatus(${t.id})">
-        <span class="task-text ${t.completed ? 'completed' : ''}">${t.text}</span>
-      </div>
-      <button class="delete-task-btn" onclick="deleteTask(${t.id})">🗑️</button>
-    </li>
-  `).join('');
-}
-
-function toggleTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const btn = document.getElementById('themeBtn');
-  if (currentTheme === 'dark') {
-    document.documentElement.removeAttribute('data-theme');
-    btn.textContent = '🌙 الوضع الليلي';
-    localStorage.setItem('kababji_theme', 'light');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    btn.textContent = '☀️ الوضع النهاري';
-    localStorage.setItem('kababji_theme', 'dark');
-  }
-}
-
-function loadTheme() {
-  const savedTheme = localStorage.getItem('kababji_theme');
-  if(savedTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('themeBtn').textContent = '☀️ الوضع النهاري';
-  }
-}
-
-document.getElementById('newTaskInput')?.addEventListener('keypress', function(e) { if (e.key === 'Enter') addNewTask(); });
-
-setInterval(updateClockAndCalendar, 1000);
-window.addEventListener('DOMContentLoaded', () => {
-  updateClockAndCalendar();
-  loadTasksFromStorage();
-  renderCustomLinks();
-  loadTheme();
-});
+// تشغيل عند التحميل
+window.onload = () => { renderLinks('rightLinksArea', 'rightLinks'); renderLinks('leftLinksArea', 'leftLinks'); };
 </script>
 </body>
 </html>
