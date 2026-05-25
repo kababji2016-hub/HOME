@@ -168,7 +168,7 @@
   .hero-section {
     background: var(--bg-card);
     text-align: center;
-    padding: 24px 30px 32px; /* مساحات تباعد علوية وسفلية سخية وضخمة لمنع أي ضيق */
+    padding: 24px 30px 32px; 
     border-bottom: 1px solid var(--border-color);
     border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: 0 4px 12px rgba(0,0,0,0.01);
@@ -190,11 +190,16 @@
     border: 1px solid var(--border-color); 
     padding: 12px 20px; 
     border-radius: 12px; 
-    max-width: 780px; 
+    max-width: 860px; /* تم زيادة العرض الأقصى لاستيعاب الصلوات الخمس بالتساوي */
     margin: 12px auto 0; 
   }
-  .prayers-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-  .prayer-title { font-size: 12.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 6px; }
+  .prayers-row { 
+    display: flex; 
+    justify-content: center; 
+    gap: 12px; 
+    flex-wrap: nowrap; /* منع التفاف صلاة العشاء إلى سطر جديد في الشاشات العادية */
+  }
+  .prayer-title { font-size: 12.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 6px; white-space: nowrap; }
   
   .prayer-item { 
     font-size: 12px; 
@@ -208,6 +213,7 @@
     color: var(--prayer-text);
     border-radius: 8px; 
     border: none !important; 
+    white-space: nowrap;
   }
   .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 12px; font-weight: bold; }
   
@@ -234,6 +240,7 @@
     .main-content { padding: 0 20px; }
     .side-bar { position: relative; top: 0; transform: none; flex-direction: row; justify-content: center; width: 100%; border-radius: var(--radius) !important; margin: 10px 0; flex-wrap: wrap; }
     .side-bar-title { width: 100%; border-bottom: none; margin-bottom: 0; }
+    .prayers-row { flex-wrap: wrap; } /* السماح بالالتفاف فقط في الشاشات الصغيرة والهواتف */
   }
 
   .portal-card {
