@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght=400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght=700;900&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -78,6 +78,7 @@
 
   body {
     font-family: 'Tajawal', sans-serif;
+    font-weight: 700; /* إجبار المتصفح على الخط العريض الأصلي */
     background: var(--bg-main);
     color: var(--text-dark);
     min-height: 100vh;
@@ -98,9 +99,9 @@
     padding: 5px 10px;
     border-radius: 20px;
     cursor: pointer;
-    font-family: 'Tajawal';
+    font-family: 'Tajawal', sans-serif;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 900;
     color: var(--text-dark);
     z-index: 210;
   }
@@ -160,7 +161,7 @@
   .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); padding-left: 18px; }
 
   .custom-links-area { display: flex; flex-direction: column; gap: 7px; max-height: 140px; overflow-y: auto; overflow-x: hidden; margin-top: 4px; }
-  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 5px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 6px; }
+  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 5px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; text-align: center; margin-top: 6px; }
 
   /* --- الهيدر العلوي المطور والموسع بالكامل --- */
   .main-content { flex: 1; width: 100%; max-width: 1260px; margin: 0 auto; padding: 0 150px; display: flex; flex-direction: column; }
@@ -174,8 +175,8 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.01);
   }
 
-  .brand-title { color: var(--color-brand); font-size: 48px; font-weight: 900; margin-bottom: 4px; letter-spacing: 0.5px; line-height: 1.2; } /* تكبير العنوان مع الحفاظ على الخط القديم الأصلي */
-  .hero-section h1 { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark); } /* تكبير الوصف مع الحفاظ على الخط القديم الأصلي */
+  .brand-title { color: var(--color-brand); font-size: 48px; font-weight: 900; margin-bottom: 4px; letter-spacing: 0.5px; line-height: 1.2; } 
+  .hero-section h1 { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark); } 
 
   .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 16px; background: #EAF2F1; padding: 8px 24px; border-radius: 30px; margin-bottom: 20px; }
   [data-theme="dark"] .live-clock-panel { background: #2A3A39; }
@@ -193,7 +194,7 @@
     max-width: 820px; 
     margin: 12px auto 0; 
   }
-  .prayers-row { display: flex; justify-content: center; gap: 10px; flex-wrap: nowrap; } /* منع النزول سرياً */
+  .prayers-row { display: flex; justify-content: center; gap: 10px; flex-wrap: nowrap; } 
   .prayer-title { font-size: 12.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 6px; white-space: nowrap; }
   
   .prayer-item { 
@@ -210,7 +211,7 @@
     border: none !important; 
     white-space: nowrap;
   }
-  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 12px; font-weight: bold; }
+  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 12px; font-weight: 900; }
   
   .prayer-countdown-container {
     margin-top: 12px;
@@ -222,13 +223,13 @@
     gap: 16px;
   }
   .countdown-text { font-size: 12px; font-weight: 700; color: var(--muted); } 
-  .countdown-text span { color: var(--text-dark); font-weight: 800; font-family: monospace; }
+  .countdown-text span { color: var(--text-dark); font-weight: 900; font-family: monospace; }
   
   .proximity-bar-bg { width: 240px; height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
   .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 1s linear; }
 
   /* --- شبكة الأنظمة الستة - ترفع ميللي مترات قليلة للأعلى --- */
-  .cards-container { margin: 18px auto 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; } /* تم تقليل الـ margin العلوي لرفع المربعات */
+  .cards-container { margin: 18px auto 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; } 
 
   @media (max-width: 1080px) {
     .prayers-row { flex-wrap: wrap; }
@@ -291,8 +292,8 @@
   .tasks-section h3 { font-size: 13.5px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
   
   .task-input-container { display: flex; gap: 8px; margin-bottom: 10px; }
-  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 6px; padding: 7px 12px; font-family: 'Tajawal'; font-size: 12.5px; outline: none; }
-  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 14px; border-radius: 6px; font-family: 'Tajawal'; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 6px; padding: 77px 12px; padding: 7px 12px; font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 12.5px; outline: none; }
+  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 14px; border-radius: 6px; font-family: 'Tajawal', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; }
 
   .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 5px; max-height: 100px; overflow-y: auto; }
   .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border-color); }
@@ -528,7 +529,7 @@ function addCustomLink(type) {
 
 function deleteCustomLink(id, type, e) {
   e.preventDefault(); e.stopPropagation();
-  if(confirm("هل تود مسح هذا الرابط؟")) {
+  if(confirm("هل تود مسح هذا الرابط?")) {
     if (type === 'google') {
       customLinksRight = customLinksRight.filter(l => l.id !== id);
       localStorage.setItem('kababji_custom_shortcuts_right', JSON.stringify(customLinksRight));
