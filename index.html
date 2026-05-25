@@ -20,7 +20,7 @@
     --border-color: #E5E9E8;
     
     --color-brand: #E64A19;     
-    --color-stock: #D35400;     
+    --color-stock: #D35400;      
     --color-accounts: #2C3E50;  
     --color-alerts: #BF360C;    
     --color-calc: #2E7D32;      
@@ -84,7 +84,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    direction: rlt;
+    direction: rtl;
     position: relative;
     transition: background 0.3s, color 0.3s;
     overflow-x: hidden;
@@ -129,7 +129,19 @@
   .side-bar-title { font-size: 10.5px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 4px; border-bottom: 1px dashed var(--border-color); margin-bottom: 1px; }
   .side-bar-title.sub-section-title { margin-top: 6px; color: #5D6D7E; }
 
-  .side-link-item { display: block; text-align: center; padding: 7px 4px; border-radius: 6px; text-decoration: none; font-size: 11.5px; font-weight: 700; transition: all 0.2s ease; }
+  .side-link-item { 
+    display: block; 
+    text-align: center; 
+    padding: 7px 4px; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-size: 11.5px; 
+    font-weight: 700; 
+    transition: all 0.2s ease;
+    overflow: hidden; /* حل مشكلة ظهور شريط التمرير الأفقي عند الماوس */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   .side-link-item:hover { transform: scale(1.02); opacity: 0.9; }
 
   .lnk-google { background: var(--bg-google); color: var(--txt-google); }
@@ -146,9 +158,9 @@
   .lnk-absher { background: var(--bg-absher); color: var(--txt-absher); }
   .lnk-gosi { background: var(--bg-gosi); color: var(--txt-gosi); }
   .lnk-chi { background: var(--bg-chi); color: var(--txt-chi); } 
-  .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); }
+  .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); padding-left: 18px; }
 
-  .custom-links-area { display: flex; flex-direction: column; gap: 6px; max-height: 90px; overflow-y: auto; }
+  .custom-links-area { display: flex; flex-direction: column; gap: 6px; max-height: 110px; overflow-y: auto; overflow-x: hidden; }
   .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 4px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 2px; }
 
   /* --- التصميم الأوسط المدمج لمنع النزول بالصفحة --- */
@@ -173,7 +185,7 @@
   .live-date { font-size: 12px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 12px; }
   .live-hijri { font-size: 12px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 12px; }
 
-  /* --- تحسين وتصغير شريط الصلوات ومحاذاة الأرقام بالكامل على سطر واحد --- */
+  /* --- شريط الصلوات ومحاذاة الأرقام بالكامل على سطر واحد --- */
   .prayer-times-bar { 
     background: var(--bg-card); 
     border: 1px solid var(--border-color); 
@@ -185,7 +197,6 @@
   .prayers-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
   .prayer-title { font-size: 11.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 4px; }
   
-  /* مساواة وتنسيق اسم الصلاة مع الوقت بالمنتصف تماماً */
   .prayer-item { 
     font-size: 11.5px; 
     font-weight: 700; 
@@ -197,11 +208,10 @@
     background: var(--prayer-bg); 
     color: var(--prayer-text);
     border-radius: 6px; 
-    border: none !important; /* إزالة أي إطارات حول صلاة العشاء أو غيرها */
+    border: none !important; 
   }
   .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 11.5px; font-weight: bold; }
   
-  /* سطر العداد التنازلي والمؤشر الأطول بلون واحد هادئ */
   .prayer-countdown-container {
     margin-top: 6px;
     padding-top: 5px;
@@ -211,15 +221,14 @@
     justify-content: center;
     gap: 12px;
   }
-  .countdown-text { font-size: 11.5px; font-weight: 700; color: var(--muted); } /* خط متبقي على الصلاة هادئ */
+  .countdown-text { font-size: 11.5px; font-weight: 700; color: var(--muted); } 
   .countdown-text span { color: var(--text-dark); font-weight: 800; font-family: monospace; }
   
-  /* جعل مؤشر الاقتراب أطول وبلون واحد ثابت مريح للعين */
   .proximity-bar-bg { width: 220px; height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
   .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 1s linear; }
 
-  /* --- تصغير وموازنة شبكة الأنظمة الستة --- */
-  .cards-container { margin: 16px auto 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  /* --- تعديل وتنزيل شبكة الأنظمة الستة مظهر متناسق ومريح --- */
+  .cards-container { margin: 24px auto 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 
   @media (max-width: 1000px) {
     .cards-container { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
@@ -231,7 +240,7 @@
   .portal-card {
     background: var(--bg-card);
     border-radius: var(--radius);
-    padding: 14px 12px;
+    padding: 24px 12px 16px; /* تم زيادة الهامش العلوي لإنزال الأيقونات بشكل مريح */
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color); 
@@ -240,6 +249,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 8px; /* يعطي مساحة متناسقة وموزعة بين الأيقونة والاسم والوصف */
     transition: transform 0.2s ease, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
@@ -259,13 +269,13 @@
   .card-github::before { background: var(--color-github); } 
   .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
 
-  .icon-wrapper { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 6px; }
-  .portal-card h2 { font-size: 14px; font-weight: 900; margin-bottom: 4px; }
-  .portal-card p { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-bottom: 8px; flex: 1; }
-  .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; border: none; }
+  .icon-wrapper { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 4px; }
+  .portal-card h2 { font-size: 14px; font-weight: 900; margin-bottom: 2px; }
+  .portal-card p { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-bottom: 4px; flex: 1; }
+  .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; border: none; margin-top: auto; }
   .portal-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); }
 
-  /* --- تصغير مساحة صندوق قائمة المهام للتوافق الشامل الشاشة --- */
+  /* --- صندوق قائمة المهام --- */
   .tasks-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -307,8 +317,8 @@
     <a href="https://claude.ai/" class="side-link-item lnk-claude">Claude</a>
 
     <div class="side-bar-title sub-section-title">روابط سريعة</div>
-    <div class="custom-links-area" id="customLinksArea"></div>
-    <button class="add-shortcut-btn" onclick="addCustomLink()">➕ أضف رابط</button>
+    <div class="custom-links-area" id="customLinksAreaRight"></div>
+    <button class="add-shortcut-btn" onclick="addCustomLink('google')">➕ أضف رابط</button>
   </div>
 
   <div class="side-bar left-bar">
@@ -319,6 +329,10 @@
     <a href="https://www.absher.sa" class="side-link-item lnk-absher">منصة أبشر</a>
     <a href="https://www.gosi.gov.sa" class="side-link-item lnk-gosi">التأمينات</a>
     <a href="https://www.chi.gov.sa/Pages/Home.aspx" class="side-link-item lnk-chi">التأمين الصحي</a>
+
+    <div class="side-bar-title sub-section-title">روابط سريعة</div>
+    <div class="custom-links-area" id="customLinksAreaLeft"></div>
+    <button class="add-shortcut-btn" onclick="addCustomLink('work')">➕ أضف رابط</button>
   </div>
 
   <div class="main-content">
@@ -352,7 +366,7 @@
       </div>
     </div>
 
-    <div class="cards-container" style="margin-top: -20px;">
+    <div class="cards-container">
       <a href="http://kababjk.opos.me/" class="portal-card card-stock">
         <div class="icon-wrapper">📦</div>
         <h2>المخزون - أرقامي</h2>
@@ -412,7 +426,8 @@
 
 <script>
 let tasks = [];
-let customLinks = [];
+let customLinksRight = [];
+let customLinksLeft = [];
 
 const PRAYER_DATA = [
   { name: "الفجر", key: "fajr", timeStr: "04:12" },
@@ -482,7 +497,6 @@ function calculatePrayerCountdown(now) {
   secs = secs < 10 ? '0' + secs : secs;
   hrs = hrs < 10 ? '0' + hrs : hrs;
 
-  // إبقاء خط صياغة المتبقي هادئاً وخفيفاً بدون تعقيد
   document.getElementById('prayerCountdownText').innerHTML = `متبقي على صلاة ${currentTarget.name}: <span>${hrs}:${mins}:${secs}</span>`;
 
   const totalWindow = 3 * 60 * 60 * 1000; 
@@ -494,40 +508,72 @@ function calculatePrayerCountdown(now) {
   if(fillBar) fillBar.style.width = `${progress}%`;
 }
 
-function addCustomLink() {
+// تعديل وظيفة إضافة رابط لتستوعب الجهتين اليمنى واليسرى
+function addCustomLink(type) {
   const title = prompt("اكتب اسم الموقع:");
   if (!title) return;
   const url = prompt("الصق رابط الموقع الكامل:");
   if (!url) return;
-  customLinks.push({ id: Date.now(), title: title, url: url });
-  localStorage.setItem('kababji_custom_shortcuts', JSON.stringify(customLinks));
+
+  if (type === 'google') {
+    customLinksRight.push({ id: Date.now(), title: title, url: url });
+    localStorage.setItem('kababji_custom_shortcuts_right', JSON.stringify(customLinksRight));
+  } else {
+    customLinksLeft.push({ id: Date.now(), title: title, url: url });
+    localStorage.setItem('kababji_custom_shortcuts_left', JSON.stringify(customLinksLeft));
+  }
   renderCustomLinks();
 }
 
-function deleteCustomLink(id, e) {
+function deleteCustomLink(id, type, e) {
   e.preventDefault(); e.stopPropagation();
   if(confirm("هل تود مسح هذا الرابط؟")) {
-    customLinks = customLinks.filter(l => l.id !== id);
-    localStorage.setItem('kababji_custom_shortcuts', JSON.stringify(customLinks));
+    if (type === 'google') {
+      customLinksRight = customLinksRight.filter(l => l.id !== id);
+      localStorage.setItem('kababji_custom_shortcuts_right', JSON.stringify(customLinksRight));
+    } else {
+      customLinksLeft = customLinksLeft.filter(l => l.id !== id);
+      localStorage.setItem('kababji_custom_shortcuts_left', JSON.stringify(customLinksLeft));
+    }
     renderCustomLinks();
   }
 }
 
 function renderCustomLinks() {
-  const area = document.getElementById('customLinksArea');
-  if(!area) return;
-  const saved = localStorage.getItem('kababji_custom_shortcuts');
-  if(saved) customLinks = JSON.parse(saved);
-  if(customLinks.length === 0) {
-    area.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center;">لا توجد روابط</div>';
-    return;
+  const areaRight = document.getElementById('customLinksAreaRight');
+  const areaLeft = document.getElementById('customLinksAreaLeft');
+  
+  // روابط الجهة اليمنى
+  if(areaRight) {
+    const savedRight = localStorage.getItem('kababji_custom_shortcuts_right');
+    if(savedRight) customLinksRight = JSON.parse(savedRight);
+    if(customLinksRight.length === 0) {
+      areaRight.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center;">لا توجد روابط</div>';
+    } else {
+      areaRight.innerHTML = customLinksRight.map(l => `
+        <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
+          ${l.title}
+          <span onclick="deleteCustomLink(${l.id}, 'google', event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">🗑️</span>
+        </a>
+      `).join('');
+    }
   }
-  area.innerHTML = customLinks.map(l => `
-    <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
-      ${l.title}
-      <span onclick="deleteCustomLink(${l.id}, event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">🗑️</span>
-    </a>
-  `).join('');
+
+  // روابط الجهة اليسرى
+  if(areaLeft) {
+    const savedLeft = localStorage.getItem('kababji_custom_shortcuts_left');
+    if(savedLeft) customLinksLeft = JSON.parse(savedLeft);
+    if(customLinksLeft.length === 0) {
+      areaLeft.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center;">لا توجد روابط</div>';
+    } else {
+      areaLeft.innerHTML = customLinksLeft.map(l => `
+        <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
+          ${l.title}
+          <span onclick="deleteCustomLink(${l.id}, 'work', event)" style="position:absolute; left:4px; top:50%; transform:translateY(-50%); color:var(--color-brand); font-size:9px; cursor:pointer;">🗑️</span>
+        </a>
+      `).join('');
+    }
+  }
 }
 
 function saveTasksToStorage() { localStorage.setItem('kababji_tasks_list', JSON.stringify(tasks)); }
