@@ -11,13 +11,14 @@
 
 <style>
   :root {
-    --bg-main: #F4F7F6; /* خلفية هادئة ومريحة جداً للعين */
+    --bg-main: #F4F7F6; 
+    --bg-card: #ffffff;
     --text-dark: #2C3E50; 
     --muted: #7F8C8D;
     --radius: 14px;
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    --border-color: #E5E9E8;
     
-    /* ألوان الأنظمة الستة المتناسقة */
     --color-brand: #E64A19;     
     --color-stock: #D35400;     
     --color-accounts: #2C3E50;  
@@ -25,6 +26,19 @@
     --color-calc: #2E7D32;      
     --color-numbers: #F9A825;
     --color-github: #24292E; 
+    
+    --color-gpt: #10a37f;
+    --color-gemini: #1a73e8;
+    --color-claude: #d97706;
+  }
+
+  /* ألوان الوضع الليلي الذكي */
+  [data-theme="dark"] {
+    --bg-main: #1A1A1A;
+    --bg-card: #262626;
+    --text-dark: #F5F5F5;
+    --muted: #9AA0A6;
+    --border-color: #333333;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,139 +52,93 @@
     flex-direction: column;
     direction: rtl;
     position: relative;
+    transition: background 0.3s, color 0.3s;
   }
 
-  /* --- الشرائط الجانبية بالأسماء النصية الصغيرة --- */
+  /* زر تحويل الوضع الليلي علوياً */
+  .theme-toggle-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dark);
+    box-shadow: var(--shadow);
+    z-index: 210;
+  }
+
+  /* الشرائط الجانبية بالأسماء النصية الصغيرة ممتدة تلقائياً لتناسب عدد العناصر */
   .side-bar {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background: #ffffff;
+    background: var(--bg-card);
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    border: 1px solid #E5E9E8;
-    padding: 14px 8px;
+    border: 1px solid var(--border-color);
+    padding: 12px 8px;
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 8px;
     z-index: 200;
     width: 140px; 
+    transition: background 0.3s, border-color 0.3s;
   }
   
-  /* شريط اليمين (خدمات وأدوات جوجل) */
-  .side-bar.right-bar {
-    right: 0;
-    border-radius: var(--radius) 0 0 var(--radius);
-  }
+  .side-bar.right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
+  .side-bar.left-bar { left: 0; border-radius: 0 var(--radius) var(--radius) 0; }
 
-  /* شريط اليسار (المنصات الحكومية + الذكاء الاصطناعي) */
-  .side-bar.left-bar {
-    left: 0;
-    border-radius: 0 var(--radius) var(--radius) 0;
-  }
+  .side-bar-title { font-size: 11px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 5px; border-bottom: 1px dashed var(--border-color); margin-bottom: 2px; }
+  .side-bar-title.ai-title { margin-top: 8px; color: #5D6D7E; }
 
-  .side-bar-title {
-    font-size: 11px;
-    font-weight: 900;
-    color: var(--muted);
-    text-align: center;
-    padding-bottom: 6px;
-    border-bottom: 1px dashed #E5E9E8;
-    margin-bottom: 2px;
-  }
+  .side-link-item { display: block; text-align: center; padding: 8px 6px; border-radius: 8px; text-decoration: none; font-size: 11.5px; font-weight: 700; transition: all 0.2s ease; }
+  .side-link-item:hover { transform: scale(1.03); opacity: 0.9; }
 
-  .side-bar-title.ai-title {
-    margin-top: 10px;
-    color: #5D6D7E;
-  }
-
-  /* تصميم الروابط الجانبية المدمجة الصغير */
-  .side-link-item {
-    display: block;
-    text-align: center;
-    padding: 9px 6px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    transition: all 0.2s ease;
-  }
-  .side-link-item:hover {
-    transform: scale(1.03);
-    opacity: 0.9;
-  }
-
-  /* الهوية اللونية للروابط الجانبية للعمل وجوجل */
+  /* تنسيقات الروابط الجانبية لليمين */
   .lnk-google { background: #F1F3F4; color: #4285F4; }
   .lnk-drive { background: #E8F0FE; color: #1967D2; }
   .lnk-gmail { background: #FCE8E6; color: #C5221F; }
   .lnk-whatsapp { background: #E6F4EA; color: #128C7E; } 
-
-  .lnk-qiwa { background: #E0F2F1; color: #004D40; }
-  .lnk-mudad { background: #E8EAF6; color: #1A237E; }
-  .lnk-absher { background: #E8F5E9; color: #1B5E20; }
-  .lnk-gosi { background: #FFF3E0; color: #E65100; }
-
-  /* الهوية اللونية لمساعدات الذكاء الاصطناعي المدمجة جانباً */
   .lnk-gpt { background: #E6F6F2; color: #10a37f; }
   .lnk-gemini { background: #E8F0FE; color: #1a73e8; }
   .lnk-claude { background: #FEF3C7; color: #d97706; }
 
-  /* --- تصميم المحتوى الأوسط للبوابة --- */
-  .main-content {
-    flex: 1;
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 160px; /* تفادي التداخل مع القوائم الجانبية */
-  }
+  /* تنسيقات الروابط الجانبية لليسار */
+  .lnk-qiwa { background: #E0F2F1; color: #004D40; }
+  .lnk-balady { background: #E0F7FA; color: #006064; }
+  .lnk-mudad { background: #E8EAF6; color: #1A237E; }
+  .lnk-absher { background: #E8F5E9; color: #1B5E20; }
+  .lnk-gosi { background: #FFF3E0; color: #E65100; }
+  .lnk-chi { background: #E0F2F1; color: #00796B; } /* لون التأمين الصحي المخصص */
+
+  .main-content { flex: 1; width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 160px; }
 
   .hero-section {
-    background: #FFFFFF;
+    background: var(--bg-card);
     text-align: center;
     padding: 20px 20px 65px;
-    border-bottom: 1px solid #E5E9E8;
+    border-bottom: 1px solid var(--border-color);
     border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    transition: background 0.3s, border-color 0.3s;
   }
 
-  .brand-title {
-    color: var(--color-brand);
-    font-size: 44px;
-    font-weight: 900;
-    margin-bottom: 2px;
-    letter-spacing: 1px;
-  }
+  .brand-title { color: var(--color-brand); font-size: 44px; font-weight: 900; margin-bottom: 2px; letter-spacing: 1px; }
+  .hero-section h1 { font-size: 19px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); }
 
-  .hero-section h1 {
-    font-size: 19px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: #34495E; 
-  }
-
-  .live-clock-panel {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    background: #EAF2F1;
-    padding: 8px 22px;
-    border-radius: 30px;
-    margin-bottom: 5px;
-    flex-wrap: wrap;
-  }
-
+  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 15px; background: #EAF2F1; padding: 8px 22px; border-radius: 30px; margin-bottom: 5px; flex-wrap: wrap; }
+  [data-theme="dark"] .live-clock-panel { background: #2A3A39; }
   .live-time { font-size: 19px; font-weight: 900; color: #111; font-family: monospace, sans-serif; }
+  [data-theme="dark"] .live-time { color: #fff; }
   .live-date { font-size: 13px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 15px; }
   .live-hijri { font-size: 13px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 15px; }
 
-  /* شبكة الأنظمة الستة الثابتة والمثالية على صفين تماماً (3 في كل صف) */
-  .cards-container {
-    margin: -35px auto 40px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 16px;
-  }
+  .cards-container { margin: -35px auto 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
   @media (max-width: 1000px) {
     .cards-container { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
@@ -180,194 +148,23 @@
   }
 
   .portal-card {
-    background: #ffffff;
+    background: var(--bg-card);
     border-radius: var(--radius);
     padding: 22px 18px;
     text-align: center;
     box-shadow: var(--shadow);
-    border: 1px solid #E5E9E8; 
+    border: 1px solid var(--border-color); 
     text-decoration: none;
     color: var(--text-dark);
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s, background 0.3s, border-color 0.3s;
     position: relative;
     overflow: hidden;
   }
-
   .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; }
 
   .card-stock::before { background: var(--color-stock); } 
   .card-stock .icon-wrapper { background: #FDEBD0; color: var(--color-stock); }
-  .card-accounts::before { background: var(--color-accounts); } 
-  .card-accounts .icon-wrapper { background: #EAEDED; color: var(--color-accounts); }
-  .card-alerts::before { background: #E64A19; } 
-  .card-alerts .icon-wrapper { background: #FFCCBC; color: #BF360C; }
-  .card-calc::before { background: var(--color-calc); } 
-  .card-calc .icon-wrapper { background: #D5F5E3; color: var(--color-calc); }
-  .card-numbers::before { background: var(--color-numbers); } 
-  .card-numbers .icon-wrapper { background: #FEF9E7; color: #F57F17; }
-  .card-github::before { background: var(--color-github); } 
-  .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
-
-  .icon-wrapper {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-
-  .portal-card h2 { font-size: 15.5px; font-weight: 900; margin-bottom: 6px; }
-  .portal-card p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; flex: 1; }
-
-  .action-btn {
-    color: #fff;
-    padding: 6px 20px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border: none;
-  }
-  .portal-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); border-color: #BDC3C7; }
-
-  .footer {
-    text-align: center;
-    padding: 16px;
-    font-size: 12px;
-    color: #95A5A6;
-    border-top: 1px solid #E5E9E8;
-    background: #FFFFFF;
-    margin-top: auto;
-  }
-</style>
-</head>
-<body>
-
-  <div class="side-bar right-bar">
-    <div class="side-bar-title">أدوات جوجل</div>
-    <a href="https://www.google.com" class="side-link-item lnk-google">بحث جوجل</a>
-    <a href="https://drive.google.com" class="side-link-item lnk-drive">جوجل درايف</a>
-    <a href="https://mail.google.com" class="side-link-item lnk-gmail">بريد جيميل</a>
-    <a href="https://web.whatsapp.com/" class="side-link-item lnk-whatsapp">واتساب ويب</a>
-  </div>
-
-  <div class="side-bar left-bar">
-    <div class="side-bar-title">منصات العمل</div>
-    <a href="https://qiwa.sa" class="side-link-item lnk-qiwa">منصة قوى</a>
-    <a href="https://www.mudad.com.sa" class="side-link-item lnk-mudad">منصة مدد</a>
-    <a href="https://www.absher.sa" class="side-link-item lnk-absher">منصة أبشر</a>
-    <a href="https://www.gosi.gov.sa" class="side-link-item lnk-gosi">التأمينات</a>
-    
-    <div class="side-bar-title ai-title">الذكاء الاصطناعي</div>
-    <a href="https://chatgpt.com/" class="side-link-item lnk-gpt">ChatGPT</a>
-    <a href="https://gemini.google.com/" class="side-link-item lnk-gemini">Gemini</a>
-    <a href="https://claude.ai/" class="side-link-item lnk-claude">Claude</a>
-  </div>
-
-  <div class="main-content">
-    
-    <div class="hero-section">
-      <div class="brand-title">كبابجي</div>
-      <h1>البوابة الرقمية الموحدة</h1>
-      
-      <div class="live-clock-panel">
-        <div class="live-time" id="liveTime">00:00:00 ص</div>
-        <div class="live-date" id="liveDate">جاري المزامنة...</div>
-        <div class="live-hijri" id="liveHijri">جاري حساب الهجري...</div>
-      </div>
-    </div>
-
-    <div class="cards-container" style="margin-top: -35px;">
-      
-      <a href="http://kababjk.opos.me/" class="portal-card card-stock">
-        <div class="icon-wrapper">📦</div>
-        <h2>المخزون - أرقامي</h2>
-        <p>متابعة وتدقيق جرد المخازن، التوريدات، والمواد الخام للفروع بشكل دوري وحي.</p>
-        <div class="action-btn" style="background: var(--color-stock);"><span>دخول</span> ⬅️</div>
-      </a>
-
-      <a href="http://kababjk-accounts.opos.me/Account/LogOn?LanguageID=2&mat=0.6675783853251626" class="portal-card card-accounts">
-        <div class="icon-wrapper">💼</div>
-        <h2>الحسابات - أرقامي</h2>
-        <p>تسجيل القيود المحاسبية، الرواتب، الأرباح والخسائر والميزانية التشغيلية.</p>
-        <div class="action-btn" style="background: var(--color-accounts);"><span>دخول</span> ⬅️</div>
-      </a>
-
-      <a href="https://abo-shefaa.vercel.app/" class="portal-card card-alerts">
-        <div class="icon-wrapper">🔔</div>
-        <h2>تنبيهات الوثائق</h2>
-        <p>مراقبة صلاحيات الإقامات، التراخيص البلديّة، والتأمين الطبي تفادياً للمخالفات.</p>
-        <div class="action-btn" style="background: var(--color-alerts);"><span>دخول</span> ⬅️</div>
-      </a>
-
-      <a href="https://kababji-seven.vercel.app/" class="portal-card card-calc">
-        <div class="icon-wrapper">📊</div>
-        <h2>حاسبة التطبيقات</h2>
-        <p>احتساب مبيعات المنصات بدقة، وحساب العمولات والتحليلات المالية اليومية.</p>
-        <div class="action-btn" style="background: var(--color-calc);"><span>دخول</span> ⬅️</div>
-      </a>
-
-      <a href="https://kababji-xl.vercel.app/" class="portal-card card-numbers">
-        <div class="icon-wrapper">🧩</div>
-        <h2>تنظيم أرقامي</h2>
-        <p>تنظيم ملفات الإكسل لمكونات الأصناف المصدرة من برنامج أرقامي مع إمكانية التعديل والتصدير والطباعة.</p>
-        <div class="action-btn" style="background: var(--color-numbers);"><span>دخول</span> ⬅️</div>
-      </a>
-
-      <a href="https://github.com/kababji2016-hub" class="portal-card card-github">
-        <div class="icon-wrapper">⚙️</div>
-        <h2>تعديل الأكواد</h2>
-        <p>الدخول المباشر إلى مستودع البرمجيات لتحديث السكريبتات وتعديل البنية البرمجية للبوابة واللوحات.</p>
-        <div class="action-btn" style="background: var(--color-github);"><span>فتح الـ Hub</span> ⬅️</div>
-      </a>
-
-    </div>
-  </div>
-
-  <div class="footer">
-    جميع الحقوق محفوظة © مطاعم كبابجي — الإشراف الإداري: أبو شفاء
-  </div>
-
-<script>
-// سكريبت تشغيل الميقات الذكي المستمر (ساعة 12 ساعة + التاريخين الميلادي والهجري)
-function updateClockAndCalendar() {
-  const now = new Date();
-
-  // تنسيق الساعة الرقمية
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  const ampm = hours >= 12 ? 'م' : 'ص';
-  
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-  
-  minutes = minutes < 10 ? '0' + minutes : minutes;
-  seconds = seconds < 10 ? '0' + seconds : seconds;
-  hours = hours < 10 ? '0' + hours : hours;
-
-  document.getElementById('liveTime').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-
-  // تنسيق التقاويم التفاعلية الحية
-  const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('liveDate').textContent = now.toLocaleDateString('ar-SA', optionsDate);
-
-  const optionsHijri = { year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('liveHijri').textContent = now.toLocaleDateString('ar-SA-u-ca-islamic', optionsHijri);
-}
-
-// التحديث اللحظي كل ثانية
-setInterval(updateClockAndCalendar, 1000);
-window.addEventListener('DOMContentLoaded', updateClockAndCalendar);
-</script>
-
-</body>
-</html>
+  .card-accounts::before
