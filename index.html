@@ -4,125 +4,124 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>كبابجي - البوابة الرقمية الموحدة</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --bg-main: #F4F7F6; --bg-card: #ffffff; --text-dark: #2C3E50; --muted: #7F8C8D;
-    --radius: 12px; --shadow: 0 4px 12px rgba(0,0,0,0.05); --border-color: #E5E9E8;
-    --color-brand: #E64A19; --color-stock: #D35400; --color-accounts: #2C3E50;
-    --color-alerts: #BF360C; --color-calc: #2E7D32; --color-numbers: #F9A825;
+    --radius: 12px; --shadow: 0 6px 20px rgba(0, 0, 0, 0.03); --border-color: #E5E9E8;
+    --color-brand: #E64A19; --color-stock: #D35400; --color-accounts: #2C3E50; 
+    --color-alerts: #BF360C; --color-calc: #2E7D32; --color-numbers: #F9A825; --color-github: #24292E;
   }
+
   [data-theme="dark"] {
-    --bg-main: #121212; --bg-card: #1E1E1E; --text-dark: #F5F5F5; --muted: #A0A0A0; --border-color: #333;
+    --bg-main: #121212; --bg-card: #1E1E1E; --text-dark: #F5F5F5; --muted: #A0A0A0; --border-color: #2C2C2C;
   }
 
-  body { font-family: 'Tajawal', sans-serif; background: var(--bg-main); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  * { box-sizing: border-box; margin: 0; padding: 0; text-decoration: none !important; } /* إلغاء أي خطوط تحت الروابط نهائياً */
 
-  /* إجبار الصفحة على عدم النزول (No Scroll) */
-  .main-wrapper { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+  body { font-family: 'Tajawal', sans-serif; background: var(--bg-main); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; transition: background 0.3s; }
 
-  .side-bar {
-    position: fixed; top: 55%; transform: translateY(-50%); background: var(--bg-card);
-    border: 1px solid var(--border-color); padding: 8px; display: flex; flex-direction: column; gap: 5px; z-index: 200; width: 130px;
-  }
-  .right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
-  .left-bar { left: 0; border-radius: 0 var(--radius) var(--radius) 0; }
+  .theme-toggle-btn { position: absolute; top: 15px; left: 20px; background: var(--bg-card); border: 1px solid var(--border-color); padding: 5px 10px; border-radius: 20px; cursor: pointer; font-size: 11px; font-weight: 700; color: var(--text-dark); z-index: 210; }
 
-  .side-link-item { display: block; text-align: center; padding: 6px; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.2s; }
+  .side-bar { position: fixed; top: 150px; background: var(--bg-card); border: 1px solid var(--border-color); padding: 10px 8px; display: flex; flex-direction: column; gap: 7px; z-index: 200; width: 135px; border-radius: var(--radius); }
+  .right-bar { right: 10px; }
+  .left-bar { left: 10px; }
+
+  .side-link-item { display: block; text-align: center; padding: 8px 4px; border-radius: 6px; font-size: 11.5px; font-weight: 700; transition: all 0.2s; color: var(--text-dark); background: var(--bg-main); }
+  .side-link-item:hover { opacity: 0.8; }
+
+  .main-content { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 20px 150px; }
   
-  /* إخفاء شريط التمرير في الروابط المضافة */
-  .custom-links-area { display: flex; flex-direction: column; gap: 4px; max-height: 80px; overflow-y: hidden; }
-  
-  .main-content { flex: 1; padding: 10px 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .hero-section { text-align: center; margin-bottom: 20px; }
+  .cards-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
 
-  .hero-section { text-align: center; padding: 5px; }
-  .brand-title { color: var(--color-brand); font-size: 32px; font-weight: 900; }
-  
-  .cards-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 1000px; margin-top: 10px; }
-  .portal-card { background: var(--bg-card); border-radius: var(--radius); padding: 10px; text-align: center; border: 1px solid var(--border-color); text-decoration: none; color: var(--text-dark); display: flex; flex-direction: column; align-items: center; }
-  .icon-wrapper { font-size: 20px; margin-bottom: 2px; }
-  .portal-card h2 { font-size: 13px; font-weight: 900; }
-  .portal-card p { font-size: 10px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .action-btn { font-size: 10px; padding: 2px 10px; border-radius: 10px; color: #fff; margin-top: 4px; }
+  .portal-card { background: var(--bg-card); border-radius: var(--radius); padding: 15px; text-align: center; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; }
+  .icon-wrapper { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 6px; background: var(--bg-main); }
+  .portal-card h2 { font-size: 14px; margin-bottom: 4px; }
+  .portal-card p { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+  .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 
-  .tasks-section { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 10px; width: 100%; max-width: 1000px; margin-top: 10px; }
-  .tasks-list { list-style: none; max-height: 80px; overflow-y: hidden; }
+  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 4px; font-size: 10px; cursor: pointer; margin-top: 5px; }
+
+  .tasks-section { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 15px; margin-bottom: 20px; }
+  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 12.5px; }
 </style>
 </head>
 <body>
 
-<div class="main-wrapper">
-  <div class="side-bar right-bar">
-    <div class="side-bar-title">أدوات جوجل</div>
-    <a href="https://www.google.com" class="side-link-item lnk-google">بحث جوجل</a>
-    <a href="https://web.whatsapp.com/" class="side-link-item lnk-whatsapp">واتساب ويب</a>
-    <div class="side-bar-title sub-section-title">إضافات يمين</div>
-    <div class="custom-links-area" id="rightLinksArea"></div>
-    <button class="add-shortcut-btn" onclick="addLink('rightLinksArea', 'rightLinks')">➕ إضافة</button>
-  </div>
+<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
 
-  <div class="side-bar left-bar">
-    <div class="side-bar-title">المنصات</div>
-    <a href="https://qiwa.sa" class="side-link-item lnk-qiwa">منصة قوى</a>
-    <a href="https://www.chi.gov.sa" class="side-link-item lnk-chi">التأمين الصحي</a>
-    <div class="side-bar-title sub-section-title">إضافات يسار</div>
-    <div class="custom-links-area" id="leftLinksArea"></div>
-    <button class="add-shortcut-btn" onclick="addLink('leftLinksArea', 'leftLinks')">➕ إضافة</button>
-  </div>
+<div class="side-bar right-bar">
+    <div style="font-size:10px; text-align:center; margin-bottom:5px;">أدوات جوجل والذكاء</div>
+    <a href="https://www.google.com" class="side-link-item">بحث جوجل</a>
+    <a href="https://chatgpt.com/" class="side-link-item">ChatGPT</a>
+    <div id="rightCustomLinks"></div>
+    <button class="add-shortcut-btn" onclick="addCustomLink('right')">➕ إضافة</button>
+</div>
 
-  <div class="main-content">
+<div class="side-bar left-bar">
+    <div style="font-size:10px; text-align:center; margin-bottom:5px;">المنصات الحكومية</div>
+    <a href="https://qiwa.sa" class="side-link-item">منصة قوى</a>
+    <a href="https://www.absher.sa" class="side-link-item">منصة أبشر</a>
+    <div id="leftCustomLinks"></div>
+    <button class="add-shortcut-btn" onclick="addCustomLink('left')">➕ إضافة</button>
+</div>
+
+<div class="main-content">
     <div class="hero-section">
-      <div class="brand-title">كبابجي</div>
-      <div id="liveTime" style="font-size: 14px; font-weight: bold;">00:00:00</div>
-      <div class="prayer-times-bar" style="font-size: 11px;">مواقيت الصلاة: جدة</div>
+        <h1 style="color:var(--color-brand)">كبابجي</h1>
+        <p>البوابة الرقمية الموحدة</p>
     </div>
 
     <div class="cards-container">
-      <a href="http://kababjk.opos.me/" class="portal-card card-stock">
-        <div class="icon-wrapper">📦</div> <h2>المخزون</h2> <p>جرد المخازن والمواد الخام.</p> <div class="action-btn" style="background:var(--color-stock)">دخول</div>
-      </a>
-      <a href="http://kababjk-accounts.opos.me/Account/LogOn?LanguageID=2&mat=0.6675783853251626" class="portal-card">
-        <div class="icon-wrapper">💼</div> <h2>الحسابات</h2> <p>القيود، الرواتب، الأرباح.</p> <div class="action-btn" style="background:var(--color-accounts)">دخول</div>
-      </a>
-      <a href="https://abo-shefaa.vercel.app/" class="portal-card">
-        <div class="icon-wrapper">🔔</div> <h2>التنبيهات</h2> <p>متابعة الوثائق والإقامات.</p> <div class="action-btn" style="background:var(--color-alerts)">دخول</div>
-      </a>
-      <a href="https://kababji-seven.vercel.app/" class="portal-card">
-        <div class="icon-wrapper">📊</div> <h2>الحاسبة</h2> <p>احتساب مبيعات المنصات.</p> <div class="action-btn" style="background:var(--color-calc)">دخول</div>
-      </a>
-      <a href="https://kababji-xl.vercel.app/" class="portal-card">
-        <div class="icon-wrapper">🧩</div> <h2>التنظيم</h2> <p>ملفات الإكسل والبيانات.</p> <div class="action-btn" style="background:var(--color-numbers)">دخول</div>
-      </a>
-      <a href="https://github.com/kababji2016-hub" class="portal-card">
-        <div class="icon-wrapper">⚙️</div> <h2>الأكواد</h2> <p>تعديل السكريبتات.</p> <div class="action-btn" style="background:var(--color-github)">دخول</div>
-      </a>
+        <a href="http://kababjk.opos.me/" class="portal-card"><div class="icon-wrapper">📦</div><h2>المخزون</h2><div class="action-btn" style="background:var(--color-stock)">دخول</div></a>
+        <a href="http://kababjk-accounts.opos.me/Account/LogOn?LanguageID=2" class="portal-card"><div class="icon-wrapper">💼</div><h2>الحسابات</h2><div class="action-btn" style="background:var(--color-accounts)">دخول</div></a>
+        <a href="https://abo-shefaa.vercel.app/" class="portal-card"><div class="icon-wrapper">🔔</div><h2>التنبيهات</h2><div class="action-btn" style="background:var(--color-alerts)">دخول</div></a>
+        <a href="https://kababji-seven.vercel.app/" class="portal-card"><div class="icon-wrapper">📊</div><h2>الحاسبة</h2><div class="action-btn" style="background:var(--color-calc)">دخول</div></a>
+        <a href="https://kababji-xl.vercel.app/" class="portal-card"><div class="icon-wrapper">🧩</div><h2>تنظيم</h2><div class="action-btn" style="background:var(--color-numbers)">دخول</div></a>
+        <a href="https://github.com/kababji2016-hub" class="portal-card"><div class="icon-wrapper">⚙️</div><h2>الأكواد</h2><div class="action-btn" style="background:var(--color-github)">دخول</div></a>
     </div>
 
     <div class="tasks-section">
-      <h3>📋 قائمة المهام</h3>
-      <ul class="tasks-list" id="tasksList"></ul>
+        <h3>📋 قائمة المهام</h3>
+        <div id="tasksList"></div>
     </div>
-  </div>
 </div>
 
 <script>
-function addLink(areaId, storageKey) {
-  const title = prompt("اسم الرابط:");
-  const url = prompt("الرابط:");
-  if (title && url) {
-    let links = JSON.parse(localStorage.getItem(storageKey) || "[]");
-    links.push({ title, url });
-    localStorage.setItem(storageKey, JSON.stringify(links));
-    renderLinks(areaId, storageKey);
-  }
+function addCustomLink(side) {
+    const title = prompt("اسم الرابط:");
+    const url = prompt("الرابط:");
+    if(title && url) {
+        const links = JSON.parse(localStorage.getItem('customLinks') || '{}');
+        if(!links[side]) links[side] = [];
+        links[side].push({title, url, id: Date.now()});
+        localStorage.setItem('customLinks', JSON.stringify(links));
+        renderLinks();
+    }
 }
-function renderLinks(areaId, storageKey) {
-  const area = document.getElementById(areaId);
-  const links = JSON.parse(localStorage.getItem(storageKey) || "[]");
-  area.innerHTML = links.map((l, i) => `<a href="${l.url}" class="side-link-item lnk-custom">${l.title}</a>`).join('');
+
+function renderLinks() {
+    const links = JSON.parse(localStorage.getItem('customLinks') || '{}');
+    ['right', 'left'].forEach(side => {
+        const container = document.getElementById(side + 'CustomLinks');
+        container.innerHTML = (links[side] || []).map(l => `<a href="${l.url}" class="side-link-item">${l.title}</a>`).join('');
+    });
 }
-// تشغيل عند التحميل
-window.onload = () => { renderLinks('rightLinksArea', 'rightLinks'); renderLinks('leftLinksArea', 'leftLinks'); };
+
+function toggleTheme() {
+    document.documentElement.toggleAttribute('data-theme');
+    localStorage.setItem('theme', document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light');
+}
+
+window.onload = () => {
+    if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    renderLinks();
+};
 </script>
 </body>
 </html>
