@@ -35,10 +35,9 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    direction: rlt;
+    direction: rtl;
   }
 
-  /* تم تقليص الطول والمساحات هنا لرفع المحتوى للأعلى */
   .hero-section {
     background: #FFFAF1;
     color: var(--text-dark);
@@ -70,7 +69,6 @@
     line-height: 1.5;
   }
 
-  /* شبكة مدمجة وذكية تعرض العناصر بشكل متناسق في سطر واحد أو اثنين حسب الشاشة */
   .cards-container {
     max-width: 1350px;
     width: 100%;
@@ -81,7 +79,6 @@
     gap: 16px;
   }
 
-  /* تصغير أبعاد وحواف البطاقات لتوفير المساحة الرأسية */
   .portal-card {
     background: #fff;
     border-radius: var(--radius);
@@ -108,7 +105,6 @@
     height: 5px;
   }
 
-  /* تنسيق الألوان والمجموعات */
   .card-stock::before { background: var(--color-stock); } 
   .card-stock .icon-wrapper { background: #FED7B7; color: var(--color-stock); }
   .card-stock .action-btn { background: var(--color-stock); }
@@ -125,11 +121,10 @@
   .card-calc .icon-wrapper { background: #C8E6C9; color: #1B5E20; }
   .card-calc .action-btn { background: #43A047; }
 
-  .card-numbers::before { background: #FBC02D; } 
+  .card-numbers::before { background: var(--color-numbers); } 
   .card-numbers .icon-wrapper { background: #FFF9C4; color: #F57F17; }
-  .card-numbers .action-btn { background: #FBC02D; }
+  .card-numbers .action-btn { background: var(--color-numbers); }
 
-  /* تصغير حجم دوائر الأيقونات */
   .icon-wrapper {
     width: 60px;
     height: 60px;
@@ -156,7 +151,6 @@
     flex: 1;
   }
 
-  /* جعل الأزرار مدمجة وأنيقة */
   .action-btn {
     color: #fff;
     padding: 8px 20px;
@@ -240,7 +234,7 @@
     <a href="https://kababji-xl.vercel.app/" class="portal-card card-numbers">
       <div class="icon-wrapper">🧩</div>
       <h2>تنظيم أرقامي</h2>
-      <p>ترتيب الأرقام التشغيلية والجداول المالية والبيانات المتقدمة للإدارة.</p>
+      <p>تنظيم ملفات الإكسل لمكونات الأصناف المصدرة من برنامج أرقامي مع إمكانية التعديل والتصدير والطباعة.</p>
       <div class="action-btn">
         <span>دخول</span> ⬅️
       </div>
