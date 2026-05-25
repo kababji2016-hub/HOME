@@ -163,15 +163,7 @@
   .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 5px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 6px; }
 
   /* --- الهيدر العلوي المطور والموسع بالكامل --- */
-  .main-content { 
-    flex: 1; 
-    width: 100%; 
-    max-width: 1400px; /* زيادة مساحة العرض الأقصى لملء الشاشة بشكل أفضل */
-    margin: 0 auto; 
-    padding: 0 160px; /* تعديل الهوامش لمنع التكديس والانضغاط الداخلي الكثيف */
-    display: flex; 
-    flex-direction: column; 
-  }
+  .main-content { flex: 1; width: 100%; max-width: 1260px; margin: 0 auto; padding: 0 150px; display: flex; flex-direction: column; }
 
   .hero-section {
     background: var(--bg-card);
@@ -196,16 +188,16 @@
   .prayer-times-bar { 
     background: var(--bg-card); 
     border: 1px solid var(--border-color); 
-    padding: 12px 24px; 
+    padding: 12px 20px; 
     border-radius: 12px; 
-    max-width: 920px; /* تمديد عرض شريط الصلوات ليتوازن تماماً في صفحة الهيدر */
+    max-width: 860px; /* تم زيادة العرض الأقصى لاستيعاب الصلوات الخمس بالتساوي */
     margin: 12px auto 0; 
   }
   .prayers-row { 
     display: flex; 
     justify-content: center; 
-    gap: 14px; 
-    flex-wrap: nowrap; 
+    gap: 12px; 
+    flex-wrap: nowrap; /* منع التفاف صلاة العشاء إلى سطر جديد في الشاشات العادية */
   }
   .prayer-title { font-size: 12.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 6px; white-space: nowrap; }
   
@@ -216,7 +208,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px; 
-    padding: 6px 14px; 
+    padding: 5px 12px; 
     background: var(--prayer-bg); 
     color: var(--prayer-text);
     border-radius: 8px; 
@@ -240,27 +232,21 @@
   .proximity-bar-bg { width: 240px; height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
   .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 1s linear; }
 
-  /* --- شبكة الأنظمة الستة المتوازنة عرضياً --- */
-  .cards-container { 
-    margin: 28px auto 16px; 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px; /* زيادة الفراغات بين الكروت لإعطاء مظهر متناسق ومريح للعين */
-    width: 100%;
-  }
+  /* --- شبكة الأنظمة الستة --- */
+  .cards-container { margin: 28px auto 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 
-  @media (max-width: 1100px) {
-    .main-content { padding: 0 40px; }
-    .cards-container { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  @media (max-width: 1000px) {
+    .cards-container { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .main-content { padding: 0 20px; }
     .side-bar { position: relative; top: 0; transform: none; flex-direction: row; justify-content: center; width: 100%; border-radius: var(--radius) !important; margin: 10px 0; flex-wrap: wrap; }
     .side-bar-title { width: 100%; border-bottom: none; margin-bottom: 0; }
-    .prayers-row { flex-wrap: wrap; }
+    .prayers-row { flex-wrap: wrap; } /* السماح بالالتفاف فقط في الشاشات الصغيرة والهواتف */
   }
 
   .portal-card {
     background: var(--bg-card);
     border-radius: var(--radius);
-    padding: 26px 16px 20px; 
+    padding: 24px 12px 16px; 
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color); 
@@ -269,7 +255,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px; 
+    gap: 8px; 
     transition: transform 0.2s ease, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
@@ -289,36 +275,35 @@
   .card-github::before { background: var(--color-github); } 
   .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
 
-  .icon-wrapper { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 4px; }
-  .portal-card h2 { font-size: 15px; font-weight: 900; margin-bottom: 2px; }
-  .portal-card p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 6px; flex: 1; }
-  .action-btn { color: #fff; padding: 5px 16px; border-radius: 20px; font-size: 11.5px; font-weight: 700; display: flex; align-items: center; gap: 4px; border: none; margin-top: auto; }
+  .icon-wrapper { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 4px; }
+  .portal-card h2 { font-size: 14px; font-weight: 900; margin-bottom: 2px; }
+  .portal-card p { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-bottom: 4px; flex: 1; }
+  .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; border: none; margin-top: auto; }
   .portal-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); }
 
-  /* --- صندوق قائمة المهام المتوازن --- */
+  /* --- صندوق قائمة المهام --- */
   .tasks-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    padding: 16px 20px;
-    margin-bottom: 20px;
+    padding: 12px 16px;
+    margin-bottom: 15px;
     box-shadow: var(--shadow);
-    width: 100%;
   }
-  .tasks-section h3 { font-size: 14px; font-weight: 900; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .tasks-section h3 { font-size: 13.5px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
   
   .task-input-container { display: flex; gap: 8px; margin-bottom: 10px; }
-  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 6px; padding: 8px 14px; font-family: 'Tajawal'; font-size: 12.5px; outline: none; }
-  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 16px; border-radius: 6px; font-family: 'Tajawal'; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 6px; padding: 7px 12px; font-family: 'Tajawal'; font-size: 12.5px; outline: none; }
+  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 14px; border-radius: 6px; font-family: 'Tajawal'; font-size: 12px; font-weight: 700; cursor: pointer; }
 
-  .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 6px; max-height: 120px; overflow-y: auto; }
-  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); }
+  .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 5px; max-height: 100px; overflow-y: auto; }
+  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border-color); }
   .task-item-right { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
   .task-checkbox { width: 14px; height: 14px; cursor: pointer; }
   .task-text.completed { text-decoration: line-through; color: var(--muted); }
   .delete-task-btn { background: transparent; border: none; color: var(--color-brand); cursor: pointer; font-size: 12px; }
 
-  .footer { text-align: center; padding: 12px; font-size: 11.5px; color: #95A5A6; border-top: 1px solid var(--border-color); background: var(--bg-card); margin-top: auto; }
+  .footer { text-align: center; padding: 10px; font-size: 11.5px; color: #95A5A6; border-top: 1px solid var(--border-color); background: var(--bg-card); margin-top: auto; }
 </style>
 </head>
 <body>
