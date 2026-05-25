@@ -11,14 +11,12 @@
 
 <style>
   :root {
-    --bg-main: #F4F7F6; 
-    --bg-card: #ffffff;
-    --text-dark: #2C3E50; 
-    --muted: #7F8C8D;
-    --radius: 12px;
-    --shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
-    --border-color: #E5E9E8;
-    
+    --bg-main: #121212; /* تثبيت الثيم الغامق كما في الصورة */
+    --bg-card: #1E1E1E;
+    --text-dark: #F5F5F5;
+    --muted: #A0A0A0;
+    --border-color: #2C2C2C;
+
     --color-brand: #E64A19;     
     --color-stock: #D35400;      
     --color-accounts: #2C3E50;  
@@ -26,33 +24,6 @@
     --color-calc: #2E7D32;      
     --color-numbers: #F9A825;
     --color-github: #24292E; 
-
-    --prayer-text: #627273;
-    --prayer-bg: #EEF3F2;
-    --prayer-bar-color: #2E7D32; 
-
-    --txt-google: #4285F4; --bg-google: #F1F3F4;
-    --txt-drive: #1967D2; --bg-drive: #E8F0FE;
-    --txt-gmail: #C5221F; --bg-gmail: #FCE8E6;
-    --txt-whatsapp: #128C7E; --bg-whatsapp: #E6F4EA;
-    --txt-gpt: #10a37f; --bg-gpt: #E6F6F2;
-    --txt-gemini: #1a73e8; --bg-gemini: #E8F0FE;
-    --txt-claude: #d97706; --bg-claude: #FEF3C7;
-    --txt-qiwa: #004D40; --bg-qiwa: #E0F2F1;
-    --txt-balady: #006064; --bg-balady: #E0F7FA;
-    --txt-mudad: #1A237E; --bg-mudad: #E8EAF6;
-    --txt-absher: #1B5E20; --bg-absher: #E8F5E9;
-    --txt-gosi: #E65100; --bg-gosi: #FFF3E0;
-    --txt-chi: #0288D1; --bg-chi: #E1F5FE;
-    --txt-custom: #607D8B; --bg-custom: #ECEFF1;
-  }
-
-  [data-theme="dark"] {
-    --bg-main: #121212;
-    --bg-card: #1E1E1E;
-    --text-dark: #F5F5F5;
-    --muted: #A0A0A0;
-    --border-color: #2C2C2C;
 
     --prayer-text: #9EAEAF;
     --prayer-bg: #282828;
@@ -72,6 +43,8 @@
     --bg-gosi: #1A1A1A; --txt-gosi: #FF9800;
     --bg-chi: #1A1A1A; --txt-chi: #29B6F6;
     --bg-custom: #1A1A1A; --txt-custom: #B0BEC5;
+    --radius: 12px;
+    --shadow: 0 4px 15px rgba(0,0,0,0.2);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -80,22 +53,20 @@
     font-family: 'Tajawal', sans-serif;
     background: var(--bg-main);
     color: var(--text-dark);
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     direction: rtl;
-    position: relative;
-    transition: background 0.3s, color 0.3s;
-    overflow-x: hidden;
+    overflow: hidden; /* منع التمرير العمودي لتظهر الصفحة كاملة */
   }
 
   .theme-toggle-btn {
     position: absolute;
-    top: 15px;
+    top: 12px;
     left: 20px;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    padding: 5px 10px;
+    padding: 4px 10px;
     border-radius: 20px;
     cursor: pointer;
     font-family: 'Tajawal';
@@ -105,36 +76,35 @@
     z-index: 210;
   }
 
-  /* --- القوائم الجانبية المحدثة --- */
+  /* --- الأشرطة الجانبية مدمجة --- */
   .side-bar {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
     background: var(--bg-card);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    box-shadow: var(--shadow);
     border: 1px solid var(--border-color);
-    padding: 12px 6px;
+    padding: 10px 6px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     z-index: 200;
-    width: 140px; 
-    transition: background 0.3s, border-color 0.3s;
+    width: 135px; 
   }
   
   .side-bar.right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
   .side-bar.left-bar { left: 0; border-radius: 0 var(--radius) var(--radius) 0; }
 
-  .side-bar-title { font-size: 11px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 6px; border-bottom: 1px dashed var(--border-color); margin-bottom: 4px; }
-  .side-bar-title.sub-section-title { margin-top: 12px; }
+  .side-bar-title { font-size: 10.5px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 4px; border-bottom: 1px dashed var(--border-color); margin-bottom: 2px; }
+  .side-bar-title.sub-section-title { margin-top: 8px; }
 
   .side-link-item { 
     display: block; 
     text-align: center; 
-    padding: 8px 4px; 
+    padding: 6px 4px; 
     border-radius: 6px; 
     text-decoration: none; 
-    font-size: 11.5px; 
+    font-size: 11px; 
     font-weight: 700; 
     transition: all 0.2s ease;
     overflow: hidden;
@@ -150,7 +120,6 @@
   .lnk-gpt { background: var(--bg-gpt); color: var(--txt-gpt); }
   .lnk-gemini { background: var(--bg-gemini); color: var(--txt-gemini); }
   .lnk-claude { background: var(--bg-claude); color: var(--txt-claude); }
-
   .lnk-qiwa { background: var(--bg-qiwa); color: var(--txt-qiwa); }
   .lnk-balady { background: var(--bg-balady); color: var(--txt-balady); } 
   .lnk-mudad { background: var(--bg-mudad); color: var(--txt-mudad); }
@@ -159,99 +128,100 @@
   .lnk-chi { background: var(--bg-chi); color: var(--txt-chi); } 
   .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); padding-left: 18px; }
 
-  .custom-links-area { display: flex; flex-direction: column; gap: 7px; max-height: 140px; overflow-y: auto; overflow-x: hidden; margin-top: 4px; }
-  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 5px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 6px; }
+  .custom-links-area { display: flex; flex-direction: column; gap: 5px; max-height: 100px; overflow-y: auto; margin-top: 2px; }
+  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 4px; font-size: 10px; font-weight: 700; cursor: pointer; text-align: center; margin-top: 4px; font-family: 'Tajawal'; }
 
-  /* --- معالجة الهوامش لحل مشكلة الانضغاط والأبعاد الفارغة --- */
+  /* --- محتوى الصفحة الرئيسي المتجاوب عمودياً --- */
   .main-content { 
     flex: 1; 
     width: 100%; 
-    max-width: 1360px; /* تحديد العرض المثالي المناسب للأشرطة الجانبية */
+    max-width: 1260px; 
     margin: 0 auto; 
-    padding: 0 165px; /* توزيع ذكي يملأ الفراغات الميتة ويحمي الكروت من الانكماش */
+    padding: 0 150px; 
     display: flex; 
-    flex-direction: column; 
+    flex-direction: column;
+    justify-content: space-between; /* توزيع مثالي لمنع النزول لأسفل الشاشة */
+    height: 100%;
   }
 
+  /* --- الهيدر المدمج --- */
   .hero-section {
     background: var(--bg-card);
     text-align: center;
-    padding: 24px 20px 28px; 
+    padding: 14px 20px 14px; 
     border-bottom: 1px solid var(--border-color);
     border-radius: 0 0 var(--radius) var(--radius);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+    box-shadow: var(--shadow);
   }
 
-  .brand-title { color: var(--color-brand); font-size: 40px; font-weight: 900; margin-bottom: 4px; letter-spacing: 0.5px; }
-  .hero-section h1 { font-size: 17px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark); }
+  .brand-title { color: var(--color-brand); font-size: 32px; font-weight: 900; margin-bottom: 2px; }
+  .hero-section h1 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text-dark); }
 
-  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 14px; background: #EAF2F1; padding: 8px 20px; border-radius: 30px; margin-bottom: 18px; }
-  [data-theme="dark"] .live-clock-panel { background: #2A3A39; }
-  .live-time { font-size: 18px; font-weight: 900; color: #111; font-family: monospace, sans-serif; }
-  [data-theme="dark"] .live-time { color: #fff; }
-  .live-date { font-size: 13px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 12px; }
-  .live-hijri { font-size: 13px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 12px; }
+  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #2A3A39; padding: 6px 16px; border-radius: 30px; margin-bottom: 10px; }
+  .live-time { font-size: 15px; font-weight: 900; color: #fff; font-family: monospace, sans-serif; }
+  .live-date { font-size: 11.5px; font-weight: 700; color: #4CAF50; border-right: 2px solid #555; padding-right: 10px; }
+  .live-hijri { font-size: 11.5px; font-weight: 700; color: #FF6B6B; border-right: 2px solid #555; padding-right: 10px; }
 
-  /* --- فك انضغاط شريط الصلوات ومحاذاته أفقياً بشكل مستقيم ومريح --- */
+  /* --- حل مشكلة شريط الصلوات: تقريب الأوقات ومنع الالتفاف نهائياً --- */
   .prayer-times-bar { 
-    background: var(--bg-card); 
+    background: var(--bg-main); 
     border: 1px solid var(--border-color); 
-    padding: 14px 20px; 
-    border-radius: 12px; 
-    max-width: 960px; /* تمديد العرض لمنع الالتفاف الداخلي للأوقات */
-    margin: 10px auto 0; 
+    padding: 10px 16px; 
+    border-radius: 10px; 
+    max-width: 840px; 
+    margin: 4px auto 0; 
   }
   .prayers-row { 
     display: flex; 
-    justify-content: space-between; /* توزيع مرن ومتوازن على كامل عرض الشريط */
+    justify-content: center; /* تجميع المكونات في المنتصف لتقريبها */
     align-items: center;
-    gap: 10px; 
-    flex-wrap: nowrap; 
+    gap: 12px; /* مسافة متناسقة وقريبة بين أوقات الصلوات */
+    flex-wrap: nowrap; /* منع النص من الالتفاف أو النزول لسطر جديد */
   }
-  .prayer-title { font-size: 13px; font-weight: 900; color: var(--muted); white-space: nowrap; }
+  .prayer-title { font-size: 12px; font-weight: 900; color: var(--muted); white-space: nowrap; margin-left: 4px; }
   
   .prayer-item { 
-    font-size: 12px; 
+    font-size: 11.5px; 
     font-weight: 700; 
     display: inline-flex;
     align-items: center;
-    gap: 6px; 
-    padding: 6px 12px; 
+    gap: 4px; 
+    padding: 5px 10px; 
     background: var(--prayer-bg); 
     color: var(--prayer-text);
-    border-radius: 8px; 
-    white-space: nowrap;
+    border-radius: 6px; 
+    white-space: nowrap; /* تأكيد عدم التفاف الكلمات داخل الصندوق */
   }
-  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 12px; font-weight: bold; }
+  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 11.5px; font-weight: bold; }
   
   .prayer-countdown-container {
-    margin-top: 12px;
-    padding-top: 10px;
+    margin-top: 8px;
+    padding-top: 6px;
     border-top: 1px dashed var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
   }
-  .countdown-text { font-size: 12px; font-weight: 700; color: var(--muted); } 
+  .countdown-text { font-size: 11px; font-weight: 700; color: var(--muted); } 
   .countdown-text span { color: var(--text-dark); font-weight: 800; font-family: monospace; }
   
-  .proximity-bar-bg { width: 220px; height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
+  .proximity-bar-bg { width: 180px; height: 5px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
   .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 1s linear; }
 
-  /* --- شبكة الأنظمة الستة المتوازنة --- */
+  /* --- كروت الـ 6 المدمجة والموزونة لتظهر بالكامل دون التمرير للأسفل --- */
   .cards-container { 
-    margin: 24px 0 16px; 
+    margin: 12px 0; 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
-    gap: 18px; /* مسافة متناسقة وموزونة بين الكروت لمنع الانكماش */
+    gap: 14px; 
     width: 100%;
   }
 
   .portal-card {
     background: var(--bg-card);
     border-radius: var(--radius);
-    padding: 24px 16px 20px; 
+    padding: 14px 12px; /* تقليص الحشو الداخلي لكبس الكارت عمودياً */
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color); 
@@ -260,70 +230,69 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px; 
-    transition: transform 0.2s ease, box-shadow 0.2s;
+    gap: 6px; /* تقريب الأيقونة من العناوين */
+    transition: transform 0.2s, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
   }
-  .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+  .portal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
 
   .card-stock::before { background: var(--color-stock); } 
-  .card-stock .icon-wrapper { background: #FDEBD0; color: var(--color-stock); }
+  .card-stock .icon-wrapper { background: #3a2a1a; color: var(--color-stock); }
   .card-accounts::before { background: var(--color-accounts); } 
-  .card-accounts .icon-wrapper { background: #EAEDED; color: var(--color-accounts); }
+  .card-accounts .icon-wrapper { background: #2a3a4a; color: #5dade2; }
   .card-alerts::before { background: var(--color-alerts); } 
-  .card-alerts .icon-wrapper { background: #FFCCBC; color: #BF360C; }
+  .card-alerts .icon-wrapper { background: #4a2a2a; color: #ff6b6b; }
   .card-calc::before { background: var(--color-calc); } 
-  .card-calc .icon-wrapper { background: #D5F5E3; color: var(--color-calc); }
+  .card-calc .icon-wrapper { background: #1a3a2a; color: var(--color-calc); }
   .card-numbers::before { background: var(--color-numbers); } 
-  .card-numbers .icon-wrapper { background: #FEF9E7; color: #F57F17; }
+  .card-numbers .icon-wrapper { background: #3a3a1a; color: var(--color-numbers); }
   .card-github::before { background: var(--color-github); } 
-  .card-github .icon-wrapper { background: #EBEDEF; color: var(--color-github); }
+  .card-github .icon-wrapper { background: #2a2a2a; color: #fff; }
 
-  .icon-wrapper { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-  .portal-card h2 { font-size: 15px; font-weight: 900; }
-  .portal-card p { font-size: 12px; color: var(--muted); line-height: 1.5; flex: 1; }
-  .action-btn { color: #fff; padding: 5px 18px; border-radius: 20px; font-size: 11.5px; font-weight: 700; border: none; margin-top: auto; }
-  .portal-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); }
+  .icon-wrapper { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .portal-card h2 { font-size: 13.5px; font-weight: 900; }
+  .portal-card p { font-size: 11px; color: var(--muted); line-height: 1.4; flex: 1; margin-bottom: 4px; }
+  .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; border: none; margin-top: auto; }
+  .portal-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
 
-  /* --- صندوق قائمة المهام --- */
+  /* --- صندوق المهام المدمج --- */
   .tasks-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    padding: 16px 20px;
-    margin-bottom: 20px;
+    padding: 10px 16px;
+    margin-bottom: 10px;
     box-shadow: var(--shadow);
     width: 100%;
   }
-  .tasks-section h3 { font-size: 14px; font-weight: 900; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .tasks-section h3 { font-size: 12.5px; font-weight: 900; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
   
-  .task-input-container { display: flex; gap: 8px; margin-bottom: 10px; }
-  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 6px; padding: 8px 14px; font-family: 'Tajawal'; font-size: 12.5px; outline: none; }
-  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 16px; border-radius: 6px; font-family: 'Tajawal'; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .task-input-container { display: flex; gap: 6px; margin-bottom: 6px; }
+  .task-input { flex: 1; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-dark); border-radius: 6px; padding: 6px 12px; font-family: 'Tajawal'; font-size: 11.5px; outline: none; }
+  .add-task-btn { background: var(--color-calc); color: #fff; border: none; padding: 0 12px; border-radius: 6px; font-family: 'Tajawal'; font-size: 11px; font-weight: 700; cursor: pointer; }
 
-  .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 6px; max-height: 120px; overflow-y: auto; }
-  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); }
-  .task-item-right { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
-  .task-checkbox { width: 14px; height: 14px; cursor: pointer; }
+  .tasks-list { list-style: none; display: flex; flex-direction: column; gap: 4px; max-height: 70px; overflow-y: auto; }
+  .task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 6px 10px; border-radius: 5px; border: 1px solid var(--border-color); }
+  .task-item-right { display: flex; align-items: center; gap: 6px; font-size: 11.5px; }
+  .task-checkbox { width: 13px; height: 13px; cursor: pointer; }
   .task-text.completed { text-decoration: line-through; color: var(--muted); }
-  .delete-task-btn { background: transparent; border: none; color: var(--color-brand); cursor: pointer; font-size: 12px; }
+  .delete-task-btn { background: transparent; border: none; color: var(--color-brand); cursor: pointer; font-size: 11px; }
 
-  .footer { text-align: center; padding: 12px; font-size: 11.5px; color: #95A5A6; border-top: 1px solid var(--border-color); background: var(--bg-card); margin-top: auto; }
+  .footer { text-align: center; padding: 8px; font-size: 11px; color: #7f8c8d; border-top: 1px solid var(--border-color); background: var(--bg-card); }
 
-  /* التجاوب للمقاسات المتوسطة والصغيرة */
-  @media (max-width: 1150px) {
-    .main-content { padding: 0 20px; max-width: 100%; }
-    .cards-container { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .side-bar { position: relative; top: 0; transform: none; flex-direction: row; justify-content: center; width: 100%; border-radius: var(--radius) !important; margin: 10px 0; flex-wrap: wrap; }
-    .side-bar-title { width: 100%; border-bottom: none; margin-bottom: 0; }
-    .prayers-row { flex-wrap: wrap; justify-content: center; }
+  @media (max-width: 1100px) {
+    .main-content { padding: 0 20px; overflow-y: auto; }
+    body { overflow: auto; height: auto; }
+    .cards-container { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .side-bar { position: relative; top: 0; transform: none; flex-direction: row; justify-content: center; width: 100%; border-radius: var(--radius) !important; margin: 6px 0; flex-wrap: wrap; }
+    .side-bar-title { width: 100%; border-bottom: none; }
   }
 </style>
 </head>
 <body>
 
-  <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">🌙 الوضع الليلي</button>
+  <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">☀️ الوضع النهاري</button>
 
   <div class="side-bar right-bar">
     <div class="side-bar-title">أدوات جوجل</div>
@@ -545,7 +514,7 @@ function addCustomLink(type) {
 
 function deleteCustomLink(id, type, e) {
   e.preventDefault(); e.stopPropagation();
-  if(confirm("هل تود مسح هذا الرابط؟")) {
+  if(confirm("هل تود مسح هذا الرابط?")) {
     if (type === 'google') {
       customLinksRight = customLinksRight.filter(l => l.id !== id);
       localStorage.setItem('kababji_custom_shortcuts_right', JSON.stringify(customLinksRight));
@@ -616,7 +585,7 @@ function renderTasks() {
   const listEl = document.getElementById('tasksList');
   if(!listEl) return;
   if (tasks.length === 0) {
-    listEl.innerHTML = '<li style="text-align:center; padding:8px; color:var(--muted); font-size:12px;">👍 لا توجد مهام حالية.</li>';
+    listEl.innerHTML = '<li style="text-align:center; padding:6px; color:var(--muted); font-size:11px;">👍 لا توجد مهام حالية.</li>';
     return;
   }
   listEl.innerHTML = tasks.map(t => `
@@ -645,11 +614,8 @@ function toggleTheme() {
 }
 
 function loadTheme() {
-  const savedTheme = localStorage.getItem('kababji_theme');
-  if(savedTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('themeBtn').textContent = '☀️ الوضع النهاري';
-  }
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeBtn').textContent = '☀️ الوضع النهاري';
 }
 
 document.getElementById('newTaskInput')?.addEventListener('keypress', function(e) { if (e.key === 'Enter') addNewTask(); });
