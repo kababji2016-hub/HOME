@@ -27,10 +27,9 @@
     --color-numbers: #F9A825;
     --color-github: #24292E; 
 
-    /* ألوان خفيفة جداً ومريحة للعين للصلوات */
     --prayer-text: #627273;
     --prayer-bg: #EEF3F2;
-    --prayer-bar-color: #2E7D32; /* لون أخضر واحد مريح للمؤشر الطويل */
+    --prayer-bar-color: #2E7D32; 
 
     --txt-google: #4285F4; --bg-google: #F1F3F4;
     --txt-drive: #1967D2; --bg-drive: #E8F0FE;
@@ -114,10 +113,10 @@
     background: var(--bg-card);
     box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     border: 1px solid var(--border-color);
-    padding: 10px 6px;
+    padding: 12px 6px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 8px;
     z-index: 200;
     width: 135px; 
     transition: background 0.3s, border-color 0.3s;
@@ -126,19 +125,19 @@
   .side-bar.right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
   .side-bar.left-bar { left: 0; border-radius: 0 var(--radius) var(--radius) 0; }
 
-  .side-bar-title { font-size: 10.5px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 4px; border-bottom: 1px dashed var(--border-color); margin-bottom: 1px; }
-  .side-bar-title.sub-section-title { margin-top: 6px; color: #5D6D7E; }
+  .side-bar-title { font-size: 11px; font-weight: 900; color: var(--muted); text-align: center; padding-bottom: 6px; border-bottom: 1px dashed var(--border-color); margin-bottom: 4px; }
+  .side-bar-title.sub-section-title { margin-top: 12px; }
 
   .side-link-item { 
     display: block; 
     text-align: center; 
-    padding: 7px 4px; 
+    padding: 8px 4px; 
     border-radius: 6px; 
     text-decoration: none; 
     font-size: 11.5px; 
     font-weight: 700; 
     transition: all 0.2s ease;
-    overflow: hidden; /* حل مشكلة ظهور شريط التمرير الأفقي عند الماوس */
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
@@ -160,75 +159,75 @@
   .lnk-chi { background: var(--bg-chi); color: var(--txt-chi); } 
   .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); padding-left: 18px; }
 
-  .custom-links-area { display: flex; flex-direction: column; gap: 6px; max-height: 110px; overflow-y: auto; overflow-x: hidden; }
-  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 4px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 2px; }
+  .custom-links-area { display: flex; flex-direction: column; gap: 7px; max-height: 140px; overflow-y: auto; overflow-x: hidden; margin-top: 4px; }
+  .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 5px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; text-align: center; margin-top: 6px; }
 
-  /* --- التصميم الأوسط المدمج لمنع النزول بالصفحة --- */
+  /* --- الهيدر العلوي المطور والموسع بالكامل --- */
   .main-content { flex: 1; width: 100%; max-width: 1260px; margin: 0 auto; padding: 0 150px; display: flex; flex-direction: column; }
 
   .hero-section {
     background: var(--bg-card);
     text-align: center;
-    padding: 12px 20px 24px;
+    padding: 24px 30px 32px; /* مساحات تباعد علوية وسفلية سخية وضخمة لمنع أي ضيق */
     border-bottom: 1px solid var(--border-color);
     border-radius: 0 0 var(--radius) var(--radius);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.01);
   }
 
-  .brand-title { color: var(--color-brand); font-size: 36px; font-weight: 900; margin-bottom: 0px; letter-spacing: 0.5px; line-height: 1.1; }
-  .hero-section h1 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
+  .brand-title { color: var(--color-brand); font-size: 42px; font-weight: 900; margin-bottom: 4px; letter-spacing: 0.5px; line-height: 1.2; }
+  .hero-section h1 { font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark); }
 
-  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #EAF2F1; padding: 5px 16px; border-radius: 30px; margin-bottom: 4px; }
+  .live-clock-panel { display: inline-flex; align-items: center; justify-content: center; gap: 16px; background: #EAF2F1; padding: 8px 24px; border-radius: 30px; margin-bottom: 20px; }
   [data-theme="dark"] .live-clock-panel { background: #2A3A39; }
-  .live-time { font-size: 16px; font-weight: 900; color: #111; font-family: monospace, sans-serif; }
+  .live-time { font-size: 18px; font-weight: 900; color: #111; font-family: monospace, sans-serif; }
   [data-theme="dark"] .live-time { color: #fff; }
-  .live-date { font-size: 12px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 12px; }
-  .live-hijri { font-size: 12px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 12px; }
+  .live-date { font-size: 13px; font-weight: 700; color: #2E7D32; border-right: 2px solid #BDC3C7; padding-right: 14px; }
+  .live-hijri { font-size: 13px; font-weight: 700; color: #C0392B; border-right: 2px solid #BDC3C7; padding-right: 14px; }
 
-  /* --- شريط الصلوات ومحاذاة الأرقام بالكامل على سطر واحد --- */
+  /* --- مواقيت الصلوات مع تباعد مريح ومنع الاتصال --- */
   .prayer-times-bar { 
     background: var(--bg-card); 
     border: 1px solid var(--border-color); 
-    padding: 8px 12px; 
-    border-radius: 10px; 
-    max-width: 720px; 
-    margin: 8px auto 0; 
+    padding: 12px 20px; 
+    border-radius: 12px; 
+    max-width: 780px; 
+    margin: 12px auto 0; 
   }
-  .prayers-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-  .prayer-title { font-size: 11.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 4px; }
+  .prayers-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .prayer-title { font-size: 12.5px; font-weight: 900; color: var(--muted); align-self: center; margin-left: 6px; }
   
   .prayer-item { 
-    font-size: 11.5px; 
+    font-size: 12px; 
     font-weight: 700; 
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 4px; 
-    padding: 3px 8px; 
+    gap: 6px; 
+    padding: 5px 12px; 
     background: var(--prayer-bg); 
     color: var(--prayer-text);
-    border-radius: 6px; 
+    border-radius: 8px; 
     border: none !important; 
   }
-  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 11.5px; font-weight: bold; }
+  .prayer-item span { color: var(--prayer-text); font-family: monospace; font-size: 12px; font-weight: bold; }
   
   .prayer-countdown-container {
-    margin-top: 6px;
-    padding-top: 5px;
+    margin-top: 12px;
+    padding-top: 10px;
     border-top: 1px dashed var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 16px;
   }
-  .countdown-text { font-size: 11.5px; font-weight: 700; color: var(--muted); } 
+  .countdown-text { font-size: 12px; font-weight: 700; color: var(--muted); } 
   .countdown-text span { color: var(--text-dark); font-weight: 800; font-family: monospace; }
   
-  .proximity-bar-bg { width: 220px; height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
+  .proximity-bar-bg { width: 240px; height: 6px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
   .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 1s linear; }
 
-  /* --- تعديل وتنزيل شبكة الأنظمة الستة مظهر متناسق ومريح --- */
-  .cards-container { margin: 24px auto 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  /* --- شبكة الأنظمة الستة --- */
+  .cards-container { margin: 28px auto 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 
   @media (max-width: 1000px) {
     .cards-container { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
@@ -240,7 +239,7 @@
   .portal-card {
     background: var(--bg-card);
     border-radius: var(--radius);
-    padding: 24px 12px 16px; /* تم زيادة الهامش العلوي لإنزال الأيقونات بشكل مريح */
+    padding: 24px 12px 16px; 
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color); 
@@ -249,7 +248,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px; /* يعطي مساحة متناسقة وموزعة بين الأيقونة والاسم والوصف */
+    gap: 8px; 
     transition: transform 0.2s ease, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
@@ -316,7 +315,6 @@
     <a href="https://gemini.google.com/" class="side-link-item lnk-gemini">Gemini</a>
     <a href="https://claude.ai/" class="side-link-item lnk-claude">Claude</a>
 
-    <div class="side-bar-title sub-section-title">روابط سريعة</div>
     <div class="custom-links-area" id="customLinksAreaRight"></div>
     <button class="add-shortcut-btn" onclick="addCustomLink('google')">➕ أضف رابط</button>
   </div>
@@ -330,7 +328,6 @@
     <a href="https://www.gosi.gov.sa" class="side-link-item lnk-gosi">التأمينات</a>
     <a href="https://www.chi.gov.sa/Pages/Home.aspx" class="side-link-item lnk-chi">التأمين الصحي</a>
 
-    <div class="side-bar-title sub-section-title">روابط سريعة</div>
     <div class="custom-links-area" id="customLinksAreaLeft"></div>
     <button class="add-shortcut-btn" onclick="addCustomLink('work')">➕ أضف رابط</button>
   </div>
@@ -508,7 +505,6 @@ function calculatePrayerCountdown(now) {
   if(fillBar) fillBar.style.width = `${progress}%`;
 }
 
-// تعديل وظيفة إضافة رابط لتستوعب الجهتين اليمنى واليسرى
 function addCustomLink(type) {
   const title = prompt("اكتب اسم الموقع:");
   if (!title) return;
@@ -543,12 +539,11 @@ function renderCustomLinks() {
   const areaRight = document.getElementById('customLinksAreaRight');
   const areaLeft = document.getElementById('customLinksAreaLeft');
   
-  // روابط الجهة اليمنى
   if(areaRight) {
     const savedRight = localStorage.getItem('kababji_custom_shortcuts_right');
     if(savedRight) customLinksRight = JSON.parse(savedRight);
     if(customLinksRight.length === 0) {
-      areaRight.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center;">لا توجد روابط</div>';
+      areaRight.innerHTML = '';
     } else {
       areaRight.innerHTML = customLinksRight.map(l => `
         <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
@@ -559,12 +554,11 @@ function renderCustomLinks() {
     }
   }
 
-  // روابط الجهة اليسرى
   if(areaLeft) {
     const savedLeft = localStorage.getItem('kababji_custom_shortcuts_left');
     if(savedLeft) customLinksLeft = JSON.parse(savedLeft);
     if(customLinksLeft.length === 0) {
-      areaLeft.innerHTML = '<div style="font-size:10px; color:var(--muted); text-align:center;">لا توجد روابط</div>';
+      areaLeft.innerHTML = '';
     } else {
       areaLeft.innerHTML = customLinksLeft.map(l => `
         <a href="${l.url}" class="side-link-item lnk-custom" style="position:relative;">
