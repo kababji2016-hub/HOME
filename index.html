@@ -11,19 +11,19 @@
 
 <style>
   :root {
-    --bg-main: #F4F7F6; /* خلفية هادئة ومريحة جداً للعين */
+    --bg-main: #F4F7F6; 
     --text-dark: #2C3E50; 
     --muted: #7F8C8D;
     --radius: 14px;
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
     
-    /* ألوان الأنظمة الستة المتناسقة */
-    --color-brand: #E64A19;     
-    --color-stock: #D35400;     
-    --color-accounts: #2C3E50;  
-    --color-alerts: #BF360C;    
-    --color-calc: #2E7D32;      
-    --color-numbers: #F9A825;
+    /* ألوان الماركة والهوية التشكيلية */
+    --color-brand: #E64A19;   
+    --color-stock: #D35400;  
+    --color-accounts: #2C3E50; 
+    --color-alerts: #BF360C; 
+    --color-calc: #2E7D32;  
+    --color-numbers: #F9A825; 
     --color-github: #24292E; 
   }
 
@@ -36,11 +36,11 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    direction: rtl;
+    direction: rlt;
     position: relative;
   }
 
-  /* --- الشرائط الجانبية المحدثة بالأسماء --- */
+  /* --- الشرائط الجانبية بالأسماء --- */
   .side-bar {
     position: fixed;
     top: 50%;
@@ -53,16 +53,14 @@
     flex-direction: column;
     gap: 10px;
     z-index: 200;
-    width: 140px; /* تحديد عرض مناسب لقراءة الأسماء */
+    width: 140px; 
   }
   
-  /* شريط اليمين (خدمات جوجل) */
   .side-bar.right-bar {
     right: 0;
     border-radius: var(--radius) 0 0 var(--radius);
   }
 
-  /* شريط اليسار (المنصات الحكومية) */
   .side-bar.left-bar {
     left: 0;
     border-radius: 0 var(--radius) var(--radius) 0;
@@ -78,7 +76,6 @@
     margin-bottom: 4px;
   }
 
-  /* تصميم روابط الأسماء العمودية */
   .side-link-item {
     display: block;
     text-align: center;
@@ -98,7 +95,8 @@
   .lnk-google { background: #F1F3F4; color: #4285F4; }
   .lnk-drive { background: #E8F0FE; color: #1967D2; }
   .lnk-gmail { background: #FCE8E6; color: #C5221F; }
-  .lnk-maps { background: #E6F4EA; color: #137333; }
+  /* تم تحديث لون واتساب */
+  .lnk-whatsapp { background: #E6F4EA; color: #128C7E; } 
 
   .lnk-qiwa { background: #E0F2F1; color: #004D40; }
   .lnk-mudad { background: #E8EAF6; color: #1A237E; }
@@ -111,7 +109,7 @@
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 160px; /* ترك مسافة كافية للأسماء على اليمين واليسار */
+    padding: 0 160px; 
   }
 
   .hero-section {
@@ -162,7 +160,6 @@
     gap: 16px;
   }
 
-  /* التوافق التام مع الشاشات المتوسطة والصغيرة كالجوال */
   @media (max-width: 1000px) {
     .cards-container { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .main-content { padding: 0 20px; }
@@ -247,7 +244,7 @@
     <a href="https://www.google.com" class="side-link-item lnk-google">بحث جوجل</a>
     <a href="https://drive.google.com" class="side-link-item lnk-drive">جوجل درايف</a>
     <a href="https://mail.google.com" class="side-link-item lnk-gmail">بريد جيميل</a>
-    <a href="https://maps.google.com" class="side-link-item lnk-maps">خرائط جوجل</a>
+    <a href="https://web.whatsapp.com/" class="side-link-item lnk-whatsapp">واتساب ويب</a>
   </div>
 
   <div class="side-bar left-bar">
