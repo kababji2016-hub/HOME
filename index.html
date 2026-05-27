@@ -11,7 +11,6 @@
 
 <style>
   :root {
-    /* الوضع النهاري الافتراضي */
     --bg-main: #F4F7F6; 
     --bg-card: #ffffff;
     --text-dark: #2C3E50; 
@@ -44,12 +43,18 @@
     --bg-gosi: #FFF3E0; --txt-gosi: #E65100;
     --bg-chi: #E1F5FE; --txt-chi: #0288D1;
     --bg-custom: #ECEFF1; --txt-custom: #607D8B;
+
+    /* تطبيقات التوصيل */
+    --bg-hungerstation: #FFFDE7; --txt-hungerstation: #F9A825;
+    --bg-keeta: #FFF8E1; --txt-keeta: #FB8C00;
+    --bg-mrsool: #E3F2FD; --txt-mrsool: #1E88E5;
+    --bg-jahez: #FFEBEE; --txt-jahez: #E53935;
+
     --radius: 12px;
     --shadow: 0 4px 15px rgba(0,0,0,0.03);
   }
 
   [data-theme="dark"] {
-    /* الوضع الليلي المطور */
     --bg-main: #121212;
     --bg-card: #1E1E1E;
     --text-dark: #F5F5F5;
@@ -74,6 +79,13 @@
     --bg-gosi: #1A1A1A; --txt-gosi: #FF9800;
     --bg-chi: #1A1A1A; --txt-chi: #29B6F6;
     --bg-custom: #1A1A1A; --txt-custom: #B0BEC5;
+
+    /* تطبيقات التوصيل - الوضع الليلي */
+    --bg-hungerstation: #1A1A1A; --txt-hungerstation: #FFD600;
+    --bg-keeta: #1A1A1A; --txt-keeta: #FFA726;
+    --bg-mrsool: #1A1A1A; --txt-mrsool: #42A5F5;
+    --bg-jahez: #1A1A1A; --txt-jahez: #EF5350;
+
     --shadow: 0 4px 15px rgba(0,0,0,0.3);
   }
 
@@ -108,7 +120,6 @@
     box-shadow: var(--shadow);
   }
 
-  /* --- الأشرطة الجانبية --- */
   .side-bar {
     position: fixed;
     top: 50%;
@@ -123,6 +134,8 @@
     z-index: 200;
     width: 135px; 
     transition: background 0.3s, border-color 0.3s;
+    max-height: 92vh;
+    overflow-y: auto;
   }
   
   .side-bar.right-bar { right: 0; border-radius: var(--radius) 0 0 var(--radius); }
@@ -161,10 +174,15 @@
   .lnk-chi { background: var(--bg-chi); color: var(--txt-chi); } 
   .lnk-custom { background: var(--bg-custom); color: var(--txt-custom); border: 1px dashed var(--border-color); padding-left: 18px; }
 
+  /* روابط التوصيل */
+  .lnk-hungerstation { background: var(--bg-hungerstation); color: var(--txt-hungerstation); }
+  .lnk-keeta { background: var(--bg-keeta); color: var(--txt-keeta); }
+  .lnk-mrsool { background: var(--bg-mrsool); color: var(--txt-mrsool); }
+  .lnk-jahez { background: var(--bg-jahez); color: var(--txt-jahez); }
+
   .custom-links-area { display: flex; flex-direction: column; gap: 5px; max-height: 100px; overflow-y: auto; margin-top: 2px; }
   .add-shortcut-btn { background: none; border: 1px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 4px; font-size: 10px; font-weight: 700; cursor: pointer; text-align: center; margin-top: 4px; font-family: 'Tajawal'; }
 
-  /* --- المحتوى الرئيسي المتناسق --- */
   .main-content { 
     flex: 1; 
     width: 100%; 
@@ -197,7 +215,6 @@
   .live-hijri { font-size: 11.5px; font-weight: 700; color: #C0392B; border-right: 2px solid var(--border-color); padding-right: 10px; }
   [data-theme="dark"] .live-hijri { color: #FF6B6B; }
 
-  /* --- شريط مواقيت الصلاة المتقارب الموزون --- */
   .prayer-times-bar { 
     background: var(--bg-card); 
     border: 1px solid var(--border-color); 
@@ -245,7 +262,6 @@
   .proximity-bar-bg { width: 180px; height: 5px; background: var(--border-color); border-radius: 10px; overflow: hidden; position: relative; }
   .proximity-bar-fill { height: 100%; width: 0%; background: var(--prayer-bar-color); border-radius: 10px; transition: width 0.5s ease; }
 
-  /* --- كروت الأنظمة الستة --- */
   .cards-container { 
     margin: 12px 0; 
     display: grid; 
@@ -299,7 +315,6 @@
   .action-btn { color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; border: none; margin-top: auto; }
   .portal-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
 
-  /* --- صندوق قائمة المهام المطور --- */
   .tasks-section {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -362,6 +377,12 @@
     <a href="https://www.absher.sa" class="side-link-item lnk-absher">منصة أبشر</a>
     <a href="https://www.gosi.gov.sa" class="side-link-item lnk-gosi">التأمينات</a>
     <a href="https://www.chi.gov.sa/Pages/Home.aspx" class="side-link-item lnk-chi">التأمين الصحي</a>
+
+    <div class="side-bar-title sub-section-title">🛵 تطبيقات التوصيل</div>
+    <a href="https://partner-app.hungerstation.com/menu-management-global?vendor=HS_SA;14978" class="side-link-item lnk-hungerstation">هنجر ستيشن</a>
+    <a href="https://passport.mykeeta.com/pc/login?service=merchants&locale=ar&region=SA&cityId=1150000106&token_id=aMJ4hs8U7Dhr-3d6TPvghA&joinkey=1101467_-488047619&backurl=https%3A%2F%2Fmerchant.mykeeta.com%2Fm%2Fweb%2Fproduct%3Flocale%3Dar" class="side-link-item lnk-keeta">كيتا</a>
+    <a href="https://business.mrsool.co/super-user/menu/items/" class="side-link-item lnk-mrsool">مرسول</a>
+    <a href="https://portal.jahez.net/restaurant-login.htm?action=logout&__cf_chl_rt_tk=.Zb.B9cuvY7F8TQvgpMa5iQsEbcoJpYzuXPC4ZHxyPw-1771964791-1.0.1.1-XgEIvHD106ta.T6LxPx0OlMSLziih7W3VqJo7K4PQaw" class="side-link-item lnk-jahez">جاهز</a>
 
     <div class="custom-links-area" id="customLinksAreaLeft"></div>
     <button class="add-shortcut-btn" onclick="addCustomLink('work')">➕ أضف رابط</button>
@@ -536,7 +557,6 @@ function calculatePrayerCountdown(now) {
 
   document.getElementById('prayerCountdownText').innerHTML = `متبقي على صلاة ${currentTarget.name}: <span>${hrs}:${mins}:${secs}</span>`;
 
-  // حسبة شريط الاقتراب الأخضر الذكي بناءً على الفترة الزمنية الفاصلة بين الصلاتين
   const totalWindowMs = currentTarget.nextWindow * 60 * 60 * 1000;
   let progress = ((totalWindowMs - minDiff) / totalWindowMs) * 100;
   if (progress < 0) progress = 0;
@@ -649,7 +669,6 @@ function renderTasks() {
   `).join('');
 }
 
-/* إصلاح التبديل الكامل والصحيح بين الوضعين الليلي والنهاري */
 function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const btn = document.getElementById('themeBtn');
@@ -665,7 +684,7 @@ function toggleTheme() {
 }
 
 function loadTheme() {
-  const savedTheme = localStorage.getItem('kababji_theme') || 'dark'; // افتراضي غامق
+  const savedTheme = localStorage.getItem('kababji_theme') || 'dark';
   const btn = document.getElementById('themeBtn');
   if(savedTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
